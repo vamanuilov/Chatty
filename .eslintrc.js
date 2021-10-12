@@ -14,7 +14,7 @@ module.exports = {
   },
   plugins: ['prettier', 'react', '@typescript-eslint', 'jest', 'import'],
   rules: {
-    "prettier/prettier": "warn",
+    'prettier/prettier': 'warn',
     'no-shadow': 'off',
     '@typescript-eslint/no-shadow': ['error'],
     'no-use-before-define': 'off',
