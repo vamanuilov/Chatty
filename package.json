@@ -21,7 +21,7 @@
     "build": "react-scripts build",
     "test": "react-scripts test",
     "eject": "react-scripts eject",
-    "lint": "npx eslint ./src",
+    "lint": "npx eslint ./src/*.{js,ts,tsx,jsx}",
     "prettier": "npx prettier ./src -w"
   },
   "eslintConfig": {
@@ -45,7 +45,9 @@
   "devDependencies": {
     "@commitlint/cli": "^13.2.1",
     "@commitlint/config-conventional": "^13.2.0",
+    "eslint-config-airbnb-typescript": "^14.0.1",
     "eslint-config-prettier": "^8.3.0",
+    "eslint-plugin-jest": "^25.0.5",
     "eslint-plugin-prettier": "^4.0.0",
     "husky": "^7.0.2",
     "prettier": "2.4.1"
