@@ -1,0 +1,32 @@
+.o__login-form {
+  width: 70%;
+  height: 60%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+
+  @media (max-width: 800px) {
+    width: 90%;
+    height: 100%;
+    justify-content: flex-end;
+  }
+
+  &__input {
+    width: 100%;
+    padding-bottom: 32px;
+    // TODO: add styles for 800-400px to center input and buttons
+    @media (max-width: 800px) {
+      padding-bottom: 24px;
+    }
+  }
+
+  &__button {
+    width: 100%;
+    padding-top: 18px;
+    @media (max-width: 800px) {
+      padding-top: 56px;
+      padding-bottom: 24px;
+    }
+  }
+}
