@@ -1,0 +1,35 @@
+@import '../../../assets/styles/_variables.scss';
+
+@mixin placeholder-color($color) {
+  &::-webkit-input-placeholder {
+    color: $color;
+  }
+  &::-moz-placeholder {
+    color: $color;
+  }
+  &:-ms-input-placeholder {
+    color: $color;
+  }
+  &::-ms-input-placeholder {
+    color: $color;
+  }
+  &::placeholder {
+    color: $color;
+  }
+}
+
+.a__input-field {
+  width: 354px;
+  height: 56px;
+  border: 1px solid $light-blue;
+  border-radius: 8px;
+  padding: 16px;
+  font-size: 15px;
+  line-height: 23px;
+  &:active,
+  &:focus {
+    outline: none;
+    border-color: #5c98f1;
+  }
+  @include placeholder-color(#9f9f9f);
+}
