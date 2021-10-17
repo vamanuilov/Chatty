@@ -19,7 +19,7 @@
 }
 
 .a__input-field {
-  width: 354px;
+  width: 356px;
   height: 56px;
   border: 1px solid $light-blue;
   border-radius: 8px;
@@ -29,7 +29,13 @@
   &:active,
   &:focus {
     outline: none;
-    border-color: #5c98f1;
+    border-color: $soft-blue;
   }
   @include placeholder-color(#9f9f9f);
+
+  @media (max-width: 800px) {
+    width: 100%;
+    max-width: 348px;
+    min-width: 130px;
+  }
 }
