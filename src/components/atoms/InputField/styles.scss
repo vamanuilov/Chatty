@@ -21,7 +21,7 @@
 .a__input-field {
   width: 356px;
   height: 56px;
-  border: 1px solid $light-blue;
+  border: 1px solid $blue-100;
   border-radius: 8px;
   padding: 16px;
   font-size: 15px;
@@ -29,7 +29,7 @@
   &:active,
   &:focus {
     outline: none;
-    border-color: $soft-blue;
+    border-color: $blue-100;
   }
   @include placeholder-color(#9f9f9f);
 

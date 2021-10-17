@@ -3,7 +3,7 @@
 .a__button {
   border-radius: 8px;
   border: 0;
-  background-color: $soft-blue;
+  background-color: $blue-100;
   width: 233px;
   height: 56px;
   color: white;
@@ -13,10 +13,10 @@
   outline: none;
   &:hover,
   &:focus {
-    background-color: $mid-blue;
+    background-color: $blue-500;
   }
   &:active {
-    background-color: $dark-blue;
+    background-color: $blue-700;
   }
   &:disabled {
     background-color: #d1d1d1;

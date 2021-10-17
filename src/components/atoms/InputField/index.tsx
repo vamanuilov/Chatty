@@ -1,4 +1,4 @@
-import './style.scss'
+import './styles.scss'
 
 type TextInputType = {
   type: 'text' | 'login' | 'password'
