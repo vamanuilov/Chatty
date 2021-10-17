@@ -1,0 +1,28 @@
+@import '../../../assets/styles/_variables.scss';
+
+.a__button {
+  border-radius: 8px;
+  border: 0;
+  background-color: $soft-blue;
+  width: 233px;
+  height: 56px;
+  color: white;
+  font-weight: 500;
+  font-size: 15px;
+  line-height: 23px;
+  outline: none;
+  &:hover,
+  &:focus {
+    background-color: $mid-blue;
+  }
+  &:active {
+    background-color: $dark-blue;
+  }
+  &:disabled {
+    background-color: #d1d1d1;
+  }
+
+  @media (max-width: 800px) {
+    width: 348px;
+  }
+}
