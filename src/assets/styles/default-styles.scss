@@ -9,3 +9,10 @@ html {
   font-family: $fonts;
   color: $soft-black;
 }
+
+input,
+select,
+textarea,
+button {
+  font-family: inherit;
+}

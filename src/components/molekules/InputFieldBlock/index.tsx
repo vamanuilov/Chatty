@@ -8,13 +8,14 @@ type InputFieldType = {
   id: string
   label: string
   placeholder: string
+  isRequired: boolean
 }
 
-const InputFieldBlock: React.FC<InputFieldType> = ({ type, id, label, placeholder }) => {
+const InputFieldBlock: React.FC<InputFieldType> = ({ type, id, label, placeholder, isRequired }) => {
   return (
     <div className="m__input-block">
       <Label forId={id} labelText={label} />
-      <TextInputAtom type={type} id={id} placeholder={placeholder} />
+      <TextInputAtom type={type} id={id} placeholder={placeholder} isRequired={isRequired} />
     </div>
   )
 }
