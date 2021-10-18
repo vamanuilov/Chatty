@@ -1,3 +1,5 @@
+import React from 'react'
+
 import Image from '../../atoms/Image'
 
 import logo from '../../../assets/images/logo.png'
@@ -12,4 +14,4 @@ const Logo = () => {
   )
 }
 
-export default Logo
+export default React.memo(Logo)

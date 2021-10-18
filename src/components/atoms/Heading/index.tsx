@@ -1,5 +1,8 @@
+import React from 'react'
+
 type HeadingType = {
   element: 'h1' | 'h2' | 'h3' | 'h4'
+  children?: React.ReactNode
 }
 
 import './styles.scss'
@@ -9,4 +12,4 @@ const Heading: React.FC<HeadingType> = ({ element, children }) => {
   return <Tag>{children}</Tag>
 }
 
-export default Heading
+export default React.memo(Heading)

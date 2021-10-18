@@ -1,13 +1,21 @@
+import React from 'react'
 import Button from '../../atoms/Button'
 import InputFieldBlock from '../../molekules/InputFieldBlock'
 
 import './styles.scss'
 
-const LoginForm = () => {
+interface ILoginProps {
+  login: string
+  password: string
+  loginChangeHandler: (e: React.ChangeEvent<HTMLInputElement>) => void
+  passwordChangeHandler: (e: React.ChangeEvent<HTMLInputElement>) => void
+}
+
+const LoginForm: React.FC<ILoginProps> = ({ login, password, loginChangeHandler, passwordChangeHandler }) => {
   return (
     <form
       className="o__login-form"
-      onSubmit={(e) => {
+      onSubmit={(e: React.SyntheticEvent) => {
         e.preventDefault()
         e.stopPropagation()
       }}
@@ -15,6 +23,8 @@ const LoginForm = () => {
       <div className="o__login-form__input">
         <InputFieldBlock
           type="login"
+          onChangeHandler={loginChangeHandler}
+          value={login}
           placeholder="Input user name..."
           id="username"
           label="User name"
@@ -23,6 +33,8 @@ const LoginForm = () => {
       </div>
       <div className="o__login-form__input">
         <InputFieldBlock
+          value={password}
+          onChangeHandler={passwordChangeHandler}
           type="password"
           placeholder="Input password..."
           id="password"

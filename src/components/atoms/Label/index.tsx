@@ -1,3 +1,5 @@
+import React from 'react'
+
 type LabelType = {
   forId?: string | undefined
   labelText: string
@@ -13,4 +15,4 @@ const Label: React.FC<LabelType> = ({ forId, labelText }) => {
   )
 }
 
-export default Label
+export default React.memo(Label)

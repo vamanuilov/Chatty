@@ -1,3 +1,4 @@
+import React from 'react'
 import './styles.scss'
 
 type ButtonText = {
@@ -14,4 +15,4 @@ const Button: React.FC<ButtonText> = ({ type, buttonText, isDisabled }) => {
   )
 }
 
-export default Button
+export default React.memo(Button)
