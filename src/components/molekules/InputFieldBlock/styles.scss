@@ -16,8 +16,15 @@
     width: 18px;
     height: 18px;
     position: absolute;
-    top: 51%;
-    right: 4%;
+    top: 40px;
+    left: 321px;
+    @media (max-width: 800px) {
+      left: 313px;
+    }
+    @media (max-width: 410px) {
+      left: unset;
+      right: 5%;
+    }
   }
 
   &_error:after {
