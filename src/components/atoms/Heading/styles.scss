@@ -1,0 +1,38 @@
+@mixin header($size, $lineHeight, $padding) {
+  font-size: $size;
+  font-style: normal;
+  font-weight: 700;
+  line-height: $lineHeight;
+  padding-top: $padding;
+  padding-bottom: $padding;
+}
+
+h1 {
+  @include header(42px, 51px, 14px);
+  @media (max-width: 800px) {
+    @include header(27px, 33px, 10px);
+  }
+  font-weight: 800;
+  letter-spacing: 0em;
+}
+
+h2 {
+  @include header(27px, 33px, 10px);
+  @media (max-width: 800px) {
+    @include header(20px, 24px, 8px);
+  }
+}
+
+h3 {
+  @include header(20px, 24px, 8px);
+  @media (max-width: 800px) {
+    @include header(15px, 18px, 4px);
+  }
+}
+
+h4 {
+  @include header(15px, 18px, 4px);
+  @media (max-width: 800px) {
+    @include header(13px, 16px, 2px);
+  }
+}
