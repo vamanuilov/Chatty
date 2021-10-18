@@ -1,0 +1,8 @@
+.o__logo {
+  width: 112px;
+  height: 43px;
+  @media (max-width: 800px) {
+    width: 84px;
+    height: 32px;
+  }
+}
