@@ -7,9 +7,11 @@
   align-items: center;
 
   @media (max-width: 800px) {
-    width: 90%;
+    width: 100%;
     height: 100%;
     justify-content: flex-end;
+    padding-left: 31px;
+    padding-right: 31px;
   }
 
   &__input {
