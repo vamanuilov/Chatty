@@ -6,9 +6,13 @@ import logo from '../../../assets/images/logo.png'
 
 import './styles.scss'
 
-const Logo = () => {
+type LogoType = {
+  className: string
+}
+
+const Logo: React.FC<LogoType> = ({ className }) => {
   return (
-    <div className="o__logo">
+    <div className={className}>
       <Image src={logo} altText="logo" />
     </div>
   )
