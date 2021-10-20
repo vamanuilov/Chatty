@@ -1,17 +1,17 @@
 @import '../../../assets/styles/_variables.scss';
 
 .header {
-  height: 64px;
+  height: $headerHeightSmall;
   width: 100%;
   padding: 0 4% 0 4%;
-  background-color: #fff;
-  border-bottom: 1px solid #d7e6ff;
+  background-color: $white;
+  border-bottom: 1px solid $blue-50;
   display: flex;
   justify-content: space-between;
   align-items: center;
 
   @media (min-width: 800px) {
-    height: 80px;
+    height: $headerHeight;
     padding: 0 2% 0 2%;
   }
 
