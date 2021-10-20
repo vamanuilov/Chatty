@@ -4,13 +4,16 @@ import Heading from '../../atoms/Heading'
 
 import background from '../../../assets/images/background.png'
 import './style.scss'
-import Logo from '../../organisms/Logo'
+import Logo from '../../molekules/Logo'
 import React, { useCallback, useState } from 'react'
 
 const LoginPage: React.FC = () => {
   const [login, setLogin] = useState<string>('')
   const [password, setPassword] = useState<string>('')
 
+  const backgroundSize = { height: 'auto', width: '1300px' }
+
+  // обернул в useCallback, т.к. из-за него ререндерились все компоненты, но они маленькие, возможно стоит убрать?
   const loginChangeHandler = useCallback((e: React.ChangeEvent<HTMLInputElement>) => {
     setLogin && setLogin(e.target.value)
   }, [])
@@ -19,8 +22,6 @@ const LoginPage: React.FC = () => {
     setPassword && setPassword(e.target.value)
   }, [])
 
-  const backgroundSize = { height: 'auto', width: '1300px' }
-
   return (
     <div className="login-page">
       <div className="login-page__img">
@@ -28,7 +29,7 @@ const LoginPage: React.FC = () => {
       </div>
       <div className="login-page__form">
         <div className="form-content">
-          <Logo />
+          <Logo className="form-content__logo" />
           <Heading element="h1">
             Welcome to <span className="form-content__span_plain-text">Chatty</span>
             <span className="form-content__span_exc-mark">!</span>

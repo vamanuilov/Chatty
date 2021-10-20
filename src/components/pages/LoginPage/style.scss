@@ -54,6 +54,15 @@
   &__span_exc-mark {
     color: $blue-100;
   }
+
+  &__logo {
+    width: 112px;
+    height: 43px;
+    @media (max-width: 800px) {
+      width: 84px;
+      height: 32px;
+    }
+  }
 }
 
 .login-page__img > img {
