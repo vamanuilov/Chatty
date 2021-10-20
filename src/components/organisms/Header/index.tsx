@@ -1,3 +1,5 @@
+import React from 'react'
+
 import Avatar from '../../molekules/Avatar'
 import Logo from '../../molekules/Logo'
 
@@ -5,7 +7,7 @@ import avatar from '../../../assets/images/avatar.png'
 
 import './styles.scss'
 
-const MessagePage = () => {
+const Header = () => {
   return (
     <div className="header">
       <Logo className="header__logo" />
@@ -14,4 +16,4 @@ const MessagePage = () => {
   )
 }
 
-export default MessagePage
+export default React.memo(Header)
