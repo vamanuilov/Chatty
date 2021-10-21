@@ -1,0 +1,47 @@
+@import '../../../assets/styles/variables';
+
+.friend {
+  display: flex;
+  width: 100%;
+  padding: 12px 14px 12px 14px;
+
+  &_selected {
+    background-color: $blue-300;
+  }
+
+  @media (min-width: 800px) {
+    padding: 16px 24px 16px 24px;
+  }
+}
+
+.friend-info {
+  padding-left: 12px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+
+  &__name {
+    color: $soft-black;
+    font-weight: bold;
+    font-size: 14px;
+    line-height: 17px;
+  }
+
+  &__add-text {
+    color: $gray;
+    font-weight: 500;
+    font-size: 13px;
+    line-height: 16px;
+
+    &__span {
+      color: $blue-200;
+      padding-right: 4px;
+    }
+  }
+}
+
+.friend_selected .friend-info__name,
+.friend_selected .friend-info__add-text,
+.friend_selected .friend-info__add-text__span {
+  color: #fff;
+}
