@@ -1,0 +1,17 @@
+.empty-friend {
+  height: 100%;
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+
+  &__img {
+    width: 200px;
+    height: 200px;
+  }
+
+  &__text {
+    padding-top: 24px;
+  }
+}
