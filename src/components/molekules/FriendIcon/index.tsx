@@ -5,13 +5,13 @@ import female from '../../../assets/images/femaleUser.png'
 
 type FriendIconType = {
   className?: 'string'
-  gender: 'male' | 'female'
+  icon: 'male' | 'female'
 }
 
 import './styles.scss'
 
-const FriendIcon: React.FC<FriendIconType> = ({ className, gender }) => {
-  const iconSrc = gender === 'male' ? male : female
+const FriendIcon: React.FC<FriendIconType> = ({ className, icon }) => {
+  const iconSrc = icon === 'male' ? male : female
 
   return (
     <div className={`m__img ${className ? className : ''}`}>

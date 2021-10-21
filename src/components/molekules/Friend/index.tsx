@@ -8,16 +8,16 @@ import './styles.scss'
 type FriendType = {
   name: string
   additionalText?: string
-  gender: 'male' | 'female'
+  icon: 'male' | 'female'
   isLastMessageFromUser?: boolean
   isSelected?: boolean
 }
 
-const Friend: React.FC<FriendType> = ({ name, additionalText, gender, isLastMessageFromUser, isSelected }) => {
+const Friend: React.FC<FriendType> = ({ name, additionalText, icon, isLastMessageFromUser, isSelected }) => {
   return (
     <div className={cn('friend', { friend_selected: isSelected })}>
       <div className="friend__icon">
-        <FriendIcon gender={gender} />
+        <FriendIcon icon={icon} />
       </div>
       <div className="friend-info">
         <div className="friend-info__name">{name}</div>
