@@ -11,7 +11,7 @@ type AvatarType = {
   className?: string
 }
 
-const Avatar: React.FC<AvatarType> = ({ src = avatar, className = 'm__avatar' }) => {
+const Avatar: React.FC<AvatarType> = ({ src = avatar, className = 'avatar-molekule' }) => {
   return (
     <div className={className}>
       <Image src={src} altText="avatar" />

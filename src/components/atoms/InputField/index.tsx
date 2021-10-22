@@ -15,7 +15,7 @@ const TextInputAtom: React.FC<TextInputType> = ({ type, id, placeholder, isRequi
     <input
       onChange={onChangeHandler}
       value={value}
-      className="a__input-field"
+      className="input-field-atom"
       id={id}
       type={type}
       placeholder={placeholder}

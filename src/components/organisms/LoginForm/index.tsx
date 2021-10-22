@@ -14,13 +14,13 @@ interface ILoginProps {
 const LoginForm: React.FC<ILoginProps> = ({ login, password, loginChangeHandler, passwordChangeHandler }) => {
   return (
     <form
-      className="o__login-form"
+      className="login-form"
       onSubmit={(e: React.SyntheticEvent) => {
         e.preventDefault()
         e.stopPropagation()
       }}
     >
-      <div className="o__login-form__input">
+      <div className="login-form__input">
         <InputFieldBlock
           type="login"
           onChangeHandler={loginChangeHandler}
@@ -31,7 +31,7 @@ const LoginForm: React.FC<ILoginProps> = ({ login, password, loginChangeHandler,
           isRequired={true}
         />
       </div>
-      <div className="o__login-form__input">
+      <div className="login-form__input">
         <InputFieldBlock
           value={password}
           onChangeHandler={passwordChangeHandler}
@@ -42,7 +42,7 @@ const LoginForm: React.FC<ILoginProps> = ({ login, password, loginChangeHandler,
           isRequired={true}
         />
       </div>
-      <div className="o__login-form__button">
+      <div className="login-form__button">
         <Button type="submit" buttonText="Log In" />
       </div>
     </form>

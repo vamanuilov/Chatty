@@ -18,7 +18,7 @@
   }
 }
 
-.a__input-field {
+.input-field-atom {
   width: 356px;
   height: 56px;
   border: 1px solid $blue-100;
@@ -29,7 +29,7 @@
   &:active,
   &:focus {
     outline: none;
-    border-color: $blue-100;
+    border-color: $blue-300;
   }
   @include placeholder-color(#9f9f9f);
 

@@ -9,7 +9,7 @@ import './styles.scss'
 
 const Label: React.FC<LabelType> = ({ forId, labelText }) => {
   return (
-    <label className="a__label" htmlFor={forId}>
+    <label className="label-atom" htmlFor={forId}>
       {labelText}
     </label>
   )

@@ -15,7 +15,7 @@ const FriendIcon: React.FC<FriendIconType> = ({ className, icon }) => {
   const iconSrc = icon === 'male' ? male : female
 
   return (
-    <div className={`m__img ${className ? className : ''}`}>
+    <div className={`friend-icon ${className ? className : ''}`}>
       <Image src={iconSrc} altText="male avatar" />
     </div>
   )

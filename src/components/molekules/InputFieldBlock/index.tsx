@@ -24,7 +24,7 @@ const InputFieldBlock: React.FC<InputFieldType> = ({
   onChangeHandler
 }) => {
   return (
-    <div className="m__input-block">
+    <div className="input-field-block">
       <Label forId={id} labelText={label} />
       <TextInputAtom
         value={value}

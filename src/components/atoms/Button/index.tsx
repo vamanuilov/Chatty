@@ -9,7 +9,7 @@ type ButtonText = {
 
 const Button: React.FC<ButtonText> = ({ type, buttonText, isDisabled }) => {
   return (
-    <button className="a__button" type={type || 'button'} disabled={isDisabled || false}>
+    <button className="button-atom" type={type || 'button'} disabled={isDisabled || false}>
       {buttonText}
     </button>
   )
