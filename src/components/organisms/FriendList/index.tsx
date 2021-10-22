@@ -22,7 +22,7 @@ const FriendList = ({ friends }: { friends: IFriends[] }) => {
         <div key={`${friend.name + index}`} onClick={() => setSelectedIndex(index)}>
           <Friend
             name={friend.name}
-            additionalText={friend.lastMessage}
+            lastMessage={friend.lastMessage}
             icon={friend.icon}
             isLastMessageFromUser={friend.isLastMessageFromUser}
             isSelected={index === selectedIndex}

@@ -7,6 +7,12 @@
 
   &_selected {
     background-color: $blue-300;
+
+    .friend-info__name,
+    .friend-info__add-text,
+    .friend-info__add-text__span {
+      color: #fff;
+    }
   }
 
   @media (min-width: 800px) {
@@ -38,10 +44,4 @@
       padding-right: 4px;
     }
   }
-}
-
-.friend_selected .friend-info__name,
-.friend_selected .friend-info__add-text,
-.friend_selected .friend-info__add-text__span {
-  color: #fff;
 }

@@ -1,3 +1,4 @@
+import React from 'react'
 import Image from '../../atoms/Image'
 
 import male from '../../../assets/images/maleUser.png'
@@ -20,4 +21,4 @@ const FriendIcon: React.FC<FriendIconType> = ({ className, icon }) => {
   )
 }
 
-export default FriendIcon
+export default React.memo(FriendIcon)
