@@ -1,0 +1,12 @@
+.svg-icon-label {
+  &:hover {
+    background-color: rgba(74 74 74 / 0.07);
+  }
+
+  padding: 10px;
+  border-radius: 50%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  cursor: pointer;
+}
