@@ -3,7 +3,7 @@ import Image from '../../atoms/Image'
 import Heading from '../../atoms/Heading'
 
 import background from '../../../assets/images/background.png'
-import './style.scss'
+import './styles.scss'
 import Logo from '../../molekules/Logo'
 import React, { useCallback, useState } from 'react'
 
