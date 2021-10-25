@@ -1,0 +1,67 @@
+@import '../../../assets/styles/variables';
+
+$side-margin: 36px;
+$corner-side-position: $side-margin - 10px;
+
+.message-container {
+  position: relative;
+  z-index: 1;
+  padding-bottom: 24px;
+}
+
+.message-corner {
+  position: absolute;
+  top: 0;
+  stroke: $blue-50;
+
+  &_friend {
+    left: $corner-side-position;
+    fill: $white;
+    transform: rotate(180deg);
+  }
+
+  &_user {
+    right: $corner-side-position;
+    fill: $userMessageBackground;
+    transform: rotate(180deg) scale(-1, 1);
+
+    // fill the color of the stroke at the line of contact with the message bubble
+    #customStroke {
+      stroke: $userMessageBackground;
+    }
+  }
+}
+
+.message {
+  padding: 12px;
+  max-width: 40%;
+  border: 1px solid $blue-50;
+  border-radius: 12px;
+  width: -webkit-fit-content;
+  width: -moz-fit-content;
+  width: fit-content;
+  color: $soft-black;
+  font-weight: normal;
+  font-size: 16px;
+  line-height: 20px;
+
+  @media (max-width: 800px) {
+    font-size: 14px;
+    line-height: 17px;
+    max-width: 91%;
+  }
+
+  &.message_user {
+    background-color: #e9f2ff;
+    margin-right: $side-margin;
+    margin-left: auto;
+    border-top-right-radius: 0;
+  }
+
+  &.message_friend {
+    background-color: $white;
+    margin-right: auto;
+    margin-left: $side-margin;
+    border-top-left-radius: 0;
+  }
+}
