@@ -1,0 +1,36 @@
+.file-message {
+  display: flex;
+  align-items: center;
+
+  &__icon {
+    width: 100%;
+    min-width: 32px;
+    position: relative;
+    bottom: 2px;
+  }
+
+  &__description {
+    width: 100%;
+    padding-right: 20px;
+    padding-left: 12px;
+  }
+
+  &__name {
+    width: 100%;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    overflow: hidden;
+    font-weight: 600;
+  }
+
+  &__size {
+    width: 100%;
+    font-size: 14px;
+    line-height: 17px;
+
+    @media (max-width: 800px) {
+      font-size: 12px;
+      line-height: 15px;
+    }
+  }
+}

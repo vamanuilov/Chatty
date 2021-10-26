@@ -5,11 +5,11 @@ import { ReactComponent as Corner } from '../../../assets/images/corner.svg'
 import './styles.scss'
 
 type MessageType = {
-  messageText: string
+  children: React.ReactNode
   author: 'user' | 'friend'
 }
 
-const Message: React.FC<MessageType> = ({ messageText, author }) => {
+const Message: React.FC<MessageType> = ({ children, author }) => {
   return (
     <div className="message-container">
       <Corner
@@ -19,7 +19,7 @@ const Message: React.FC<MessageType> = ({ messageText, author }) => {
         })}
       />
       <div className={cn('message', { message_user: author === 'user', message_friend: author === 'friend' })}>
-        {messageText}
+        {children}
       </div>
     </div>
   )
