@@ -1,16 +1,12 @@
-import React from 'react'
-import { BrowserRouter as Router, Switch, Route } from 'react-router-dom'
-import LoginPage from './components/pages/LoginPage'
-import './App.scss'
+import { BrowserRouter as Router } from 'react-router-dom'
 
-function App() {
+import './App.scss'
+import Routes from './routes'
+
+const App = () => {
   return (
     <Router>
-      <Switch>
-        <Route path="/">
-          <LoginPage />
-        </Route>
-      </Switch>
+      <Routes />
     </Router>
   )
 }
