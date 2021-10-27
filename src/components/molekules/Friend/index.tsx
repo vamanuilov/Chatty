@@ -1,19 +1,15 @@
 import React from 'react'
 import cn from 'classnames'
 
+import { IFriend } from '../../../interface/friends'
+
+import { ReactComponent as FileIcon } from '../../../assets/images/fileIcon.svg'
+
 import FriendIcon from '../FriendIcon'
 
 import './styles.scss'
 
-type FriendType = {
-  name: string
-  lastMessage?: string
-  icon: 'male' | 'female'
-  isLastMessageFromUser?: boolean
-  isSelected?: boolean
-}
-
-const Friend: React.FC<FriendType> = ({ name, lastMessage, icon, isLastMessageFromUser, isSelected }) => {
+const Friend: React.FC<IFriend> = ({ name, lastMessage, icon, isLastMessageFromUser, isSelected }) => {
   return (
     <div className={cn('friend', { friend_selected: isSelected })}>
       <div className="friend__icon">
@@ -22,7 +18,8 @@ const Friend: React.FC<FriendType> = ({ name, lastMessage, icon, isLastMessageFr
       <div className="friend-info">
         <div className="friend-info__name">{name}</div>
         <div className="friend-info__add-text">
-          {isLastMessageFromUser && <span className="friend-info__add-text__span">You:</span>}
+          {isLastMessageFromUser && <span className="friend-info__span">You:</span>}
+          {lastMessage === 'File' && <FileIcon className="friend-info__file-icon" />}
           {lastMessage}
         </div>
       </div>

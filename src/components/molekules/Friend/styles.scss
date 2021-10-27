@@ -10,8 +10,11 @@
 
     .friend-info__name,
     .friend-info__add-text,
-    .friend-info__add-text__span {
-      color: #fff;
+    .friend-info__span {
+      color: $white;
+    }
+    .friend-info__file-icon {
+      fill: $white;
     }
   }
 
@@ -21,6 +24,7 @@
 }
 
 .friend-info {
+  width: 90%;
   padding-left: 12px;
   display: flex;
   flex-direction: column;
@@ -38,10 +42,24 @@
     font-weight: 500;
     font-size: 13px;
     line-height: 16px;
+    width: 100%;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    overflow: hidden;
+  }
 
-    &__span {
-      color: $blue-200;
-      padding-right: 4px;
-    }
+  &__span {
+    color: $blue-200;
+    padding-right: 4px;
+  }
+
+  &__file-icon {
+    width: 14px;
+    height: 18px;
+    margin-right: 4px;
+    margin-left: 1px;
+    position: relative;
+    bottom: -2px;
+    fill: $blue-300;
   }
 }
