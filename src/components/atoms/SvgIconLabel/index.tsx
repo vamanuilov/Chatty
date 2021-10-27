@@ -7,7 +7,7 @@ import './styles.scss'
 
 const SvgIconLabel: React.FC<IconLabelType> = ({ children, htmlForId }) => {
   return (
-    <label className="svg-icon-label" htmlFor={htmlForId}>
+    <label tabIndex={0} className="svg-icon-label" htmlFor={htmlForId}>
       {children}
     </label>
   )

@@ -1,3 +1,5 @@
+@import '../../../assets/styles/variables';
+
 .file-message {
   display: flex;
   align-items: center;
@@ -7,6 +9,7 @@
     min-width: 32px;
     position: relative;
     bottom: 2px;
+    fill: $blue-300;
   }
 
   &__description {
