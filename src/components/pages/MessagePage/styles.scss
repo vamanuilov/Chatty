@@ -1,0 +1,14 @@
+@import '../../../assets/styles/variables';
+
+.content {
+  width: 100%;
+  height: calc(100% - $headerHeightSmall);
+
+  overflow: hidden;
+  display: contents;
+
+  @media (min-width: 800px) {
+    height: calc(100% - $headerHeight);
+    display: flex;
+  }
+}
