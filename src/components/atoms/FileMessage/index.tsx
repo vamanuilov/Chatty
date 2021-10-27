@@ -2,12 +2,9 @@ import React from 'react'
 
 import { ReactComponent as FileIcon } from '../../../assets/images/fileIcon.svg'
 
-import './styles.scss'
+import { IFileMessage } from '../../../interface/message'
 
-export interface IFileMessage {
-  name: string
-  size: string
-}
+import './styles.scss'
 
 const FileMessage: React.FC<IFileMessage> = ({ name, size }) => {
   return (
