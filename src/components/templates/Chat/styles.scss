@@ -1,0 +1,18 @@
+@import '../../../assets/styles/variables';
+
+.chat {
+  height: 100%;
+  width: 100%;
+  position: relative;
+  background-color: rgba(239 245 255 / 0.9);
+  display: flex;
+  flex-direction: column;
+
+  &__background {
+    position: absolute;
+    z-index: -10;
+    right: 0;
+    top: -110px;
+    opacity: 0.5;
+  }
+}
