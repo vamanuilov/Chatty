@@ -1,15 +1,16 @@
+import React from 'react'
 import cn from 'classnames'
 
 import { ReactComponent as Corner } from '../../../assets/images/corner.svg'
 
 import './styles.scss'
 
-type MessageType = {
+type MessageAtomType = {
   children: React.ReactNode
   author: 'user' | 'friend'
 }
 
-const Message: React.FC<MessageType> = ({ children, author }) => {
+const Message: React.FC<MessageAtomType> = ({ children, author }) => {
   return (
     <div className="message-container">
       <Corner
@@ -25,4 +26,4 @@ const Message: React.FC<MessageType> = ({ children, author }) => {
   )
 }
 
-export default Message
+export default React.memo(Message)

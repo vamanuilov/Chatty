@@ -44,6 +44,8 @@ $corner-side-position: $side-margin - 10px;
   font-weight: normal;
   font-size: 16px;
   line-height: 20px;
+  word-break: break-all;
+  white-space: pre-line;
 
   @media (max-width: 800px) {
     font-size: 14px;
