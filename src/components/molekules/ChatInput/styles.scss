@@ -1,0 +1,68 @@
+@import '../../../assets/styles/variables';
+
+.chat-input {
+  display: flex;
+  align-items: center;
+  justify-content: space-around;
+  border-top: 1px solid $blue-50;
+  height: 80px;
+  background: $white;
+  padding: 25px 14px;
+}
+
+.file-input,
+.send-button,
+.text-input {
+  padding: 0px 10px;
+}
+
+.text-input {
+  width: 100%;
+
+  &__textarea {
+    border: none;
+    width: 100%;
+    font-weight: 500;
+    font-size: 16px;
+    line-height: 20px;
+    padding: 8px;
+    resize: none;
+    overflow: overlay;
+    border: 1px solid $white;
+    border-radius: 12px;
+
+    &::-webkit-scrollbar {
+      width: 0;
+    }
+
+    &:focus,
+    &:active {
+      border: 1px solid $blue-300;
+    }
+    &::-webkit-input-placeholder {
+      color: $gray;
+      line-height: 43px;
+    }
+    &::-moz-placeholder {
+      color: $gray;
+      line-height: 43px;
+    }
+    &:-ms-input-placeholder {
+      color: $gray;
+      line-height: 43px;
+    }
+    &::-ms-input-placeholder {
+      color: $gray;
+      line-height: 43px;
+    }
+    &::placeholder {
+      color: $gray;
+      line-height: 43px;
+    }
+  }
+}
+
+.send-button svg {
+  position: relative;
+  left: 3px;
+}
