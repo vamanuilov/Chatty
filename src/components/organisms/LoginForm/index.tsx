@@ -9,15 +9,23 @@ interface ILoginProps {
   password: string
   loginChangeHandler: (e: React.ChangeEvent<HTMLInputElement>) => void
   passwordChangeHandler: (e: React.ChangeEvent<HTMLInputElement>) => void
+  onSubmitHandler: () => void
 }
 
-const LoginForm: React.FC<ILoginProps> = ({ login, password, loginChangeHandler, passwordChangeHandler }) => {
+const LoginForm: React.FC<ILoginProps> = ({
+  login,
+  password,
+  loginChangeHandler,
+  passwordChangeHandler,
+  onSubmitHandler
+}) => {
   return (
     <form
       className="login-form"
       onSubmit={(e: React.SyntheticEvent) => {
         e.preventDefault()
         e.stopPropagation()
+        onSubmitHandler()
       }}
     >
       <div className="login-form__input">

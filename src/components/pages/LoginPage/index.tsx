@@ -6,6 +6,7 @@ import background from '../../../assets/images/background.png'
 import './styles.scss'
 import Logo from '../../molekules/Logo'
 import React, { useCallback, useState } from 'react'
+import { useHistory } from 'react-router'
 
 const LoginPage: React.FC = () => {
   const [login, setLogin] = useState<string>('')
@@ -21,6 +22,12 @@ const LoginPage: React.FC = () => {
   const passwordChangeHandler = useCallback((e: React.ChangeEvent<HTMLInputElement>) => {
     setPassword && setPassword(e.target.value)
   }, [])
+
+  const history = useHistory()
+
+  const onSubmitHandler = () => {
+    history.push('/messages')
+  }
 
   return (
     <div className="login-page">
@@ -41,6 +48,7 @@ const LoginPage: React.FC = () => {
           password={password}
           loginChangeHandler={loginChangeHandler}
           passwordChangeHandler={passwordChangeHandler}
+          onSubmitHandler={onSubmitHandler}
         />
       </div>
     </div>
