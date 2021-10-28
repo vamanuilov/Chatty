@@ -1,4 +1,5 @@
 import React from 'react'
+import cn from 'classnames'
 import { UseFormRegister } from 'react-hook-form'
 
 import TextInputAtom from '../../atoms/InputField'
@@ -15,7 +16,7 @@ export interface IInputField extends IInput {
 
 const InputFieldBlock = React.forwardRef<HTMLInputElement, IInputField & ReturnType<UseFormRegister<IFormInputs>>>(
   ({ type, id, label, placeholder, errorText, onChange, onBlur, name }, ref) => (
-    <div className="input-field-block">
+    <div className={cn('input-field-block', { 'input-field-block_error': errorText })}>
       <Label forId={id} labelText={label} />
       <TextInputAtom
         id={id}
@@ -26,7 +27,7 @@ const InputFieldBlock = React.forwardRef<HTMLInputElement, IInputField & ReturnT
         onChange={onChange}
         name={name}
       />
-      <label className="input-field">{errorText}</label>
+      <label className="input-field-block__error-label">{errorText}</label>
     </div>
   )
 )

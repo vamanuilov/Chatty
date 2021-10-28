@@ -5,7 +5,26 @@
   flex-direction: column;
   position: relative;
 
+  &__error-label {
+    color: $error;
+    display: block;
+    position: absolute;
+    top: 101%;
+    left: 1%;
+    font-weight: 500;
+    font-size: 13px;
+    line-height: 19px;
+
+    &::first-letter {
+      text-transform: uppercase;
+    }
+  }
+
   &_error > input {
+    &:focus,
+    &:active {
+      border-color: $error;
+    }
     border-color: $error;
   }
 
@@ -25,17 +44,5 @@
       left: unset;
       right: 5%;
     }
-  }
-
-  &_error:after {
-    content: 'Something wrong';
-    color: $error;
-    display: block;
-    position: absolute;
-    top: 101%;
-    left: 1%;
-    font-weight: 500;
-    font-size: 13px;
-    line-height: 19px;
   }
 }
