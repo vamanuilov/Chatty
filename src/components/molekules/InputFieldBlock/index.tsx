@@ -1,41 +1,34 @@
 import React from 'react'
+import { UseFormRegister } from 'react-hook-form'
+
 import TextInputAtom from '../../atoms/InputField'
 import Label from '../../atoms/Label'
 
+import { IFormInputs, IInput } from '../../../interface/input'
+
 import './styles.scss'
 
-type InputFieldType = {
-  type: 'text' | 'login' | 'password'
-  value: string
-  onChangeHandler: (e: React.ChangeEvent<HTMLInputElement>) => void
-  id: string
+export interface IInputField extends IInput {
   label: string
-  placeholder: string
-  isRequired: boolean
+  errorText?: string | undefined
 }
 
-const InputFieldBlock: React.FC<InputFieldType> = ({
-  type,
-  id,
-  label,
-  placeholder,
-  isRequired,
-  value,
-  onChangeHandler
-}) => {
-  return (
+const InputFieldBlock = React.forwardRef<HTMLInputElement, IInputField & ReturnType<UseFormRegister<IFormInputs>>>(
+  ({ type, id, label, placeholder, errorText, onChange, onBlur, name }, ref) => (
     <div className="input-field-block">
       <Label forId={id} labelText={label} />
       <TextInputAtom
-        value={value}
-        onChangeHandler={onChangeHandler}
-        type={type}
         id={id}
+        type={type}
         placeholder={placeholder}
-        isRequired={isRequired}
+        ref={ref}
+        onBlur={onBlur}
+        onChange={onChange}
+        name={name}
       />
+      <label className="input-field">{errorText}</label>
     </div>
   )
-}
+)
 
 export default React.memo(InputFieldBlock)

@@ -1,36 +1,24 @@
+import React from 'react'
+import { UseFormRegister } from 'react-hook-form'
+import { IFormInputs, IInput } from '../../../interface/input'
+
 import './styles.scss'
 
-type TextInputType = {
-  type: 'text' | 'login' | 'password'
-  id: string
-  placeholder: string
-  isRequired?: boolean
-  value: string
-  onChangeHandler: (e: React.ChangeEvent<HTMLInputElement>) => void
-  className?: string
-}
-
-const TextInputAtom: React.FC<TextInputType> = ({
-  type,
-  id,
-  placeholder,
-  isRequired,
-  className,
-  value,
-  onChangeHandler
-}) => {
-  return (
+const TextInputAtom = React.forwardRef<HTMLInputElement, IInput & ReturnType<UseFormRegister<IFormInputs>>>(
+  ({ type, id, placeholder, isRequired, onBlur, onChange, name }, ref) => (
     <input
-      onChange={onChangeHandler}
-      value={value}
-      className={`input-field-atom ${className ? className : ''}`}
+      className="input-field-atom"
       id={id}
       type={type}
       placeholder={placeholder}
       required={isRequired}
       autoComplete="off"
+      ref={ref}
+      onBlur={onBlur}
+      onChange={onChange}
+      name={name}
     />
   )
-}
+)
 
 export default TextInputAtom

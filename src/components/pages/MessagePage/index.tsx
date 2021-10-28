@@ -131,6 +131,7 @@ const MessagePage: React.FC = () => {
     history.push(`/messages/${id}`)
   }
 
+  // TODO: fix loader styles
   return (
     <>
       <Loader isLoading={false} />
