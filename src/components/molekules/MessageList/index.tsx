@@ -1,17 +1,20 @@
+import { observer } from 'mobx-react-lite'
+
 import Message from '../../atoms/Message'
 import FileMessage from '../../atoms/FileMessage'
 import EmptyContentPopup from '../../atoms/EmptyContentPopup'
 
-import { IFileMessage, IMessage } from '../../../interface/message'
+import { IFileMessage } from '../../../interface/message'
 
-interface IMessageList {
-  messages: IMessage[] | undefined
-}
+import friendsStore from '../../../store/friends'
 
 import './styles.scss'
 
-const MessageList: React.FC<IMessageList> = ({ messages }) => {
-  if (typeof messages === 'undefined' || messages.length === 0) {
+const MessageList: React.FC = () => {
+  if (
+    typeof friendsStore.selectedFriend?.messages === 'undefined' ||
+    friendsStore.selectedFriend.messages?.length === 0
+  ) {
     return (
       <EmptyContentPopup>
         <p>There is no messages yet</p> Start chatting
@@ -20,9 +23,9 @@ const MessageList: React.FC<IMessageList> = ({ messages }) => {
   }
   return (
     <div>
-      {messages?.map(({ message, type, author, id }) => {
+      {friendsStore.selectedFriend.messages.map(({ text, type, author, id }) => {
         if (type === 'file') {
-          const { size, name } = message as IFileMessage
+          const { size, name } = text as IFileMessage
           return (
             <Message key={id} author={author}>
               <FileMessage size={size} name={name} />
@@ -32,7 +35,7 @@ const MessageList: React.FC<IMessageList> = ({ messages }) => {
 
         return (
           <Message key={id} author={author}>
-            {message}
+            {text}
           </Message>
         )
       })}
@@ -40,4 +43,4 @@ const MessageList: React.FC<IMessageList> = ({ messages }) => {
   )
 }
 
-export default MessageList
+export default observer(MessageList)

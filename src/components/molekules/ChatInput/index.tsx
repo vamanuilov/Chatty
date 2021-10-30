@@ -6,15 +6,13 @@ import InputWithSvgIcon from '../InputWithSvgIcon'
 import { ReactComponent as PaperClip } from '../../../assets/images/paper-clip.svg'
 import { ReactComponent as SendButtonIcon } from '../../../assets/images/send-button.svg'
 
-import { IMessage } from '../../../interface/message'
+import { ID_LENGTH } from '../../pages/MessagePage'
+
+import friendsStore from '../../../store/friends'
 
 import './styles.scss'
 
-interface IChatInput {
-  setMessages: React.Dispatch<React.SetStateAction<IMessage[] | undefined>>
-}
-
-const ChatInput: React.FC<IChatInput> = ({ setMessages }) => {
+const ChatInput: React.FC = () => {
   const [userMessage, setUserMessage] = useState<string>('')
   const fileRef = useRef<HTMLInputElement>(null)
 
@@ -27,14 +25,12 @@ const ChatInput: React.FC<IChatInput> = ({ setMessages }) => {
     const fileSize: string | null = file && (file?.size / (1024 * 1024)).toFixed(2)
 
     if (file) {
-      setMessages &&
-        setMessages(
-          (prev) =>
-            prev && [
-              ...prev,
-              { message: { size: `${fileSize} MB`, name: file?.name }, author: 'user', id: nanoid(), type: 'file' }
-            ]
-        )
+      friendsStore.addMessage({
+        text: { size: `${fileSize} MB`, name: file?.name },
+        author: 'user',
+        id: nanoid(ID_LENGTH),
+        type: 'file'
+      })
 
       if (fileRef.current) {
         fileRef.current.value = ''
@@ -43,8 +39,7 @@ const ChatInput: React.FC<IChatInput> = ({ setMessages }) => {
   }
 
   const handleSendClick = () => {
-    setMessages &&
-      setMessages((prev) => prev && [...prev, { message: userMessage, author: 'user', id: nanoid(), type: 'text' }])
+    friendsStore.addMessage({ text: userMessage, author: 'user', id: nanoid(ID_LENGTH), type: 'text' })
     setUserMessage('')
   }
 

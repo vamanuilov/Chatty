@@ -1,19 +1,22 @@
 import React from 'react'
+import { observer } from 'mobx-react-lite'
+
 import ChatInput from '../../molekules/ChatInput'
-
-import { ISelectedFriend } from '../../../interface/friends'
-import { IChat } from '../../../interface/chat'
-
-import './styles.scss'
 import MessageList from '../../molekules/MessageList'
 import EmptyContentPopup from '../../atoms/EmptyContentPopup'
 
-const ChatMessages: React.FC<IChat> = ({ setMessages, selectedFriend, messages }) => {
-  if (!selectedFriend) {
+import { IFriends } from '../../../interface/friends'
+
+import './styles.scss'
+
+import friendsStore from '../../../store/friends'
+
+const ChatMessages: React.FC = () => {
+  if (!friendsStore.selectedFriend) {
     return <EmptyContentPopup>Select a chat to start messaging</EmptyContentPopup>
   }
 
-  const { name: friendName, lastTimeOnline } = selectedFriend as ISelectedFriend
+  const { name: friendName, lastTimeOnline } = friendsStore.selectedFriend as IFriends
 
   return (
     <>
@@ -24,13 +27,13 @@ const ChatMessages: React.FC<IChat> = ({ setMessages, selectedFriend, messages }
         </div>
       </div>
       <div className="chat-messages">
-        <MessageList messages={messages} />
+        <MessageList />
       </div>
       <div className="chat-input-container">
-        <ChatInput setMessages={setMessages} />
+        <ChatInput />
       </div>
     </>
   )
 }
 
-export default React.memo(ChatMessages)
+export default observer(ChatMessages)

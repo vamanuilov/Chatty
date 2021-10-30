@@ -1,13 +1,17 @@
 import React from 'react'
 import cn from 'classnames'
 
-import { IFriend } from '../../../interface/friends'
+import { IFriends } from '../../../interface/friends'
 
 import { ReactComponent as FileIcon } from '../../../assets/images/fileIcon.svg'
 
 import FriendIcon from '../FriendIcon'
 
 import './styles.scss'
+
+interface IFriend extends Omit<IFriends, 'messages' | 'lastTimeOnline' | 'id'> {
+  isSelected?: boolean
+}
 
 const Friend: React.FC<IFriend> = ({ name, lastMessage, icon, isLastMessageFromUser, isSelected }) => {
   return (

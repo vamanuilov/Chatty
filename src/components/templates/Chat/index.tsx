@@ -4,11 +4,9 @@ import Image from '../../atoms/Image'
 import background from '../../../assets/images/background.png'
 import ChatMessages from '../../organisms/ChatMessages'
 
-import { IChat } from '../../../interface/chat'
-
 import './styles.scss'
 
-const Chat: React.FC<IChat> = ({ setMessages, selectedFriend, messages }) => {
+const Chat: React.FC = () => {
   const backgroundSize = { height: 'auto', width: '1300px' }
 
   return (
@@ -16,7 +14,7 @@ const Chat: React.FC<IChat> = ({ setMessages, selectedFriend, messages }) => {
       <div className="chat__background">
         <Image src={background} altText="background" size={backgroundSize} />
       </div>
-      <ChatMessages messages={messages} setMessages={setMessages} selectedFriend={selectedFriend} />
+      <ChatMessages />
     </div>
   )
 }

@@ -6,6 +6,6 @@ export interface IFileMessage {
 export interface IMessage {
   author: 'user' | 'friend'
   type: 'text' | 'file'
-  message: IFileMessage | string
+  text: IFileMessage | string
   id: string
 }

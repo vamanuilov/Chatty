@@ -1,6 +1,7 @@
-import { useEffect, useState } from 'react'
+import { useCallback, useEffect } from 'react'
 import { nanoid } from 'nanoid'
 import { useHistory, useParams } from 'react-router'
+import { observer } from 'mobx-react-lite'
 
 import Sidebar from '../../organisms/Sidebar'
 import Header from '../../organisms/Header'
@@ -8,8 +9,9 @@ import Loader from '../../organisms/Loader'
 import FriendList from '../../organisms/FriendList'
 import Chat from '../../templates/Chat'
 
-import { IMessage } from '../../../interface/message'
-import { IFriends, ISelectedFriend } from '../../../interface/friends'
+import { IFriends } from '../../../interface/friends'
+
+import friendsStore from '../../../store/friends'
 
 import './styles.scss'
 
@@ -28,14 +30,13 @@ const TEMPLATE_FRIENDS: IFriends[] = [
       {
         id: nanoid(ID_LENGTH),
         author: 'user',
-        message: 'Lorem ipsum dolor sit amet',
+        text: 'Lorem ipsum dolor sit amet',
         type: 'text'
       },
       {
         id: nanoid(ID_LENGTH),
         author: 'friend',
-        message:
-          'Lorem ipsum dolor sit amet consectetur adipisicing elit. Quo blanditiis nam eligendi, excepturi sit voluptate fugit consectetur fugiat. Est, vitae! Beatae provident nihil magnam officia aliquam, quasi corporis tempore voluptatibus?',
+        text: 'Lorem ipsum dolor sit amet consectetur adipisicing elit. Quo blanditiis nam eligendi, excepturi sit voluptate fugit consectetur fugiat. Est, vitae! Beatae provident nihil magnam officia aliquam, quasi corporis tempore voluptatibus?',
         type: 'text'
       }
     ]
@@ -58,7 +59,7 @@ const TEMPLATE_FRIENDS: IFriends[] = [
       {
         id: nanoid(ID_LENGTH),
         author: 'user',
-        message: 'Lorem ipsum dolor sit amet',
+        text: 'Lorem ipsum dolor sit amet',
         type: 'text'
       }
     ]
@@ -74,20 +75,19 @@ const TEMPLATE_FRIENDS: IFriends[] = [
       {
         id: nanoid(ID_LENGTH),
         author: 'user',
-        message: 'Lorem ipsum dolor sit amet',
+        text: 'Lorem ipsum dolor sit amet',
         type: 'text'
       },
       {
         id: nanoid(ID_LENGTH),
         author: 'friend',
-        message:
-          'Lorem ipsum dolor sit amet consectetur adipisicing elit. Quo blanditiis nam eligendi, excepturi sit voluptate fugit consectetur fugiat. Est, vitae! Beatae provident nihil magnam officia aliquam, quasi corporis tempore voluptatibus?',
+        text: 'Lorem ipsum dolor sit amet consectetur adipisicing elit. Quo blanditiis nam eligendi, excepturi sit voluptate fugit consectetur fugiat. Est, vitae! Beatae provident nihil magnam officia aliquam, quasi corporis tempore voluptatibus?',
         type: 'text'
       },
       {
         id: nanoid(ID_LENGTH),
         author: 'user',
-        message: {
+        text: {
           size: '14 MB',
           name: 'File_for_exampl0011232555234.doc'
         },
@@ -100,36 +100,20 @@ const TEMPLATE_FRIENDS: IFriends[] = [
 const MessagePage: React.FC = () => {
   const { id: selectedId } = useParams<{ [v: string]: string }>()
   const history = useHistory()
-  const [friends, setFriends] = useState<IFriends[]>(TEMPLATE_FRIENDS)
-  const [messages, setMessages] = useState<IMessage[] | undefined>()
-  const [selectedFriend, setSelectedFriend] = useState<ISelectedFriend | undefined>()
 
   useEffect(() => {
-    const foundFriend = friends?.find((friend) => friend.id === selectedId)
-    setSelectedFriend(foundFriend)
-    setMessages(foundFriend?.messages)
+    friendsStore.setFriends(TEMPLATE_FRIENDS)
+  }, [])
+
+  useEffect(() => {
+    friendsStore.setSelectedFriend(selectedId)
   }, [selectedId])
 
-  useEffect(() => {
-    if (typeof messages !== 'undefined') {
-      setFriends((prevFriends) => {
-        return prevFriends.map((prevFriend) => {
-          if (prevFriend.id === selectedId && JSON.stringify(messages) !== JSON.stringify(prevFriend.messages)) {
-            const newLastMessage: IMessage = messages[messages.length - 1]
-            const isLastMessageFromUser = newLastMessage.author === 'user'
-            const lastMessage: string = newLastMessage.type === 'text' ? (newLastMessage.message as string) : 'File'
-
-            return { ...prevFriend, messages, lastMessage, isLastMessageFromUser }
-          }
-          return prevFriend
-        })
-      })
+  const handleSelectFriend = useCallback((id: string) => {
+    if (friendsStore.selectedFriend?.id !== id) {
+      history.push(`/messages/${id}`)
     }
-  }, [messages])
-
-  const handleSelectFriend = (id: string) => {
-    history.push(`/messages/${id}`)
-  }
+  }, [])
 
   // TODO: fix loader styles
   return (
@@ -138,12 +122,12 @@ const MessagePage: React.FC = () => {
       <Header />
       <div className="content">
         <Sidebar>
-          <FriendList selectedFriend={selectedFriend} handleSelectFriend={handleSelectFriend} friends={friends} />
+          <FriendList handleSelectFriend={handleSelectFriend} />
         </Sidebar>
-        <Chat setMessages={setMessages} selectedFriend={selectedFriend} messages={messages} />
+        <Chat />
       </div>
     </>
   )
 }
 
-export default MessagePage
+export default observer(MessagePage)
