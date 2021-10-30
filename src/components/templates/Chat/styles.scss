@@ -1,12 +1,13 @@
 @import '../../../assets/styles/variables';
 
-.chat {
-  height: 100%;
+.chat-container {
   width: 100%;
   position: relative;
   background-color: rgba(239 245 255 / 0.9);
-  display: flex;
-  flex-direction: column;
+
+  @media (max-width: 800px) {
+    position: unset;
+  }
 
   &__background {
     position: absolute;
@@ -14,5 +15,21 @@
     right: 0;
     top: -110px;
     opacity: 0.5;
+  }
+
+  &__loader_desktop {
+    @media (max-width: 800px) {
+    }
+  }
+}
+
+.chat {
+  height: 100%;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+
+  &_loading {
+    visibility: hidden;
   }
 }

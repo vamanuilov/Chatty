@@ -6,12 +6,13 @@
     display: flex;
     justify-content: center;
     align-items: center;
-    margin-top: -$headerHeight;
     height: 100%;
     text-align: center;
     &__text {
       background: rgba(255, 255, 255, 0.5);
       padding: 19px 46px;
+      width: -webkit-max-content;
+      width: -moz-max-content;
       width: max-content;
       border-radius: 32px;
       border: 1px solid $blue-200;

@@ -1,22 +1,107 @@
 import { makeAutoObservable } from 'mobx'
 import { nanoid } from 'nanoid'
 
-import { ID_LENGTH } from '../components/pages/MessagePage'
-
 import { IFriends } from '../interface/friends'
 import { IMessage } from '../interface/message'
 
+export const ID_LENGTH: number = 5
+
+const TEMPLATE_FRIENDS: IFriends[] = [
+  {
+    name: 'Konstantin Konstantinopolski',
+    id: nanoid(ID_LENGTH),
+    icon: 'male',
+    lastMessage:
+      'Lorem ipsum dolor sit amet consectetur adipisicing elit. Quo blanditiis nam eligendi, excepturi sit voluptate fugit consectetur fugiat. Est, vitae! Beatae provident nihil magnam officia aliquam, quasi corporis tempore voluptatibus?',
+    isLastMessageFromUser: true,
+    lastTimeOnline: '10 minutes',
+    messages: [
+      {
+        id: nanoid(ID_LENGTH),
+        author: 'user',
+        text: 'Lorem ipsum dolor sit amet',
+        type: 'text'
+      },
+      {
+        id: nanoid(ID_LENGTH),
+        author: 'friend',
+        text: 'Lorem ipsum dolor sit amet consectetur adipisicing elit. Quo blanditiis nam eligendi, excepturi sit voluptate fugit consectetur fugiat. Est, vitae! Beatae provident nihil magnam officia aliquam, quasi corporis tempore voluptatibus?',
+        type: 'text'
+      }
+    ]
+  },
+  {
+    name: 'Marina Joe',
+    id: nanoid(ID_LENGTH),
+    icon: 'female',
+    lastTimeOnline: 'Online',
+    messages: []
+  },
+  {
+    name: 'Ernest Gillroy',
+    id: nanoid(ID_LENGTH),
+    icon: 'male',
+    lastMessage: 'Lorem ipsum dolor sit amet',
+    isLastMessageFromUser: true,
+    lastTimeOnline: '3 minutes',
+    messages: [
+      {
+        id: nanoid(ID_LENGTH),
+        author: 'user',
+        text: 'Lorem ipsum dolor sit amet',
+        type: 'text'
+      }
+    ]
+  },
+  {
+    name: 'Konstantin Konstantinopolski',
+    id: nanoid(ID_LENGTH),
+    icon: 'male',
+    lastMessage: 'File',
+    isLastMessageFromUser: true,
+    lastTimeOnline: '3 minutes',
+    messages: [
+      {
+        id: nanoid(ID_LENGTH),
+        author: 'user',
+        text: 'Lorem ipsum dolor sit amet',
+        type: 'text'
+      },
+      {
+        id: nanoid(ID_LENGTH),
+        author: 'friend',
+        text: 'Lorem ipsum dolor sit amet consectetur adipisicing elit. Quo blanditiis nam eligendi, excepturi sit voluptate fugit consectetur fugiat. Est, vitae! Beatae provident nihil magnam officia aliquam, quasi corporis tempore voluptatibus?',
+        type: 'text'
+      },
+      {
+        id: nanoid(ID_LENGTH),
+        author: 'user',
+        text: {
+          size: '14 MB',
+          name: 'File_for_exampl0011232555234.doc'
+        },
+        type: 'file'
+      }
+    ]
+  }
+]
 class FriendStore {
   friends: IFriends[] = []
 
   selectedFriend: IFriends | undefined
 
+  isLoading: boolean = true
+
   constructor() {
     makeAutoObservable(this)
   }
 
-  setFriends(friendList: IFriends[]) {
-    this.friends = [...friendList]
+  getFriends() {
+    this.isLoading = true
+    setTimeout(() => {
+      this.friends = [...TEMPLATE_FRIENDS]
+      this.isLoading = false
+    }, 2000)
   }
 
   setSelectedFriend(selectedId: string) {

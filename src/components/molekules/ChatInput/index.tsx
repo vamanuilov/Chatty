@@ -6,9 +6,7 @@ import InputWithSvgIcon from '../InputWithSvgIcon'
 import { ReactComponent as PaperClip } from '../../../assets/images/paper-clip.svg'
 import { ReactComponent as SendButtonIcon } from '../../../assets/images/send-button.svg'
 
-import { ID_LENGTH } from '../../pages/MessagePage'
-
-import friendsStore from '../../../store/friends'
+import friendsStore, { ID_LENGTH } from '../../../store/friends'
 
 import './styles.scss'
 
