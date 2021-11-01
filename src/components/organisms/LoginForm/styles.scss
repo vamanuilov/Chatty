@@ -21,6 +21,10 @@
     @media (max-width: 800px) {
       padding-bottom: 46px;
     }
+
+    @media (max-height: 800px) {
+      padding-bottom: 36px;
+    }
   }
 
   &__button {

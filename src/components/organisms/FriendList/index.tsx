@@ -10,6 +10,10 @@ interface IFriendList {
 }
 
 const FriendList: React.FC<IFriendList> = ({ handleSelectFriend }) => {
+  if (friendsStore.isLoading) {
+    return <div></div>
+  }
+
   if (!friendsStore.friends || friendsStore.friends.length === 0) {
     return <EmptyFriendList />
   }

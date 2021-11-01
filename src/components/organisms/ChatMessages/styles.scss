@@ -81,6 +81,7 @@ $scrollBarWidth: 12px;
   overflow-y: auto;
   display: flex;
   flex-direction: column-reverse;
+
   &::-webkit-scrollbar {
     width: $scrollBarWidth;
 
@@ -121,5 +122,12 @@ $scrollBarWidth: 12px;
       font-size: 15px;
       line-height: 18px;
     }
+  }
+}
+
+@supports (scrollbar-color: red blue) {
+  * {
+    scrollbar-color: #c5daff #e1ecfe;
+    scrollbar-width: thin;
   }
 }

@@ -43,6 +43,11 @@
     left: 31px;
     z-index: 20;
   }
+
+  @media (max-height: 800px) {
+    top: -200px;
+  }
+
   &__span_plain-text {
     color: $blue-200;
   }

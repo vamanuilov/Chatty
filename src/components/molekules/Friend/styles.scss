@@ -6,21 +6,25 @@
   padding: 12px 14px 12px 14px;
   cursor: pointer;
 
+  -webkit-tap-highlight-color: transparent;
+
   &__icon {
     width: 48px;
     height: 48px;
   }
 
   &_selected {
-    background-color: $blue-300;
+    @media (min-width: 800px) {
+      background-color: $blue-300;
 
-    .friend-info__name,
-    .friend-info__add-text,
-    .friend-info__span {
-      color: $white;
-    }
-    .friend-info__file-icon {
-      fill: $white;
+      .friend-info__name,
+      .friend-info__add-text,
+      .friend-info__span {
+        color: $white;
+      }
+      .friend-info__file-icon {
+        fill: $white;
+      }
     }
   }
 
