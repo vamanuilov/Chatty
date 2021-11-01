@@ -1,4 +1,4 @@
-import { makeAutoObservable } from 'mobx'
+import { makeAutoObservable, runInAction } from 'mobx'
 import { nanoid } from 'nanoid'
 
 import { IFriends } from '../interface/friends'
@@ -99,9 +99,11 @@ class FriendStore {
   getFriends() {
     this.isLoading = true
     setTimeout(() => {
-      this.friends = [...TEMPLATE_FRIENDS]
-      this.isLoading = false
-    }, 2000)
+      runInAction(() => {
+        this.friends = [...TEMPLATE_FRIENDS]
+        this.isLoading = false
+      })
+    }, 500)
   }
 
   setSelectedFriend(selectedId: string) {
@@ -130,7 +132,9 @@ class FriendStore {
     if (JSON.stringify(newMessages) !== JSON.stringify(friendMessages)) {
       const lastMessage: string = newMessage.type === 'text' ? (newMessage.text as string) : 'File'
       this.selectedFriend = { ...this.selectedFriend, messages: newMessages, lastMessage, isLastMessageFromUser: true }
-      this.friends.map((friend) => (friend.id === this.selectedFriend?.id ? this.selectedFriend : friend))
+      this.friends = this.friends.map((friend) =>
+        friend.id === this.selectedFriend?.id ? this.selectedFriend : friend
+      )
     }
   }
 }
