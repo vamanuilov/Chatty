@@ -10,12 +10,13 @@ import Loader from '../../organisms/Loader'
 import './styles.scss'
 
 import friendsStore from '../../../store/friends'
+import classNames from 'classnames'
 
 const Chat: React.FC = () => {
   const backgroundSize = { height: 'auto', width: '1300px' }
 
   return (
-    <div className="chat-container">
+    <div className={classNames('chat-container', { 'chat-container_hidden': !friendsStore.selectedFriend })}>
       <div className="chat-container__loader">
         <Loader isLoading={friendsStore.isLoading} />
       </div>

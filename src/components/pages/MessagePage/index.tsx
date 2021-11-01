@@ -1,6 +1,7 @@
 import { useCallback, useEffect } from 'react'
 import { useHistory, useParams } from 'react-router'
 import { observer } from 'mobx-react-lite'
+import cn from 'classnames'
 
 import Sidebar from '../../organisms/Sidebar'
 import Header from '../../organisms/Header'
@@ -32,7 +33,7 @@ const MessagePage: React.FC = () => {
   return (
     <>
       <Header />
-      <div className="content">
+      <div className={cn('content', { 'content_full-height_mobile': friendsStore.selectedFriend })}>
         <Sidebar>
           <FriendList handleSelectFriend={handleSelectFriend} />
         </Sidebar>

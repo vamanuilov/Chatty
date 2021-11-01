@@ -17,10 +17,12 @@
     opacity: 0.5;
   }
 
-  &__loader_desktop {
+  &_hidden {
     @media (max-width: 800px) {
+      width: 0;
     }
   }
+  transition: width 0.15s linear;
 }
 
 .chat {

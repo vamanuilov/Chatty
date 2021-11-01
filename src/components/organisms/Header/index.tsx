@@ -1,4 +1,6 @@
 import React from 'react'
+import cn from 'classnames'
+import { observer } from 'mobx-react-lite'
 
 import Avatar from '../../molekules/Avatar'
 import Logo from '../../molekules/Logo'
@@ -7,13 +9,15 @@ import avatar from '../../../assets/images/avatar.png'
 
 import './styles.scss'
 
+import friendsStore from '../../../store/friends'
+
 const Header = () => {
   return (
-    <div className="header">
+    <div className={cn('header', { header_hidden: friendsStore.selectedFriend })}>
       <Logo className="header__logo" />
       <Avatar src={avatar} className="header__avatar" />
     </div>
   )
 }
 
-export default React.memo(Header)
+export default observer(Header)

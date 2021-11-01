@@ -3,14 +3,16 @@
 .content {
   width: 100%;
   height: calc(100% - $headerHeightSmall);
-
   overflow: hidden;
-  display: contents;
   position: relative;
+  display: flex;
+
+  &_full-height_mobile {
+    height: 100%;
+  }
 
   @media (min-width: 800px) {
     height: calc(100% - $headerHeight);
-    display: flex;
   }
 }
 

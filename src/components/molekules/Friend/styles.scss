@@ -4,6 +4,12 @@
   display: flex;
   width: 100%;
   padding: 12px 14px 12px 14px;
+  cursor: pointer;
+
+  &__icon {
+    width: 48px;
+    height: 48px;
+  }
 
   &_selected {
     background-color: $blue-300;

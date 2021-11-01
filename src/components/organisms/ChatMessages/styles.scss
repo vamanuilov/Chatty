@@ -20,6 +20,34 @@ $scrollBarWidth: 12px;
   background: $white;
   border-bottom: 1px solid $blue-50;
   padding: 14px 24px;
+  display: flex;
+  align-items: center;
+
+  @media (max-width: 800px) {
+    height: $chatHeaderHeight - 24px;
+    padding: 16px 14px;
+  }
+
+  &__backwards-arrow {
+    @media (min-width: 800px) {
+      &_hidden_desktop {
+        display: none;
+      }
+    }
+  }
+
+  &__user-icon {
+    margin-left: 10px;
+    margin-right: 10px;
+    width: 40px;
+    height: 40px;
+
+    @media (min-width: 800px) {
+      &_hidden_desktop {
+        display: none;
+      }
+    }
+  }
 
   &__name {
     color: $soft-black;
@@ -27,6 +55,11 @@ $scrollBarWidth: 12px;
     font-size: 20px;
     line-height: 24px;
     padding-bottom: 4px;
+
+    @media (max-width: 800px) {
+      font-size: 15px;
+      line-height: 18px;
+    }
   }
 
   &__last-time {
@@ -34,6 +67,10 @@ $scrollBarWidth: 12px;
     font-weight: 500;
     font-size: 16px;
     line-height: 20px;
+    @media (max-width: 800px) {
+      font-size: 13px;
+      line-height: 16px;
+    }
   }
 }
 

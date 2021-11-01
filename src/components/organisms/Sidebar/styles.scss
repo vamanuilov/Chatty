@@ -7,6 +7,23 @@
   height: 100%;
   width: 100%;
 
+  &_hidden_mobile {
+    @media (max-width: 800px) {
+      opacity: 0;
+      visibility: hidden;
+      min-width: 0;
+      width: 0;
+      color: transparent;
+
+      div {
+        visibility: hidden;
+        opacity: 0;
+        transition: opacity 0.05 0.13s, visibility 0.05 0.13s;
+      }
+    }
+    transition: opacity 0s 0.14s, visibility 0s 0.14s, min-width 0.15s linear, width 0.15s linear;
+  }
+
   @media (min-width: 800px) {
     width: 25%;
     height: 100%;

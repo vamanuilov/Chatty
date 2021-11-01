@@ -10,6 +10,16 @@
   justify-content: space-between;
   align-items: center;
 
+  &_hidden {
+    @media (max-width: 800px) {
+      height: 0;
+      visibility: hidden;
+      opacity: 0;
+    }
+  }
+
+  transition: height 0.2s linear;
+
   @media (min-width: 800px) {
     height: $headerHeight;
     padding: 0 2% 0 2%;
