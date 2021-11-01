@@ -13,9 +13,17 @@
     height: 48px;
   }
 
+  &:hover {
+    background-color: $blue-50;
+  }
+
   &_selected {
     @media (min-width: 800px) {
       background-color: $blue-300;
+
+      &:hover {
+        background-color: $blue-300;
+      }
 
       .friend-info__name,
       .friend-info__add-text,

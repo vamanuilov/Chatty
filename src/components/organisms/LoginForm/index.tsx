@@ -26,7 +26,7 @@ const LoginForm: React.FC<ILoginForm> = ({ onSubmitHandler }) => {
   const {
     register,
     handleSubmit,
-    formState: { errors }
+    formState: { errors, isValid, isDirty, isSubmitted }
   } = useForm<IFormInputs>({ resolver: yupResolver(schema) })
 
   const usernameRegister = register('login')
@@ -55,7 +55,7 @@ const LoginForm: React.FC<ILoginForm> = ({ onSubmitHandler }) => {
         />
       </div>
       <div className="login-form__button">
-        <Button type="submit" buttonText="Log In" />
+        <Button type="submit" buttonText="Log In" isDisabled={isSubmitted && (!isDirty || !isValid)} />
       </div>
     </form>
   )

@@ -3,7 +3,7 @@
 .button-atom {
   border-radius: 8px;
   border: 0;
-  background-color: $blue-100;
+  background-color: $blue-300;
   width: 233px;
   height: 56px;
   color: $white;
@@ -11,6 +11,7 @@
   font-size: 15px;
   line-height: 23px;
   outline: none;
+
   &:hover,
   &:focus {
     background-color: $blue-500;
