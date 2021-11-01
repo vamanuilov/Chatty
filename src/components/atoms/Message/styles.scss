@@ -2,11 +2,17 @@
 
 $side-margin: 36px;
 $corner-side-position: $side-margin - 10px;
+$mobile-side-margin: 20px;
+$mobile-corner-side-position: $mobile-side-margin - 8px;
 
 .message-container {
   position: relative;
   z-index: 1;
   padding-bottom: 24px;
+
+  @media (max-width: 800px) {
+    padding-bottom: 16px;
+  }
 }
 
 .message-corner {
@@ -28,6 +34,16 @@ $corner-side-position: $side-margin - 10px;
     // fill the color of the stroke at the line of contact with the message bubble
     #customStroke {
       stroke: $userMessageBackground;
+    }
+  }
+
+  @media (max-width: 800px) {
+    &_friend {
+      left: $mobile-corner-side-position;
+    }
+
+    &_user {
+      right: $mobile-corner-side-position;
     }
   }
 }
@@ -65,5 +81,15 @@ $corner-side-position: $side-margin - 10px;
     margin-right: auto;
     margin-left: $side-margin;
     border-top-left-radius: 0;
+  }
+
+  @media (max-width: 800px) {
+    &.message_user {
+      margin-right: $mobile-side-margin;
+    }
+
+    &.message_friend {
+      margin-left: $mobile-side-margin;
+    }
   }
 }

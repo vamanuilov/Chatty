@@ -56,7 +56,7 @@ const ChatInput: React.FC = () => {
     <div className="chat-input">
       <div className="file-input">
         <InputWithSvgIcon elemRef={fileRef} type="file" id="chatInputFile" onChangeHandler={handleFileUpload}>
-          <PaperClip />
+          <PaperClip className="file-input__icon" />
         </InputWithSvgIcon>
       </div>
       <div className="text-input">
@@ -71,7 +71,7 @@ const ChatInput: React.FC = () => {
       </div>
       <div className="send-button">
         <InputWithSvgIcon type="button" id="sendButton" onClickHandler={handleSendClick}>
-          <SendButtonIcon />
+          <SendButtonIcon className="send-button__icon" />
         </InputWithSvgIcon>
       </div>
     </div>

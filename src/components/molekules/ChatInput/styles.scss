@@ -1,5 +1,31 @@
 @import '../../../assets/styles/variables';
 
+$desktop-line-height: 43px;
+$mobile-line-height: 26px;
+
+@mixin textarea-placeholder($textColor, $line-height) {
+  &::-webkit-input-placeholder {
+    color: $textColor;
+    line-height: $line-height;
+  }
+  &::-moz-placeholder {
+    color: $textColor;
+    line-height: $line-height;
+  }
+  &:-ms-input-placeholder {
+    color: $textColor;
+    line-height: $line-height;
+  }
+  &::-ms-input-placeholder {
+    color: $textColor;
+    line-height: $line-height;
+  }
+  &::placeholder {
+    color: $textColor;
+    line-height: $line-height;
+  }
+}
+
 .chat-input {
   display: flex;
   align-items: center;
@@ -8,17 +34,25 @@
   height: 80px;
   background: $white;
   padding: 25px 14px;
+
+  @media (max-width: 800px) {
+    height: 48px;
+    padding: 3px 0;
+  }
 }
 
 .file-input,
 .send-button,
 .text-input {
   padding: 0px 10px;
+
+  @media (max-width: 800px) {
+    padding: 0px 5px;
+  }
 }
 
 .text-input {
   width: 100%;
-
   &__textarea {
     border: none;
     width: 100%;
@@ -39,30 +73,44 @@
     &:active {
       border: 1px solid $blue-300;
     }
-    &::-webkit-input-placeholder {
-      color: $gray;
-      line-height: 43px;
+
+    @include textarea-placeholder($gray, $desktop-line-height);
+
+    @media (max-width: 800px) {
+      height: 40px;
+      font-size: 14px;
+
+      @include textarea-placeholder($gray, $mobile-line-height);
     }
-    &::-moz-placeholder {
-      color: $gray;
-      line-height: 43px;
-    }
-    &:-ms-input-placeholder {
-      color: $gray;
-      line-height: 43px;
-    }
-    &::-ms-input-placeholder {
-      color: $gray;
-      line-height: 43px;
-    }
-    &::placeholder {
-      color: $gray;
-      line-height: 43px;
+  }
+
+  @media (max-width: 800px) {
+    height: 100%;
+  }
+}
+
+.file-input {
+  &__icon {
+    width: 22px;
+    height: 24px;
+
+    @media (max-width: 800px) {
+      width: 16px;
+      height: 17px;
     }
   }
 }
 
-.send-button svg {
-  position: relative;
-  left: 3px;
+.send-button {
+  &__icon {
+    position: relative;
+    left: 3px;
+    width: 24px;
+    height: 22px;
+
+    @media (max-width: 800px) {
+      width: 16px;
+      height: 14px;
+    }
+  }
 }
