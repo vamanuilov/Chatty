@@ -74,7 +74,7 @@ $mobile-line-height: 26px;
       border: 1px solid $blue-300;
     }
 
-    @include textarea-placeholder($gray, $desktop-line-height);
+    @include textarea-placeholder($light-gray, $desktop-line-height);
 
     @media (max-width: 800px) {
       height: 40px;
