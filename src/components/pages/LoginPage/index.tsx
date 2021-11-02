@@ -30,7 +30,6 @@ const LoginPage: React.FC = () => {
           </Heading>
           <Heading element="h2">Please, authorize yourself</Heading>
         </div>
-
         <LoginForm onSubmitHandler={onSubmitHandler} />
       </div>
     </div>

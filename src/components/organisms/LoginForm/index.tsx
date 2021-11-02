@@ -1,12 +1,15 @@
 import React from 'react'
-import { useForm } from 'react-hook-form'
+import { Link } from 'react-router-dom'
+import { Controller, useForm } from 'react-hook-form'
 import * as yup from 'yup'
 import { yupResolver } from '@hookform/resolvers/yup'
 
 import Button from '../../atoms/Button'
-import InputFieldBlock from '../../molekules/InputFieldBlock'
+import FormInput from '../../molekules/FormInput'
 
 import { IFormInputs } from '../../../interface/input'
+
+import { MAX_INPUT_VALUE, MIN_INPUT_VALUE } from '../../../config'
 
 import './styles.scss'
 
@@ -14,48 +17,66 @@ interface ILoginForm {
   onSubmitHandler: () => void
 }
 
-const MIN_INPUT_VALUE: number = 2
-const MAX_INPUT_VALUE: number = 10
-
 const schema = yup.object().shape({
   login: yup.string().min(MIN_INPUT_VALUE).required(),
-  password: yup.string().min(MIN_INPUT_VALUE).max(MAX_INPUT_VALUE).required()
+  password: yup.string().min(MIN_INPUT_VALUE).max(MAX_INPUT_VALUE).required(),
+  captcha: yup.string().required()
 })
 
 const LoginForm: React.FC<ILoginForm> = ({ onSubmitHandler }) => {
   const {
-    register,
+    control,
     handleSubmit,
     formState: { errors, isValid, isDirty, isSubmitted }
   } = useForm<IFormInputs>({ resolver: yupResolver(schema) })
 
-  const usernameRegister = register('login')
-  const passwordRegister = register('password')
-
   return (
     <form className="login-form" onSubmit={handleSubmit(onSubmitHandler)}>
       <div className="login-form__input">
-        <InputFieldBlock
-          type="login"
-          placeholder="Input user name..."
-          id="username"
-          label="User name"
-          errorText={errors.login?.message}
-          {...usernameRegister}
+        <Controller
+          name="login"
+          control={control}
+          render={({ field: { onBlur, onChange, name, ref } }) => (
+            <FormInput
+              type="login"
+              label="Username"
+              placeholder="Type your username..."
+              id="login"
+              errorText={errors.login?.message}
+              onBlur={onBlur}
+              onChange={onChange}
+              name={name}
+              innerRef={ref}
+            />
+          )}
         />
       </div>
       <div className="login-form__input">
-        <InputFieldBlock
-          type="password"
-          placeholder="Input password..."
-          id="password"
-          label="Password"
-          errorText={errors.password?.message}
-          {...passwordRegister}
+        <Controller
+          name="password"
+          control={control}
+          render={({ field: { onBlur, onChange, name, ref } }) => (
+            <FormInput
+              type="password"
+              label="Password"
+              placeholder="Type your password..."
+              id="password"
+              errorText={errors.password?.message}
+              onBlur={onBlur}
+              onChange={onChange}
+              name={name}
+              innerRef={ref}
+            />
+          )}
         />
       </div>
       <div className="login-form__button">
         <Button type="submit" buttonText="Log In" isDisabled={isSubmitted && (!isDirty || !isValid)} />
+        <div className="login-form-signup">
+          <Link className="login-form-signup__link" to="/signup">
+            Sign up?
+          </Link>
+        </div>
       </div>
     </form>
   )
