@@ -3,29 +3,52 @@
 .button-atom {
   border-radius: 8px;
   border: 0;
-  background-color: $blue-300;
   width: 233px;
   height: 56px;
-  color: $white;
+
   font-weight: 500;
   font-size: 15px;
   line-height: 23px;
+  cursor: pointer;
   outline: none;
+
+  border: 1px solid $blue-300;
+  color: $blue-300;
+  background-color: $white;
 
   &:hover,
   &:focus {
-    background-color: $blue-500;
+    background-color: #f3f8ff;
   }
+
   &:active {
-    background-color: $blue-700;
+    background-color: #dfecff;
   }
+
   &:disabled {
-    background-color: #d1d1d1;
+    border: 1px solid #d1d1d1;
+    color: #d1d1d1;
   }
 
   @media (max-width: 800px) {
     width: 100%;
     max-width: 348px;
     min-width: 130px;
+  }
+
+  &_main {
+    background-color: $blue-300;
+    color: $white;
+
+    &:hover,
+    &:focus {
+      background-color: $blue-500;
+    }
+    &:active {
+      background-color: $blue-700;
+    }
+    &:disabled {
+      background-color: #d1d1d1;
+    }
   }
 }
