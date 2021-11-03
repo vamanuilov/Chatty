@@ -3,3 +3,5 @@ export enum UrlRoutes {
   REGISTER = 'auth/register',
   CAPTCHA = 'auth/captcha'
 }
+
+export const controller = new AbortController()
