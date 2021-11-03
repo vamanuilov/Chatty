@@ -5,13 +5,14 @@ import { UrlRoutes } from '../../../utils/api'
 
 import Image from '../../atoms/Image'
 import FormInput from '../FormInput'
+import InputWithSvgIcon from '../InputWithSvgIcon'
 
 import { ReactComponent as RefreshIcon } from '../../../assets/images/refresh-icon.svg'
 
 import { IController } from '../../../interface/input'
 
 import './styles.scss'
-import InputWithSvgIcon from '../InputWithSvgIcon'
+
 interface ICaptcha extends IController {
   errorText?: string
 }
