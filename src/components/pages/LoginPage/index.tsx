@@ -28,7 +28,9 @@ const LoginPage: React.FC = () => {
             Welcome to <span className="form-content__span_plain-text">Chatty</span>
             <span className="form-content__span_exc-mark">!</span>
           </Heading>
-          <Heading element="h2">Please, authorize yourself</Heading>
+          <span className="form-content__additional-text">
+            <Heading element="h2">Please, authorize yourself</Heading>
+          </span>
         </div>
         <LoginForm onSubmitHandler={onSubmitHandler} />
       </div>

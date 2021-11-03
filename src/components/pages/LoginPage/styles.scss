@@ -29,13 +29,16 @@
     justify-content: center;
     align-items: center;
     position: relative;
-    @media (max-width: 800px) {
-    }
   }
 }
 
 .form-content {
   width: 70%;
+
+  @media (max-width: 1000px) {
+    width: 80%;
+  }
+
   @media (max-width: 800px) {
     width: 90%;
     position: absolute;
@@ -44,8 +47,8 @@
     z-index: 20;
   }
 
-  @media (max-height: 800px) {
-    top: -200px;
+  @media (max-height: 660px) {
+    top: -100px;
   }
 
   &__span_plain-text {
@@ -61,6 +64,12 @@
     @media (max-width: 800px) {
       width: 84px;
       height: 32px;
+    }
+  }
+
+  &__additional-text {
+    @media (max-height: 660px) {
+      display: none;
     }
   }
 }

@@ -6,6 +6,7 @@ import { yupResolver } from '@hookform/resolvers/yup'
 
 import Button from '../../atoms/Button'
 import FormInput from '../../molekules/FormInput'
+import Captcha from '../../molekules/Captcha'
 
 import { IFormInputs } from '../../../interface/input'
 
@@ -70,6 +71,13 @@ const LoginForm: React.FC<ILoginForm> = ({ onSubmitHandler }) => {
           )}
         />
       </div>
+      <Controller
+        name="captcha"
+        control={control}
+        render={({ field: { onBlur, onChange, name, ref } }) => (
+          <Captcha onBlur={onBlur} onChange={onChange} name={name} innerRef={ref} errorText={errors.captcha?.message} />
+        )}
+      />
       <div className="login-form__button">
         <Button type="submit" buttonText="Log In" isDisabled={isSubmitted && (!isDirty || !isValid)} />
         <div className="login-form-signup">

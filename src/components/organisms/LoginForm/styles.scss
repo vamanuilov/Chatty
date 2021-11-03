@@ -8,6 +8,10 @@
   justify-content: center;
   align-items: flex-start;
 
+  @media (max-width: 1000px) {
+    width: 80%;
+  }
+
   @media (max-width: 800px) {
     width: 100%;
     height: 100%;
@@ -17,11 +21,17 @@
   }
 
   &__input {
-    width: 100%;
+    width: 356px;
     padding-bottom: 32px;
+    max-width: 356px;
+    min-width: 200px;
+
     // TODO: add styles for 800-400px to center input and buttons
     @media (max-width: 800px) {
       padding-bottom: 46px;
+      width: 100%;
+      max-width: 356px;
+      min-width: 200px;
     }
 
     @media (max-height: 800px) {

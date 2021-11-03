@@ -1,9 +1,18 @@
 .svg-icon-label {
-  &:hover,
-  &:focus,
-  &:active {
+  &:hover {
     background-color: rgba(74 74 74 / 0.12);
   }
+
+  @supports selector(focus-visible) {
+    &:focus {
+      background-color: none;
+    }
+
+    &:focus-visible {
+      background-color: rgba(74 74 74 / 0.12);
+    }
+  }
+
   padding: 10px;
   border-radius: 50%;
   display: flex;
