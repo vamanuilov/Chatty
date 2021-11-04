@@ -1,5 +1,4 @@
 import React from 'react'
-import { Link } from 'react-router-dom'
 import { Controller, useForm } from 'react-hook-form'
 import * as yup from 'yup'
 import { yupResolver } from '@hookform/resolvers/yup'
@@ -8,7 +7,7 @@ import Button from '../../atoms/Button'
 import FormInput from '../../molekules/FormInput'
 import Captcha from '../../molekules/Captcha'
 
-import { IFormInputs } from '../../../interface/input'
+import { ILoginData } from '../../../interface/user'
 
 import { MAX_INPUT_VALUE, MIN_INPUT_VALUE } from '../../../config'
 
@@ -29,7 +28,7 @@ const LoginForm: React.FC<ILoginForm> = ({ onSubmitHandler }) => {
     control,
     handleSubmit,
     formState: { errors, isValid, isDirty, isSubmitted }
-  } = useForm<IFormInputs>({ resolver: yupResolver(schema) })
+  } = useForm<ILoginData>({ resolver: yupResolver(schema) })
 
   return (
     <form className="login-form" onSubmit={handleSubmit(onSubmitHandler)}>
@@ -71,19 +70,33 @@ const LoginForm: React.FC<ILoginForm> = ({ onSubmitHandler }) => {
           )}
         />
       </div>
-      <Controller
-        name="captcha"
-        control={control}
-        render={({ field: { onBlur, onChange, name, ref } }) => (
-          <Captcha onBlur={onBlur} onChange={onChange} name={name} innerRef={ref} errorText={errors.captcha?.message} />
-        )}
-      />
-      <div className="login-form__button">
-        <Button type="submit" buttonText="Log In" isDisabled={isSubmitted && (!isDirty || !isValid)} />
-        <div className="login-form-signup">
-          <Link className="login-form-signup__link" to="/signup">
-            Sign up?
-          </Link>
+      <div className="login-form__captcha">
+        <Controller
+          name="captcha"
+          control={control}
+          render={({ field: { onBlur, onChange, name, ref } }) => (
+            <Captcha
+              onBlur={onBlur}
+              onChange={onChange}
+              name={name}
+              innerRef={ref}
+              errorText={errors.captcha?.message}
+            />
+          )}
+        />
+      </div>
+      <div className="form-buttons">
+        <div className="login-form__button">
+          <Button type="submit" buttonText="Log In" isMainButton isDisabled={isSubmitted && (!isDirty || !isValid)} />
+        </div>
+        <div className="login-form__button">
+          <Button
+            type="button"
+            buttonText="Sign Up"
+            onClickHandler={() => {
+              console.log('woop')
+            }}
+          />
         </div>
       </div>
     </form>

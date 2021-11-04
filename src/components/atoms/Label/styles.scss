@@ -3,4 +3,9 @@
   font-weight: 600;
   font-size: 13px;
   line-height: 19px;
+  display: block;
+
+  &::first-letter {
+    text-transform: capitalize;
+  }
 }

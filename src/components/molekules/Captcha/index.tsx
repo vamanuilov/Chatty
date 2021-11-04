@@ -1,7 +1,5 @@
-import React, { useState } from 'react'
-
-import { API_VERSION, HTTP_PORT, URL } from '../../../config'
-import { UrlRoutes } from '../../../utils/api'
+import React, { useEffect, useState } from 'react'
+import { observer } from 'mobx-react-lite'
 
 import Image from '../../atoms/Image'
 import FormInput from '../FormInput'
@@ -13,27 +11,21 @@ import { IController } from '../../../interface/input'
 
 import './styles.scss'
 
+import registration from '../../../store/registration'
+
 interface ICaptcha extends IController {
   errorText?: string
 }
 
 const Captcha: React.FC<ICaptcha> = ({ onChange, onBlur, name, errorText, innerRef }) => {
   const [parameter, setParameter] = useState<number>(Date.now())
+
+  useEffect(() => {
+    registration.getCaptcha(parameter)
+  }, [parameter])
+
   return (
     <div className="captcha">
-      <div className="captcha__img">
-        <Image
-          src={`${URL}:${HTTP_PORT}${API_VERSION}${UrlRoutes.CAPTCHA}?t${parameter}`}
-          altText="Captcha"
-          size={{ width: '100px', height: '30px' }}
-        />
-
-        <div className="captcha__refresh">
-          <InputWithSvgIcon id="refresh-captcha" type="button" onClickHandler={() => setParameter(Date.now())}>
-            <RefreshIcon width="15px" height="15px" />
-          </InputWithSvgIcon>
-        </div>
-      </div>
       <div className="captcha__input">
         <FormInput
           name={name as string}
@@ -41,14 +33,22 @@ const Captcha: React.FC<ICaptcha> = ({ onChange, onBlur, name, errorText, innerR
           onChange={onChange}
           onBlur={onBlur}
           type="text"
-          label="Captcha"
-          placeholder="Type captcha..."
+          label="Security code"
+          placeholder="Security code"
           id="captcha"
           errorText={errorText}
         />
+      </div>
+      <div className="captcha__img">
+        <Image src={registration.captchaUrl} altText="Captcha" size={{ width: '100px', height: '30px' }} />
+        <div className="captcha__refresh">
+          <InputWithSvgIcon id="refresh-captcha" type="button" onClickHandler={() => setParameter(Date.now())}>
+            <RefreshIcon width="15px" height="15px" />
+          </InputWithSvgIcon>
+        </div>
       </div>
     </div>
   )
 }
 
-export default Captcha
+export default observer(Captcha)

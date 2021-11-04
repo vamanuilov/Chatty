@@ -2,41 +2,49 @@
 
 .captcha {
   width: 100%;
-  max-width: 356px;
   min-width: 200px;
   display: flex;
   align-items: flex-end;
-  justify-content: center;
+  position: relative;
+  justify-content: space-between;
 
   @media (max-width: 800px) {
-    flex-direction: column;
-    align-items: flex-start;
   }
 
   &__img {
-    margin-right: 10px;
-    padding-bottom: 5px;
     display: flex;
     justify-content: center;
+    width: 48%;
+    padding: 10px;
+    border: 1px solid $blue-100;
+    border-radius: 8px;
 
     @media (max-width: 800px) {
-      margin-right: 0;
+      padding-left: 0;
     }
   }
 
   &__input {
-    width: 244px;
+    width: 48%;
+    min-width: 100px;
 
     @media (max-width: 800px) {
-      width: 100%;
+      width: 48%;
     }
   }
 
   &__refresh {
+    position: absolute;
+    left: 98%;
+    top: 45%;
     width: -webkit-fit-content;
     width: -moz-fit-content;
     width: fit-content;
     margin-left: 4px;
+
+    @media (max-width: 800px) {
+      left: 90%;
+    }
 
     svg {
       fill: $blue-300;

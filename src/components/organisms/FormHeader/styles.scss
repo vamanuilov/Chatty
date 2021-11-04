@@ -1,0 +1,44 @@
+@import '../../../assets/styles/variables';
+
+.form-header {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+
+  &__logo {
+    width: 112px;
+    height: 43px;
+    @media (max-width: 800px) {
+      width: 84px;
+      height: 32px;
+    }
+  }
+
+  &__additional-text h2 {
+    font-weight: 600;
+    width: 150%;
+
+    @media (max-width: 800px) {
+      width: 100%;
+    }
+  }
+}
+
+.main-text {
+  width: 150%;
+  h1 {
+    font-weight: 800;
+  }
+
+  @media (max-width: 800px) {
+    width: 100%;
+  }
+  &__span {
+    color: $blue-200;
+  }
+
+  &__exc-mark {
+    color: $blue-100;
+  }
+}
