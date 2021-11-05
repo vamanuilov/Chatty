@@ -17,6 +17,11 @@
     opacity: 0.5;
   }
 
+  &__img {
+    width: 1300px;
+    height: auto;
+  }
+
   &_hidden {
     @media (max-width: 800px) {
       width: 0;
