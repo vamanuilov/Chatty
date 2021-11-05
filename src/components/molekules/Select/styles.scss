@@ -1,0 +1,110 @@
+@import '../../../assets/styles/variables';
+
+.select {
+  position: relative;
+  width: 100%;
+
+  &__main-item {
+    width: 100%;
+    border: 1px solid $blue-100;
+    padding: 16px;
+    border-radius: 8px;
+    font-size: 15px;
+    line-height: 23px;
+    color: #9f9f9f;
+    cursor: pointer;
+    position: relative;
+
+    &_selected {
+      color: $soft-black;
+    }
+
+    &_active {
+      border-color: $blue-300;
+    }
+
+    &_error {
+      border-color: $error;
+    }
+
+    &::first-letter {
+      text-transform: capitalize;
+    }
+  }
+
+  &__arrow-icon {
+    position: absolute;
+    right: 6%;
+    top: 48%;
+    transition: transform 0.2s linear;
+
+    &_active {
+      transform: rotate(180deg);
+    }
+  }
+
+  &__error-label {
+    color: $error;
+    display: block;
+    position: absolute;
+    top: 101%;
+    left: 1%;
+    font-weight: 500;
+    font-size: 13px;
+    line-height: 19px;
+
+    &::first-letter {
+      text-transform: uppercase;
+    }
+  }
+}
+
+.dropdown-container {
+  border: 1px solid $blue-100;
+  box-sizing: border-box;
+  border-radius: 8px;
+  position: absolute;
+  width: 100%;
+  left: 0;
+  top: calc(100% + 4px);
+  background-color: $white;
+  opacity: 0;
+  transform: translateY(-10px);
+  transition: opacity 0.1s ease-in-out, transform 0.1s ease-in-out;
+  pointer-events: none;
+
+  &__item {
+    display: block;
+    padding: 16px;
+    border-bottom: 1px solid $blue-100;
+    cursor: pointer;
+    font-weight: normal;
+    font-size: 15px;
+    line-height: 23px;
+
+    &::first-letter {
+      text-transform: capitalize;
+    }
+
+    &:hover {
+      background-color: #f3f8ff;
+    }
+  }
+
+  &__item:last-child {
+    border-bottom: none;
+  }
+
+  &_open {
+    pointer-events: unset;
+    opacity: 1;
+    transform: translateY(0);
+    z-index: 5;
+  }
+
+  &__radio {
+    &_hidden {
+      display: none;
+    }
+  }
+}

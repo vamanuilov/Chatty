@@ -1,7 +1,7 @@
 import { RefCallBack } from 'react-hook-form'
 
 export interface IController {
-  onChange?: (value: any) => void
+  onChange?: (value: React.ChangeEvent<HTMLInputElement>) => void
   onBlur?: () => void
   name?: string
   innerRef?: RefCallBack
@@ -12,10 +12,4 @@ export interface IInput extends IController {
   id: string
   placeholder: string
   isRequired?: boolean
-}
-
-export interface IFormInputs {
-  login: string
-  password: string
-  captcha: string
 }
