@@ -14,6 +14,8 @@ module.exports = {
   },
   plugins: ['prettier', 'react', '@typescript-eslint', 'jest', 'import'],
   rules: {
+    'lines-between-class-members': 'off',
+    '@typescript-eslint/lines-between-class-members': 'off',
     'prettier/prettier': 'warn',
     'no-shadow': 'off',
     '@typescript-eslint/no-shadow': ['error'],

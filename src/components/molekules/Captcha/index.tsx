@@ -11,7 +11,7 @@ import { IController } from '../../../interface/input'
 
 import './styles.scss'
 
-import registration from '../../../store/registration'
+import user from '../../../store/user'
 
 interface ICaptcha extends IController {
   errorText?: string
@@ -21,7 +21,7 @@ const Captcha: React.FC<ICaptcha> = ({ onChange, onBlur, name, errorText, innerR
   const [parameter, setParameter] = useState<number>(Date.now())
 
   useEffect(() => {
-    registration.getCaptcha(parameter)
+    user.getCaptcha(parameter)
   }, [parameter])
 
   return (
@@ -40,7 +40,7 @@ const Captcha: React.FC<ICaptcha> = ({ onChange, onBlur, name, errorText, innerR
         />
       </div>
       <div className="captcha__img">
-        <Image src={registration.captchaUrl} altText="Captcha" size={{ width: '100px', height: '30px' }} />
+        <Image src={user.captchaUrl} altText="Captcha" size={{ width: '100px', height: '30px' }} />
         <div className="captcha__refresh">
           <InputWithSvgIcon id="refresh-captcha" type="button" onClickHandler={() => setParameter(Date.now())}>
             <RefreshIcon width="15px" height="15px" />
