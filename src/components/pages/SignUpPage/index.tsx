@@ -14,7 +14,7 @@ const SignUpPage = () => {
 
   const onSubmitHandler = (data: ISignUpData): void => {
     user.resetErrors()
-    user.signUpUser(data)
+    user.signUp(data)
   }
 
   const onRegisterAfterDelay = (): void => {

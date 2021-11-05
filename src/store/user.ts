@@ -70,7 +70,7 @@ class User {
     }
   }
 
-  async signUpUser(data: ISignUpData): Promise<void> {
+  async signUp(data: ISignUpData): Promise<void> {
     const urlEncodedData: string = convertToUrlEncoded<ISignUpData>(data)
 
     try {
