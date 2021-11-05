@@ -31,7 +31,7 @@ const MessagePage: React.FC = () => {
   }, [])
 
   return (
-    <>
+    <div className="chat-page">
       <Header />
       <div className={cn('content', { 'content_full-height_mobile': friendsStore.selectedFriend })}>
         <Sidebar>
@@ -39,7 +39,7 @@ const MessagePage: React.FC = () => {
         </Sidebar>
         <Chat />
       </div>
-    </>
+    </div>
   )
 }
 
