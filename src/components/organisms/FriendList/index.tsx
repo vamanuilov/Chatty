@@ -1,7 +1,7 @@
 import { observer } from 'mobx-react-lite'
 
-import EmptyFriendList from '../../molekules/EmptyFriendList'
-import Friend from '../../molekules/Friend'
+import EmptyFriendList from '../../molecules/EmptyFriendList'
+import Friend from '../../molecules/Friend'
 
 import friendsStore from '../../../store/friends'
 

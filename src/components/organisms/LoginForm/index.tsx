@@ -4,8 +4,8 @@ import * as yup from 'yup'
 import { yupResolver } from '@hookform/resolvers/yup'
 
 import Button from '../../atoms/Button'
-import FormInput from '../../molekules/FormInput'
-import Captcha from '../../molekules/Captcha'
+import FormInput from '../../molecules/FormInput'
+import Captcha from '../../molecules/Captcha'
 
 import { ILoginData } from '../../../interface/user'
 

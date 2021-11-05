@@ -1,5 +1,5 @@
 import Heading from '../../atoms/Heading'
-import Logo from '../../molekules/Logo'
+import Logo from '../../molecules/Logo'
 
 import './styles.scss'
 

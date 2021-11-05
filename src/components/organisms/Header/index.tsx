@@ -2,8 +2,8 @@ import React from 'react'
 import cn from 'classnames'
 import { observer } from 'mobx-react-lite'
 
-import Avatar from '../../molekules/Avatar'
-import Logo from '../../molekules/Logo'
+import Avatar from '../../molecules/Avatar'
+import Logo from '../../molecules/Logo'
 
 import avatar from '../../../assets/images/avatar.png'
 

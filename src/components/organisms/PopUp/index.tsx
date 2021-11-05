@@ -1,7 +1,7 @@
 import React from 'react'
 import cn from 'classnames'
 
-import InputWithSvgIcon from '../../molekules/InputWithSvgIcon'
+import InputWithSvgIcon from '../../molecules/InputWithSvgIcon'
 
 import { ReactComponent as CloseIcon } from '../../../assets/images/icon_close.svg'
 

@@ -9,9 +9,9 @@ import './styles.scss'
 import { MAX_INPUT_VALUE, MIN_INPUT_VALUE } from '../../../config'
 
 import Button from '../../atoms/Button'
-import FormInput from '../../molekules/FormInput'
-import Captcha from '../../molekules/Captcha'
-import Select from '../../molekules/Select'
+import FormInput from '../../molecules/FormInput'
+import Captcha from '../../molecules/Captcha'
+import Select from '../../molecules/Select'
 import PopUp from '../PopUp'
 
 import user from '../../../store/user'
