@@ -26,6 +26,7 @@ class User {
   captchaUrl: string = ''
   isLoading: boolean = false
   selectLoading: boolean = false
+  captchaLoading: boolean = false
 
   constructor() {
     makeAutoObservable(this)
@@ -36,7 +37,7 @@ class User {
   }
 
   async getCaptcha(parameter: number) {
-    this.isLoading = true
+    this.captchaLoading = true
     try {
       const response: Blob | string = await getCaptcha(parameter)
 
@@ -50,7 +51,7 @@ class User {
       }
     } finally {
       runInAction(() => {
-        this.isLoading = false
+        this.captchaLoading = false
       })
     }
   }

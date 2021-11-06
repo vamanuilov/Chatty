@@ -1,12 +1,12 @@
 import React, { useEffect } from 'react'
 import { observer } from 'mobx-react-lite'
-import { Controller, useForm } from 'react-hook-form'
+import { Controller, useForm, UseFormClearErrors } from 'react-hook-form'
 import * as yup from 'yup'
 import { yupResolver } from '@hookform/resolvers/yup'
 
 import Button from '../../atoms/Button'
 import FormInput from '../../molecules/FormInput'
-import Captcha from '../../molecules/Captcha'
+import Captcha from '../Captcha'
 
 import { ILoginData } from '../../../interface/user'
 
@@ -57,6 +57,7 @@ const LoginForm: React.FC<ILoginForm> = ({ onSubmitHandler, onAdditionalButtonCl
   const {
     control,
     setError,
+    clearErrors,
     handleSubmit,
     formState: { errors, isDirty }
   } = useForm<ILoginData>({ resolver: yupResolver(schema) })
@@ -128,6 +129,7 @@ const LoginForm: React.FC<ILoginForm> = ({ onSubmitHandler, onAdditionalButtonCl
             control={control}
             render={({ field: { onBlur, onChange, name, ref } }) => (
               <Captcha
+                resetError={clearErrors as UseFormClearErrors<Pick<ILoginData, 'captcha'>>}
                 onBlur={onBlur}
                 onChange={onChange}
                 name={name}

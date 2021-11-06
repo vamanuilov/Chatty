@@ -24,6 +24,10 @@
     }
   }
 
+  &__stub {
+    width: 48%;
+  }
+
   &__input {
     width: 48%;
     min-width: 100px;
@@ -35,7 +39,7 @@
 
   &__refresh {
     position: absolute;
-    left: 98%;
+    left: 100%;
     top: 45%;
     width: -webkit-fit-content;
     width: -moz-fit-content;
@@ -44,10 +48,6 @@
 
     @media (max-width: 800px) {
       left: 90%;
-    }
-
-    svg {
-      fill: $blue-300;
     }
   }
 }

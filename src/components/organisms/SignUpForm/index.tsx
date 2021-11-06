@@ -1,7 +1,7 @@
 import { useEffect } from 'react'
 import { observer } from 'mobx-react-lite'
 import { yupResolver } from '@hookform/resolvers/yup'
-import { Controller, useForm } from 'react-hook-form'
+import { Controller, useForm, UseFormClearErrors } from 'react-hook-form'
 import * as yup from 'yup'
 
 import './styles.scss'
@@ -10,7 +10,7 @@ import { MAX_INPUT_VALUE, MIN_INPUT_VALUE, POP_UP_LIFETIME } from '../../../conf
 
 import Button from '../../atoms/Button'
 import FormInput from '../../molecules/FormInput'
-import Captcha from '../../molecules/Captcha'
+import Captcha from '../Captcha'
 import Select from '../../molecules/Select'
 import StubInput from '../../molecules/StubInput'
 
@@ -220,6 +220,7 @@ const SignUpForm: React.FC<ISignUpForm> = ({
             control={control}
             render={({ field: { onBlur, onChange, name, ref } }) => (
               <Captcha
+                resetError={clearErrors as UseFormClearErrors<Pick<ISignUpData, 'captcha'>>}
                 onBlur={onBlur}
                 onChange={onChange}
                 name={name}

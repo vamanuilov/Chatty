@@ -1,8 +1,9 @@
 @import '../../../assets/styles/variables';
 
 .stub {
-  height: 76px;
+  height: auto;
   width: 100%;
+  position: relative;
 
   &__input {
     height: 53px;
