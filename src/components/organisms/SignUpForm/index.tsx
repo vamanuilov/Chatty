@@ -100,7 +100,7 @@ const SignUpForm: React.FC<ISignUpForm> = ({
     setError,
     clearErrors,
     handleSubmit,
-    formState: { errors }
+    formState: { errors, isValid, isDirty, isSubmitted }
   } = useForm<ISignUpData>({
     resolver: yupResolver(schema),
     defaultValues: {
@@ -118,6 +118,7 @@ const SignUpForm: React.FC<ISignUpForm> = ({
 
   useEffect(() => {
     user.getGenders()
+    user.resetErrors()
   }, [])
 
   useEffect(() => {
@@ -137,39 +138,43 @@ const SignUpForm: React.FC<ISignUpForm> = ({
   }, [user.isRegistered])
 
   useEffect(() => {
-    if (user.error?.type === 'captcha') {
-      setError('captcha', {
-        type: 'manual',
-        message: user.error.message
-      })
-    }
-
-    if (user.error?.type === 'gender_id') {
-      setError('gender_id', {
-        type: 'manual',
-        message: user.error.message
-      })
-    }
-
-    if (RegisterInputFields.some((input) => input.type === user.error.type)) {
-      setError(user.error.type as ITextInputNames, {
-        type: 'manual',
-        message: user.error.message
-      })
-    }
-
-    if (user.error.type === 'general') {
-      setPopUpMessage({
-        type: 'error',
-        message: user.error.message
-      })
-
-      setTimeout(() => {
-        setPopUpMessage({
-          type: '',
-          message: ''
+    switch (user.error.type) {
+      case 'captcha': {
+        setError('captcha', {
+          type: 'manual',
+          message: user.error.message
         })
-      }, POP_UP_LIFETIME)
+        break
+      }
+      case 'gender_id': {
+        setError('gender_id', {
+          type: 'manual',
+          message: user.error.message
+        })
+        break
+      }
+      case 'general': {
+        setPopUpMessage({
+          type: 'error',
+          message: user.error.message
+        })
+
+        setTimeout(() => {
+          setPopUpMessage({
+            type: '',
+            message: ''
+          })
+        }, POP_UP_LIFETIME)
+        break
+      }
+      default: {
+        if (RegisterInputFields.some((input) => input.type === user.error.type)) {
+          setError(user.error.type as ITextInputNames, {
+            type: 'manual',
+            message: user.error.message
+          })
+        }
+      }
     }
   }, [user.error])
 
@@ -214,7 +219,7 @@ const SignUpForm: React.FC<ISignUpForm> = ({
           </div>
         ))}
         <div className="sign-up-form__item sign-up-form__select">
-          {/* FIXME: fix required. in case of defaultValue there is always some value */}
+          {/* FIXME: fix required rule. better add loader. in case of defaultValue there is always some value. */}
           <Controller
             name="gender_id"
             control={control}
@@ -226,7 +231,9 @@ const SignUpForm: React.FC<ISignUpForm> = ({
                 errorText={errors.gender_id?.message}
                 onChange={(e) => {
                   onChange(e)
-                  user.resetErrors()
+                  if (user.error.type === 'select') {
+                    user.resetErrors()
+                  }
                 }}
                 name={name}
                 innerRef={ref}
@@ -241,20 +248,22 @@ const SignUpForm: React.FC<ISignUpForm> = ({
             render={({ field: { onBlur, onChange, name, ref } }) => (
               <Captcha
                 onBlur={onBlur}
-                onChange={(e) => {
-                  onChange(e)
-                  user.resetErrors()
-                }}
+                onChange={onChange}
                 name={name}
                 innerRef={ref}
-                errorText={user.error?.type === 'captcha' ? user.error.message : errors.captcha?.message}
+                errorText={errors.captcha?.message}
               />
             )}
           />
         </div>
         <div className="form-buttons">
           <div className="sign-up-form__button">
-            <Button isMainButton type="submit" buttonText="Sign Up" />
+            <Button
+              isMainButton
+              type="submit"
+              buttonText="Sign Up"
+              isDisabled={isSubmitted && (!isDirty || !isValid)}
+            />
           </div>
           <div className="sign-up-form__button">
             <Button buttonText="Login" onClickHandler={onAdditionalButtonClickHandler} />

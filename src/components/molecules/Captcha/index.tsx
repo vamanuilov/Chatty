@@ -28,9 +28,14 @@ const Captcha: React.FC<ICaptcha> = ({ onChange, onBlur, name, errorText, innerR
     <div className="captcha">
       <div className="captcha__input">
         <FormInput
-          name={name as string}
+          name={name}
           innerRef={innerRef}
-          onChange={onChange}
+          onChange={(e) => {
+            onChange && onChange(e)
+            if (user.error.type === 'captcha') {
+              user.resetErrors()
+            }
+          }}
           onBlur={onBlur}
           type="text"
           label="Security code"

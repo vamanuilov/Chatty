@@ -1,9 +1,9 @@
 import { makeAutoObservable, runInAction } from 'mobx'
 
 import { convertToUrlEncoded, getErrorMessage } from '../utils'
-import { fetchGenders, getCaptcha, registerUser } from '../utils/api'
+import { fetchGenders, getCaptcha, registerUser, loginUser } from '../utils/api'
 
-import { ISignUpData } from '../interface/user'
+import { ILoginData, ISignUpData } from '../interface/user'
 
 interface IGender {
   id: string
@@ -17,6 +17,7 @@ interface IError {
 
 class User {
   genders: IGender[] = []
+  wsConnectKey: string = localStorage.getItem('wsConnectKey') || ''
   isRegistered: boolean = false
   error: IError = {
     type: '',
@@ -88,6 +89,29 @@ class User {
       this.error = {
         type: 'general',
         message: `Can't connect to the server. \n Try again`
+      }
+    }
+  }
+
+  async logIn(data: ILoginData): Promise<void> {
+    const urlEncodedData: string = convertToUrlEncoded<ILoginData>(data)
+
+    try {
+      const response = await loginUser(urlEncodedData)
+      console.log('###:', 'response', response)
+
+      runInAction(() => {
+        this.wsConnectKey = response
+        localStorage.setItem('wsConnectKey', response)
+      })
+    } catch (err) {
+      const errorMessage = await err
+
+      if (typeof errorMessage === 'string') {
+        this.error = getErrorMessage(errorMessage)
+      } else {
+        // eslint-disable-next-line no-console
+        console.error(errorMessage)
       }
     }
   }

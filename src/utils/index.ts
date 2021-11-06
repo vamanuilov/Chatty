@@ -24,6 +24,11 @@ export const getErrorMessage = (untreadError: string): { type: string; message: 
       type: 'login',
       message: `Username already used`
     }
+  } else if (untreadError.includes('login or password')) {
+    return {
+      type: 'userData',
+      message: 'Invalid username or password'
+    }
   }
 
   return {
