@@ -1,14 +1,32 @@
-import { Switch, Route } from 'react-router-dom'
-import { publicRoutes } from './endpoints'
+import { observer } from 'mobx-react-lite'
+import { Switch, Route, Redirect } from 'react-router-dom'
+
+import { publicRoutes, privateRoutes } from './endpoints'
+
+import user from '../store/user'
 
 const Routes: React.FC = () => {
+  const wsConnectKey = user.wsConnectKey
+
+  if (wsConnectKey) {
+    return (
+      <Switch>
+        {privateRoutes.map((route, index) => (
+          <Route key={index} exact={route.exact} path={route.path} component={route.component} />
+        ))}
+        <Redirect to="/messages" />
+      </Switch>
+    )
+  }
+
   return (
     <Switch>
       {publicRoutes.map((route, index) => (
         <Route key={index} exact={route.exact} path={route.path} component={route.component} />
       ))}
+      <Redirect to="/login" />
     </Switch>
   )
 }
 
-export default Routes
+export default observer(Routes)

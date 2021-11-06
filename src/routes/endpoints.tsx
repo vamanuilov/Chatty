@@ -17,17 +17,10 @@ export enum PathEnum {
   SIGN_UP = '/signup'
 }
 
-// TODO: remove messages from publicroutes
-
 export const publicRoutes: IRoutes[] = [
   {
     path: [PathEnum.DEFAULT, PathEnum.LOGIN],
     component: () => <LoginPage />,
-    exact: true
-  },
-  {
-    path: [PathEnum.DEFAULT_CHAT, PathEnum.CHAT_WITH_ID],
-    component: () => <MessagePage />,
     exact: true
   },
   {
