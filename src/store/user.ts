@@ -98,7 +98,6 @@ class User {
 
     try {
       const response = await loginUser(urlEncodedData)
-      console.log('###:', 'response', response)
 
       runInAction(() => {
         this.wsConnectKey = response
