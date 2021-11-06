@@ -29,6 +29,7 @@ const SignUpPage = () => {
 
   return (
     <StartFormTemplate
+      isLoading={user.isLoading}
       form={
         <SignUpForm
           onSubmitHandler={onSubmitHandler}

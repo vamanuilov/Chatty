@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react'
+import { useEffect } from 'react'
 import { observer } from 'mobx-react-lite'
 import { yupResolver } from '@hookform/resolvers/yup'
 import { Controller, useForm } from 'react-hook-form'
@@ -6,7 +6,7 @@ import * as yup from 'yup'
 
 import './styles.scss'
 
-import { MAX_INPUT_VALUE, MIN_INPUT_VALUE } from '../../../config'
+import { MAX_INPUT_VALUE, MIN_INPUT_VALUE, POP_UP_LIFETIME } from '../../../config'
 
 import Button from '../../atoms/Button'
 import FormInput from '../../molecules/FormInput'
@@ -15,6 +15,7 @@ import Select from '../../molecules/Select'
 import PopUp from '../PopUp'
 
 import user from '../../../store/user'
+import popup from '../../../store/popup'
 
 import { ISignUpData } from '../../../interface/user'
 
@@ -28,18 +29,11 @@ interface ITextInput {
   id: string
 }
 
-interface IPopUpMessage {
-  type: 'success' | 'error' | ''
-  message: string
-}
-
 interface ISignUpForm {
   onSubmitHandler: (data: ISignUpData) => void
   onRegisterAfterDelay?: () => void
   onAdditionalButtonClickHandler: () => void
 }
-
-const POP_UP_LIFETIME = 2000
 
 const RegisterInputFields: ITextInput[] = [
   {
@@ -89,18 +83,13 @@ const SignUpForm: React.FC<ISignUpForm> = ({
   onRegisterAfterDelay,
   onAdditionalButtonClickHandler
 }) => {
-  const [popUpMessage, setPopUpMessage] = useState<IPopUpMessage>({
-    type: '',
-    message: ''
-  })
-
   const {
     control,
     watch,
     setError,
     clearErrors,
     handleSubmit,
-    formState: { errors, isValid, isDirty, isSubmitted }
+    formState: { errors, isDirty }
   } = useForm<ISignUpData>({
     resolver: yupResolver(schema),
     defaultValues: {
@@ -123,15 +112,12 @@ const SignUpForm: React.FC<ISignUpForm> = ({
 
   useEffect(() => {
     if (user.isRegistered) {
-      setPopUpMessage({
+      popup.setMessage({
         type: 'success',
-        message: 'User successfully registered! \n Redirecting to login page...'
+        text: 'User successfully registered! \n Redirecting to login page...'
       })
+
       setTimeout(() => {
-        setPopUpMessage({
-          type: '',
-          message: ''
-        })
         onRegisterAfterDelay && onRegisterAfterDelay()
       }, POP_UP_LIFETIME)
     }
@@ -154,17 +140,10 @@ const SignUpForm: React.FC<ISignUpForm> = ({
         break
       }
       case 'general': {
-        setPopUpMessage({
+        popup.setMessage({
           type: 'error',
-          message: user.error.message
+          text: user.error.message
         })
-
-        setTimeout(() => {
-          setPopUpMessage({
-            type: '',
-            message: ''
-          })
-        }, POP_UP_LIFETIME)
         break
       }
       default: {
@@ -186,14 +165,7 @@ const SignUpForm: React.FC<ISignUpForm> = ({
 
   return (
     <>
-      <PopUp
-        onCloseHandler={() => {
-          setPopUpMessage({ type: '', message: '' })
-        }}
-        popUpText={popUpMessage.message}
-        isSuccessMessage={popUpMessage.type === 'success'}
-        isErrorMessage={popUpMessage.type === 'error'}
-      />
+      <PopUp />
       <form className="sign-up-form" onSubmit={handleSubmit(onSubmitHandler)}>
         {RegisterInputFields.map(({ inputName, type, label, placeholder, id }) => (
           <div className="sign-up-form__item" key={inputName}>
@@ -258,12 +230,7 @@ const SignUpForm: React.FC<ISignUpForm> = ({
         </div>
         <div className="form-buttons">
           <div className="sign-up-form__button">
-            <Button
-              isMainButton
-              type="submit"
-              buttonText="Sign Up"
-              isDisabled={isSubmitted && (!isDirty || !isValid)}
-            />
+            <Button isMainButton type="submit" buttonText="Sign Up" isDisabled={user.isLoading || !isDirty} />
           </div>
           <div className="sign-up-form__button">
             <Button buttonText="Login" onClickHandler={onAdditionalButtonClickHandler} />

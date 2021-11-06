@@ -24,6 +24,7 @@ class User {
     message: ''
   }
   captchaUrl: string = ''
+  isLoading: boolean = false
 
   constructor() {
     makeAutoObservable(this)
@@ -34,6 +35,7 @@ class User {
   }
 
   async getCaptcha(parameter: number) {
+    this.isLoading = true
     try {
       const response: Blob | string = await getCaptcha(parameter)
 
@@ -45,10 +47,15 @@ class User {
         type: 'captcha',
         message: `Can't load captcha. \n Try again`
       }
+    } finally {
+      runInAction(() => {
+        this.isLoading = false
+      })
     }
   }
 
   async getGenders(): Promise<void> {
+    this.isLoading = true
     try {
       const response = await fetchGenders<IGender[] | string>()
 
@@ -68,10 +75,15 @@ class User {
         type: 'gender_id',
         message: `Can't gen genders. \n Try again`
       }
+    } finally {
+      runInAction(() => {
+        this.isLoading = false
+      })
     }
   }
 
   async signUp(data: ISignUpData): Promise<void> {
+    this.isLoading = true
     const urlEncodedData: string = convertToUrlEncoded<ISignUpData>(data)
 
     try {
@@ -90,10 +102,15 @@ class User {
         type: 'general',
         message: `Can't connect to the server. \n Try again`
       }
+    } finally {
+      runInAction(() => {
+        this.isLoading = false
+      })
     }
   }
 
   async logIn(data: ILoginData): Promise<void> {
+    this.isLoading = true
     const urlEncodedData: string = convertToUrlEncoded<ILoginData>(data)
 
     try {
@@ -110,8 +127,16 @@ class User {
         this.error = getErrorMessage(errorMessage)
       } else {
         // eslint-disable-next-line no-console
-        console.error(errorMessage)
+        console.error('Error: ' + errorMessage)
+        this.error = {
+          type: 'general',
+          message: `Can't connect to the server. \n Try again`
+        }
       }
+    } finally {
+      runInAction(() => {
+        this.isLoading = false
+      })
     }
   }
 }

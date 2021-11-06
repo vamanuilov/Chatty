@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react'
+import React, { useEffect } from 'react'
 import { observer } from 'mobx-react-lite'
 import { Controller, useForm } from 'react-hook-form'
 import * as yup from 'yup'
@@ -7,11 +7,11 @@ import { yupResolver } from '@hookform/resolvers/yup'
 import Button from '../../atoms/Button'
 import FormInput from '../../molecules/FormInput'
 import Captcha from '../../molecules/Captcha'
-import PopUp from '../PopUp'
 
 import { ILoginData } from '../../../interface/user'
 
 import user from '../../../store/user'
+import popup from '../../../store/popup'
 
 import { MAX_INPUT_VALUE, MIN_INPUT_VALUE } from '../../../config'
 
@@ -58,12 +58,9 @@ const LoginForm: React.FC<ILoginForm> = ({ onSubmitHandler, onAdditionalButtonCl
     control,
     setError,
     handleSubmit,
-    formState: { errors, isValid, isDirty, isSubmitted }
+    formState: { errors, isDirty }
   } = useForm<ILoginData>({ resolver: yupResolver(schema) })
-  const [popUpMessage, setPopUpMessage] = useState<{ type: 'error' | 'success' | ''; message: string }>({
-    type: '',
-    message: ''
-  })
+
   useEffect(() => {
     user.resetErrors()
   }, [])
@@ -87,9 +84,9 @@ const LoginForm: React.FC<ILoginForm> = ({ onSubmitHandler, onAdditionalButtonCl
         break
       }
       case 'general': {
-        setPopUpMessage({
+        popup.setMessage({
           type: 'error',
-          message: user.error.message
+          text: user.error.message
         })
         break
       }
@@ -98,16 +95,6 @@ const LoginForm: React.FC<ILoginForm> = ({ onSubmitHandler, onAdditionalButtonCl
 
   return (
     <>
-      <PopUp
-        popUpText={popUpMessage.message}
-        isErrorMessage={popUpMessage.type === 'error'}
-        onCloseHandler={() => {
-          setPopUpMessage({
-            type: '',
-            message: ''
-          })
-        }}
-      />
       <form className="login-form" onSubmit={handleSubmit(onSubmitHandler)}>
         {LogInInputFields.map(({ inputName, type, label, placeholder, id }) => (
           <div key={id} className="login-form__input">
@@ -152,7 +139,7 @@ const LoginForm: React.FC<ILoginForm> = ({ onSubmitHandler, onAdditionalButtonCl
         </div>
         <div className="form-buttons">
           <div className="login-form__button">
-            <Button type="submit" buttonText="Log In" isMainButton isDisabled={isSubmitted && (!isDirty || !isValid)} />
+            <Button type="submit" buttonText="Log In" isMainButton isDisabled={user.isLoading || !isDirty} />
           </div>
           <div className="login-form__button">
             <Button type="button" buttonText="Sign Up" onClickHandler={onAdditionalButtonClickHandler} />

@@ -29,6 +29,7 @@ const LoginPage: React.FC = () => {
 
   return (
     <FormTemplate
+      isLoading={user.isLoading}
       form={
         <LoginForm onSubmitHandler={onSubmitHandler} onAdditionalButtonClickHandler={onAdditionalButtonClickHandler} />
       }
