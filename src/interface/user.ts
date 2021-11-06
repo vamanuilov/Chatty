@@ -3,7 +3,7 @@ export interface ISignUpData {
   password: string
   password_confirm: string
   name: string
-  gender_id: string
+  gender_id: number
   captcha: string
 }
 

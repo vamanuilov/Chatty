@@ -12,7 +12,7 @@ import Button from '../../atoms/Button'
 import FormInput from '../../molecules/FormInput'
 import Captcha from '../../molecules/Captcha'
 import Select from '../../molecules/Select'
-import PopUp from '../PopUp'
+import StubInput from '../../molecules/StubInput'
 
 import user from '../../../store/user'
 import popup from '../../../store/popup'
@@ -96,8 +96,7 @@ const SignUpForm: React.FC<ISignUpForm> = ({
       login: '',
       password: '',
       password_confirm: '',
-      // без этого не рендерились элементы селекта (одобрено Андреем Бубновым )
-      gender_id: user.genders?.[0]?.id,
+      gender_id: undefined,
       name: '',
       captcha: ''
     }
@@ -165,7 +164,6 @@ const SignUpForm: React.FC<ISignUpForm> = ({
 
   return (
     <>
-      <PopUp />
       <form className="sign-up-form" onSubmit={handleSubmit(onSubmitHandler)}>
         {RegisterInputFields.map(({ inputName, type, label, placeholder, id }) => (
           <div className="sign-up-form__item" key={inputName}>
@@ -191,27 +189,30 @@ const SignUpForm: React.FC<ISignUpForm> = ({
           </div>
         ))}
         <div className="sign-up-form__item sign-up-form__select">
-          {/* FIXME: fix required rule. better add loader. in case of defaultValue there is always some value. */}
-          <Controller
-            name="gender_id"
-            control={control}
-            render={({ field: { onChange, name, ref } }) => (
-              <Select
-                options={user.genders}
-                placeholder="Your gender"
-                label="Your gender"
-                errorText={errors.gender_id?.message}
-                onChange={(e) => {
-                  onChange(e)
-                  if (user.error.type === 'select') {
-                    user.resetErrors()
-                  }
-                }}
-                name={name}
-                innerRef={ref}
-              />
-            )}
-          />
+          {user.genders.length === 0 ? (
+            <StubInput labelText="Select" isLoading={user.selectLoading} />
+          ) : (
+            <Controller
+              name="gender_id"
+              control={control}
+              render={({ field: { onChange, name, ref } }) => (
+                <Select
+                  options={user.genders}
+                  placeholder="Your gender"
+                  label="Your gender"
+                  errorText={errors.gender_id?.message}
+                  onChange={(e) => {
+                    onChange(e)
+                    if (user.error.type === 'select') {
+                      user.resetErrors()
+                    }
+                  }}
+                  name={name}
+                  innerRef={ref}
+                />
+              )}
+            />
+          )}
         </div>
         <div className="sign-up-form__item">
           <Controller

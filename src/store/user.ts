@@ -25,6 +25,7 @@ class User {
   }
   captchaUrl: string = ''
   isLoading: boolean = false
+  selectLoading: boolean = false
 
   constructor() {
     makeAutoObservable(this)
@@ -55,7 +56,7 @@ class User {
   }
 
   async getGenders(): Promise<void> {
-    this.isLoading = true
+    this.selectLoading = true
     try {
       const response = await fetchGenders<IGender[] | string>()
 
@@ -63,7 +64,7 @@ class User {
         if (typeof response === 'string') {
           this.error = {
             type: 'gender_id',
-            message: `Can't gen genders. \n Try again`
+            message: `Can't get genders. \n Try again`
           }
           return
         }
@@ -72,12 +73,12 @@ class User {
       })
     } catch {
       this.error = {
-        type: 'gender_id',
-        message: `Can't gen genders. \n Try again`
+        type: 'general',
+        message: `Can't get genders. \n Try again`
       }
     } finally {
       runInAction(() => {
-        this.isLoading = false
+        this.selectLoading = false
       })
     }
   }
