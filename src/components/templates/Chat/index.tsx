@@ -4,7 +4,7 @@ import cn from 'classnames'
 
 import { ReactComponent as BackgroundImg } from '../../../assets/images/Background.svg'
 import ChatMessages from '../../organisms/ChatMessages'
-import Loader from '../../organisms/Loader'
+import Loader from '../../atoms/Loader'
 
 import './styles.scss'
 

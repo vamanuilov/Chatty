@@ -1,6 +1,6 @@
 import React from 'react'
 
-import Loader from '../../organisms/Loader'
+import Loader from '../../atoms/Loader'
 import PopUp from '../../organisms/PopUp'
 
 import { ReactComponent as BackgroundImg } from '../../../assets/images/Background.svg'

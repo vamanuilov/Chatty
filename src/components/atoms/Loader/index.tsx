@@ -1,8 +1,6 @@
 import cn from 'classnames'
 
-import Image from '../../atoms/Image'
-
-import loaderElements from '../../../assets/images/loaderElements.png'
+import { ReactComponent as LoaderIcon } from '../../../assets/images/Loader.svg'
 
 type LoaderType = {
   isLoading: boolean
@@ -15,7 +13,7 @@ const Loader: React.FC<LoaderType> = ({ isLoading }) => {
     <div className={cn('loader', { loader_hidden: !isLoading })}>
       <div className="loader-content">
         <div className="loader-content__img">
-          <Image src={loaderElements} altText="loader" />
+          <LoaderIcon />
         </div>
       </div>
     </div>
