@@ -10,12 +10,12 @@ interface IGender {
   gender: string
 }
 
-interface IError {
+export interface IError {
   type: string
   message: string
 }
 
-class User {
+class UserStore {
   genders: IGender[] = []
   wsConnectKey: string = localStorage.getItem('wsConnectKey') || ''
   isRegistered: boolean = false
@@ -128,8 +128,6 @@ class User {
       if (typeof errorMessage === 'string') {
         this.error = getErrorMessage(errorMessage)
       } else {
-        // eslint-disable-next-line no-console
-        console.error('Error: ' + errorMessage)
         this.error = {
           type: 'general',
           message: `Can't connect to the server. \n Try again`
@@ -143,4 +141,4 @@ class User {
   }
 }
 
-export default new User()
+export default new UserStore()

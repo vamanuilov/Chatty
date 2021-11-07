@@ -24,7 +24,7 @@ const ChatMessages: React.FC = () => {
     return <EmptyContentPopup>Select a chat to start messaging</EmptyContentPopup>
   }
 
-  const { name: friendName, icon, lastTimeOnline } = friendsStore.selectedFriend as IFriends
+  const { name: friendName, gender, lastTimeOnline } = friendsStore.selectedFriend as IFriends
 
   return (
     <>
@@ -49,7 +49,7 @@ const ChatMessages: React.FC = () => {
             'chat-header__user-icon_hidden_desktop': friendsStore.selectedFriend
           })}
         >
-          <FriendIcon icon={icon} isHeader />
+          <FriendIcon icon={gender} isHeader />
         </div>
         <div className="chat-header__info">
           <div className="chat-header__name">{friendName}</div>

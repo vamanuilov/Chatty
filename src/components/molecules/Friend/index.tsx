@@ -13,11 +13,11 @@ interface IFriend extends Omit<IFriends, 'messages' | 'lastTimeOnline' | 'id'> {
   isSelected?: boolean
 }
 
-const Friend: React.FC<IFriend> = ({ name, lastMessage, icon, isLastMessageFromUser, isSelected }) => {
+const Friend: React.FC<IFriend> = ({ name, lastMessage, gender, isLastMessageFromUser, isSelected }) => {
   return (
     <div className={cn('friend', { friend_selected: isSelected })}>
       <div className="friend__icon">
-        <FriendIcon icon={icon} />
+        <FriendIcon icon={gender} />
       </div>
       <div className="friend-info">
         <div className="friend-info__name">{name}</div>

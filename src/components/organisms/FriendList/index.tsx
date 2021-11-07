@@ -14,18 +14,18 @@ const FriendList: React.FC<IFriendList> = ({ handleSelectFriend }) => {
     return <div></div>
   }
 
-  if (!friendsStore.friends || friendsStore.friends.length === 0) {
+  if (!friendsStore.friendList || friendsStore.friendList.length === 0) {
     return <EmptyFriendList />
   }
 
   return (
     <>
-      {friendsStore.friends.map(({ name, icon, lastMessage, isLastMessageFromUser, id }) => (
+      {friendsStore.friendList.map(({ name, gender, lastMessage, isLastMessageFromUser, id }) => (
         <div key={`${name + id}`} onClick={() => handleSelectFriend(id)}>
           <Friend
             name={name}
             lastMessage={lastMessage}
-            icon={icon}
+            gender={gender}
             isLastMessageFromUser={isLastMessageFromUser}
             isSelected={id === friendsStore.selectedFriend?.id}
           />

@@ -29,6 +29,11 @@ export const getErrorMessage = (untreadError: string): { type: string; message: 
       type: 'userData',
       message: 'Invalid username or password'
     }
+  } else if (untreadError.includes('Please relogin!')) {
+    return {
+      type: 'general',
+      message: 'Invalid connect key. \n Please, re-login'
+    }
   }
 
   return {

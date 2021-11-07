@@ -7,18 +7,26 @@ import Sidebar from '../../organisms/Sidebar'
 import Header from '../../organisms/Header'
 import FriendList from '../../organisms/FriendList'
 import Chat from '../../templates/Chat'
+import PopUp from '../../organisms/PopUp'
 
 import friendsStore from '../../../store/friends'
 
 import './styles.scss'
+
+import user from '../../../store/user'
+import socket from '../../../store/socket'
 
 const MessagePage: React.FC = () => {
   const { id: selectedId } = useParams<{ [v: string]: string }>()
   const history = useHistory()
 
   useEffect(() => {
-    friendsStore.getFriends()
-  }, [])
+    socket.connect(user.wsConnectKey)
+
+    return () => {
+      socket.closeConnection()
+    }
+  }, [user.wsConnectKey])
 
   useEffect(() => {
     friendsStore.setSelectedFriend(selectedId)
@@ -32,6 +40,8 @@ const MessagePage: React.FC = () => {
 
   return (
     <div className="chat-page">
+      {/* TODO: fix popup styles. move to center of page */}
+      <PopUp />
       <Header />
       <div className={cn('content', { 'content_full-height_mobile': friendsStore.selectedFriend })}>
         <Sidebar>
