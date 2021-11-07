@@ -114,6 +114,7 @@ const LoginForm: React.FC<ILoginForm> = ({ onSubmitHandler, onAdditionalButtonCl
                     onChange && onChange(e)
                     if (user.error.type === 'userData') {
                       user.resetErrors()
+                      clearErrors(['login', 'password'])
                     }
                   }}
                   name={name}
