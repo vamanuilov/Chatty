@@ -6,7 +6,7 @@ import InputWithSvgIcon from '../InputWithSvgIcon'
 import { ReactComponent as PaperClip } from '../../../assets/images/paper-clip.svg'
 import { ReactComponent as SendButtonIcon } from '../../../assets/images/send-button.svg'
 
-import friendsStore, { ID_LENGTH } from '../../../store/friends'
+import chat, { ID_LENGTH } from '../../../store/chat'
 
 import './styles.scss'
 
@@ -23,7 +23,7 @@ const ChatInput: React.FC = () => {
     const fileSize: string | null = file && (file?.size / (1024 * 1024)).toFixed(2)
 
     if (file) {
-      friendsStore.addMessage({
+      chat.addMessage({
         text: { size: `${fileSize} MB`, name: file?.name },
         author: 'user',
         id: nanoid(ID_LENGTH),
@@ -37,7 +37,7 @@ const ChatInput: React.FC = () => {
   }
 
   const handleSendClick = () => {
-    friendsStore.addMessage({ text: userMessage, author: 'user', id: nanoid(ID_LENGTH), type: 'text' })
+    chat.addMessage({ text: userMessage, author: 'user', id: nanoid(ID_LENGTH), type: 'text' })
     setUserMessage('')
   }
 

@@ -9,7 +9,7 @@ import FriendList from '../../organisms/FriendList'
 import Chat from '../../templates/Chat'
 import PopUp from '../../organisms/PopUp'
 
-import friendsStore from '../../../store/friends'
+import chat from '../../../store/chat'
 
 import './styles.scss'
 
@@ -29,11 +29,11 @@ const MessagePage: React.FC = () => {
   }, [user.wsConnectKey])
 
   useEffect(() => {
-    friendsStore.setSelectedFriend(selectedId)
+    chat.setSelectedFriend(selectedId)
   }, [selectedId])
 
   const handleSelectFriend = useCallback((id: string) => {
-    if (friendsStore.selectedFriend?.id !== id) {
+    if (chat.selectedFriend?.id !== id) {
       history.push(`/messages/${id}`)
     }
   }, [])
@@ -43,7 +43,7 @@ const MessagePage: React.FC = () => {
       {/* TODO: fix popup styles. move to center of page */}
       <PopUp />
       <Header />
-      <div className={cn('content', { 'content_full-height_mobile': friendsStore.selectedFriend })}>
+      <div className={cn('content', { 'content_full-height_mobile': chat.selectedFriend })}>
         <Sidebar>
           <FriendList handleSelectFriend={handleSelectFriend} />
         </Sidebar>

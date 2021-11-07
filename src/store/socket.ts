@@ -3,7 +3,7 @@ import { nanoid } from 'nanoid'
 
 import { RETRY_AMOUNT, WS_URI } from '../config'
 
-import friends, { ID_LENGTH } from './friends'
+import chat, { ID_LENGTH } from './chat'
 import popup from './popup'
 
 import { IFriends } from '../interface/friends'
@@ -66,7 +66,7 @@ class SocketStore {
             id: nanoid(ID_LENGTH),
             lastTimeOnline: 'Online'
           }))
-          friends.friendList = friendList
+          chat.friendList = friendList
           break
         }
       }

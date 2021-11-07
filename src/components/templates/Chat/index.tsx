@@ -8,19 +8,18 @@ import Loader from '../../atoms/Loader'
 
 import './styles.scss'
 
-import friendsStore from '../../../store/friends'
-import classNames from 'classnames'
+import chat from '../../../store/chat'
 
 const Chat: React.FC = () => {
   return (
-    <div className={classNames('chat-container', { 'chat-container_hidden': !friendsStore.selectedFriend })}>
+    <div className={cn('chat-container', { 'chat-container_hidden': !chat.selectedFriend })}>
       <div className="chat-container__loader">
-        <Loader isLoading={friendsStore.isLoading} />
+        <Loader isLoading={chat.isLoading} />
       </div>
       <div className="chat-container__background">
         <BackgroundImg className="chat-container__img" />
       </div>
-      <div className={cn('chat', { chat_loading: friendsStore.isLoading })}>
+      <div className={cn('chat', { chat_loading: chat.isLoading })}>
         <ChatMessages />
       </div>
     </div>

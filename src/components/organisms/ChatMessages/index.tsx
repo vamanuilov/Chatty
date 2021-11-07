@@ -15,23 +15,23 @@ import { ReactComponent as BackArrow } from '../../../assets/images/arrow.svg'
 
 import './styles.scss'
 
-import friendsStore from '../../../store/friends'
+import chat from '../../../store/chat'
 
 const ChatMessages: React.FC = () => {
   const history = useHistory()
 
-  if (!friendsStore.selectedFriend) {
+  if (!chat.selectedFriend) {
     return <EmptyContentPopup>Select a chat to start messaging</EmptyContentPopup>
   }
 
-  const { name: friendName, gender, lastTimeOnline } = friendsStore.selectedFriend as IFriends
+  const { name: friendName, gender, lastTimeOnline } = chat.selectedFriend as IFriends
 
   return (
     <>
       <div className="chat-header">
         <div
           className={cn('chat-header__backwards-arrow', {
-            'chat-header__backwards-arrow_hidden_desktop': friendsStore.selectedFriend
+            'chat-header__backwards-arrow_hidden_desktop': chat.selectedFriend
           })}
         >
           <InputWithSvgIcon
@@ -46,7 +46,7 @@ const ChatMessages: React.FC = () => {
         </div>
         <div
           className={cn('chat-header__user-icon', {
-            'chat-header__user-icon_hidden_desktop': friendsStore.selectedFriend
+            'chat-header__user-icon_hidden_desktop': chat.selectedFriend
           })}
         >
           <FriendIcon icon={gender} isHeader />
