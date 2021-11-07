@@ -3,7 +3,7 @@ import { useHistory } from 'react-router'
 import { observer } from 'mobx-react-lite'
 import cn from 'classnames'
 
-import ChatInput from '../../molecules/ChatInput'
+import ChatInput from '../ChatInput'
 import MessageList from '../../molecules/MessageList'
 import InputWithSvgIcon from '../../molecules/InputWithSvgIcon'
 import FriendIcon from '../../molecules/FriendIcon'

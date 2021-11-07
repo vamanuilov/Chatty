@@ -5,7 +5,7 @@ import { IFriends } from '../../../interface/friends'
 
 import { ReactComponent as FileIcon } from '../../../assets/images/fileIcon.svg'
 
-import FriendIcon from '../FriendIcon'
+import FriendIcon from '../../molecules/FriendIcon'
 
 import './styles.scss'
 

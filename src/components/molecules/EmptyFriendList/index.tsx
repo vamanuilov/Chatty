@@ -1,9 +1,10 @@
 import Image from '../../atoms/Image'
 
+import Heading from '../../atoms/Heading'
+
 import emptyUser from '../../../assets/images/emptyUsers.png'
 
 import './styles.scss'
-import Heading from '../../atoms/Heading'
 
 const EmptyFriendList = () => {
   return (

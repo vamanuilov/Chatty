@@ -1,12 +1,12 @@
 import React, { useRef, useState } from 'react'
 import { nanoid } from 'nanoid'
 
-import InputWithSvgIcon from '../InputWithSvgIcon'
+import InputWithSvgIcon from '../../molecules/InputWithSvgIcon'
 
 import { ReactComponent as PaperClip } from '../../../assets/images/paper-clip.svg'
 import { ReactComponent as SendButtonIcon } from '../../../assets/images/send-button.svg'
 
-import chat, { ID_LENGTH } from '../../../store/chat'
+import chatStore, { ID_LENGTH } from '../../../store/chat'
 
 import './styles.scss'
 
@@ -23,7 +23,7 @@ const ChatInput: React.FC = () => {
     const fileSize: string | null = file && (file?.size / (1024 * 1024)).toFixed(2)
 
     if (file) {
-      chat.addMessage({
+      chatStore.addMessage({
         text: { size: `${fileSize} MB`, name: file?.name },
         author: 'user',
         id: nanoid(ID_LENGTH),
@@ -37,7 +37,7 @@ const ChatInput: React.FC = () => {
   }
 
   const handleSendClick = () => {
-    chat.addMessage({ text: userMessage, author: 'user', id: nanoid(ID_LENGTH), type: 'text' })
+    chatStore.addMessage({ text: userMessage, author: 'user', id: nanoid(ID_LENGTH), type: 'text' })
     setUserMessage('')
   }
 
