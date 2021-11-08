@@ -1,11 +1,7 @@
 @import '../../../assets/styles/variables';
 
 .pop-up-container {
-  position: absolute;
-  top: 10px;
-  left: 10vw;
-  z-index: 2;
-  width: 30%;
+  width: 100%;
   pointer-events: none;
   opacity: 0;
   visibility: hidden;
@@ -17,11 +13,6 @@
     visibility: visible;
     transform: translateY(0);
     pointer-events: unset;
-  }
-
-  @media (max-width: 800px) {
-    left: 19%;
-    width: 65%;
   }
 }
 
@@ -46,8 +37,7 @@
   }
 
   &__text {
-    padding-right: 10px;
-    margin-left: 10px;
+    padding: 0 20px;
   }
 }
 

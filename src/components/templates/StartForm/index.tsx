@@ -16,7 +16,9 @@ import './styles.scss'
 const FormTemplate: React.FC<IFormTemplate> = ({ form, header, isLoading }) => {
   return (
     <div className="page">
-      <PopUp />
+      <div className="form-pop-up">
+        <PopUp />
+      </div>
       <div className="page__bg">
         <div className="page-img">
           <BackgroundImg className="page-img__svg" />

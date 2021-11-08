@@ -41,7 +41,9 @@ const MessagePage: React.FC = () => {
   return (
     <div className="chat-page">
       {/* TODO: fix popup styles. move to center of page */}
-      <PopUp />
+      <div className="chat-pop-up">
+        <PopUp />
+      </div>
       <Header />
       <div className={cn('content', { 'content_full-height_mobile': chat.selectedFriend })}>
         <Sidebar>
