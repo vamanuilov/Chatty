@@ -11,6 +11,7 @@ interface IInputWithSvgIcon {
   onChangeHandler?: (e: React.ChangeEvent<HTMLInputElement>) => void
   children: React.ReactNode
   elemRef?: React.LegacyRef<HTMLInputElement>
+  accept?: string
 }
 
 const InputWithSvgIcon: React.FC<IInputWithSvgIcon> = ({
@@ -19,7 +20,8 @@ const InputWithSvgIcon: React.FC<IInputWithSvgIcon> = ({
   id,
   type,
   onClickHandler,
-  onChangeHandler
+  onChangeHandler,
+  accept
 }) => {
   return (
     <div className="input-with-svg-icon">
@@ -29,6 +31,7 @@ const InputWithSvgIcon: React.FC<IInputWithSvgIcon> = ({
         className="input-with-svg-icon__input_hidden"
         id={id}
         type={type}
+        accept={accept}
         onChange={onChangeHandler}
         onClick={onClickHandler}
       ></input>

@@ -13,6 +13,20 @@ export const convertToUrlEncoded = <T>(data: T): string =>
     return acc === '' ? `${key}=${value}` : `${acc}&${key}=${value}`
   }, '')
 
+export const convertToFormData = (data: { [v: string]: any }): FormData => {
+  const formData = new FormData()
+
+  Object.entries(data).forEach(([key, value]) => {
+    if (value instanceof File) {
+      formData.append(key, value)
+    } else {
+      formData.append(key, String(value))
+    }
+  })
+
+  return formData
+}
+
 export const getErrorMessage = (untreadError: string): { type: string; message: string } => {
   if (untreadError.includes('Captcha is wrong')) {
     return {
@@ -41,3 +55,5 @@ export const getErrorMessage = (untreadError: string): { type: string; message: 
     message: `Can't connect to the server. \n Try again`
   }
 }
+
+export const convertByteToMByte = (bytes: number): number => bytes / 1024 / 1024

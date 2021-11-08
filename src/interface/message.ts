@@ -1,6 +1,7 @@
 export interface IFileMessage {
   name: string
   size: string
+  fileLink: string
 }
 
 export interface IMessage {

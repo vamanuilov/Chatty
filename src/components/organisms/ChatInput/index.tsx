@@ -1,4 +1,4 @@
-import React, { useRef, useState } from 'react'
+import React, { useMemo, useRef, useState } from 'react'
 import { nanoid } from 'nanoid'
 
 import InputWithSvgIcon from '../../molecules/InputWithSvgIcon'
@@ -6,29 +6,27 @@ import InputWithSvgIcon from '../../molecules/InputWithSvgIcon'
 import { ReactComponent as PaperClip } from '../../../assets/images/paper-clip.svg'
 import { ReactComponent as SendButtonIcon } from '../../../assets/images/send-button.svg'
 
-import chatStore, { ID_LENGTH } from '../../../store/chat'
+import chatStore, { FILE_LIMITS, ID_LENGTH } from '../../../store/chat'
 
 import './styles.scss'
 
 const ChatInput: React.FC = () => {
   const [userMessage, setUserMessage] = useState<string>('')
   const fileRef = useRef<HTMLInputElement>(null)
+  const fileAcceptValues: string = useMemo(
+    () => Object.values(FILE_LIMITS.types).reduce((acc, rec) => (acc ? `${acc},${rec.join(',')}` : rec.join(',')), ''),
+    []
+  )
 
   const handleMessageInput = (e: React.ChangeEvent<HTMLTextAreaElement>) => {
     setUserMessage(e.target.value)
   }
 
   const handleFileUpload = (e: React.ChangeEvent<HTMLInputElement>) => {
-    const file: File | null = e.target.files && e.target.files[0]
-    const fileSize: string | null = file && (file?.size / (1024 * 1024)).toFixed(2)
+    const incomingFile: File | null = e.target.files && e.target.files[0]
 
-    if (file) {
-      chatStore.addMessage({
-        text: { size: `${fileSize} MB`, name: file?.name },
-        author: 'user',
-        id: nanoid(ID_LENGTH),
-        type: 'file'
-      })
+    if (incomingFile) {
+      chatStore.sendFile(incomingFile)
 
       if (fileRef.current) {
         fileRef.current.value = ''
@@ -55,7 +53,13 @@ const ChatInput: React.FC = () => {
   return (
     <div className="chat-input">
       <div className="file-input">
-        <InputWithSvgIcon elemRef={fileRef} type="file" id="chatInputFile" onChangeHandler={handleFileUpload}>
+        <InputWithSvgIcon
+          elemRef={fileRef}
+          type="file"
+          accept={fileAcceptValues}
+          id="chatInputFile"
+          onChangeHandler={handleFileUpload}
+        >
           <PaperClip className="file-input__icon" />
         </InputWithSvgIcon>
       </div>

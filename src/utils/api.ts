@@ -4,11 +4,12 @@ import { HTTP_URL, API_VERSION } from '../config'
 
 const POST_CONTENT_TYPE: string = 'application/x-www-form-urlencoded'
 
-export enum UrlRoutes {
+enum UrlRoutes {
   AUTH = `auth`,
   REGISTER = 'auth/register',
   CAPTCHA = 'auth/captcha',
-  LOGIN = 'auth/login'
+  LOGIN = 'auth/login',
+  UPLOAD = 'upload'
 }
 
 export const getCaptcha = (parameter: number): Promise<Blob> =>
@@ -73,3 +74,14 @@ export const loginUser = (data: string): Promise<string> =>
 
       return Promise.reject(body)
     })
+
+export const uploadFile = (file: FormData): Promise<string> =>
+  timeoutFunction(
+    fetch(`${HTTP_URL}${API_VERSION}${UrlRoutes.UPLOAD}`, {
+      method: 'POST',
+      body: file,
+      credentials: 'same-origin'
+    })
+  ).then((res) => {
+    return res.text()
+  })

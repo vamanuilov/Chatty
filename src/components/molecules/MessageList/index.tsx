@@ -22,10 +22,10 @@ const MessageList: React.FC = () => {
     <div>
       {chat.selectedFriend.messages.map(({ text, type, author, id }) => {
         if (type === 'file') {
-          const { size, name } = text as IFileMessage
+          const { size, name, fileLink } = text as IFileMessage
           return (
             <Message key={id} author={author}>
-              <FileMessage size={size} name={name} />
+              <FileMessage fileLink={fileLink} size={size} name={name} />
             </Message>
           )
         }

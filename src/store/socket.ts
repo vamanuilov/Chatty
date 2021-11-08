@@ -17,6 +17,7 @@ class SocketStore {
   socket: WebSocket | undefined
   retryCount: number = 1
   isLoading: boolean = false
+  type: string = 'testtest'
 
   constructor() {
     makeAutoObservable(this)
@@ -24,7 +25,7 @@ class SocketStore {
 
   connect = (connectKey: string) => {
     this.isLoading = true
-    this.socket = new WebSocket(`${WS_URI}?type=test&ws_id=${connectKey}`)
+    this.socket = new WebSocket(`${WS_URI}?type=${this.type}&ws_id=${connectKey}`)
     this.socket.onopen = this.onOpen.bind(this)
     this.socket.onclose = this.onClose.bind(this)
     this.socket.onmessage = this.onMessage.bind(this)
@@ -41,12 +42,13 @@ class SocketStore {
       type: 'error',
       text: 'Connection closed. \n Refresh page'
     })
+    this.isLoading = false
     // eslint-disable-next-line no-console
     console.warn('WS Connection closed! Refresh page or reconnect manually')
   }
 
   onMessage(incomingMessage: MessageEvent<string>) {
-    if (incomingMessage.data.includes('"type"')) {
+    if (incomingMessage.data.includes('type')) {
       const wsResponse: IWSResponse = JSON.parse(incomingMessage.data)
 
       switch (wsResponse.type) {
@@ -56,6 +58,7 @@ class SocketStore {
             name: string
             gender: 'male' | 'female'
           } = wsResponse.data
+
           console.log('user_data: ', userData)
           break
         }
@@ -70,6 +73,11 @@ class SocketStore {
           break
         }
       }
+    } else if (incomingMessage.data.includes('2222')) {
+      /*TODO: remove this if block after backend fix.
+      some sort of spam from server on file upload. need to be fixed on server.*/
+      console.log('spam from server: ', incomingMessage)
+      return
     } else {
       /* TODO: based on the fact that we have no message requirements yet,
       I think that all that is not processed is an error */
@@ -90,6 +98,7 @@ class SocketStore {
         text: `Can't connect to the server. \n Try again`
       })
     }
+    this.isLoading = false
   }
 
   getFriendList() {
