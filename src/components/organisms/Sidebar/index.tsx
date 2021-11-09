@@ -1,12 +1,13 @@
 import cn from 'classnames'
-import { observer } from 'mobx-react-lite'
-
-import chat from '../../../store/chat'
 
 import './styles.scss'
 
-const SideBar = ({ children }: { children: React.ReactNode }) => {
-  return <div className={cn('sidebar', { sidebar_hidden_mobile: chat.selectedFriend })}>{children}</div>
+interface ISideBar {
+  isFriendSelected: boolean
 }
 
-export default observer(SideBar)
+const SideBar: React.FC<ISideBar> = ({ children, isFriendSelected }) => {
+  return <div className={cn('sidebar', { sidebar_hidden_mobile: isFriendSelected })}>{children}</div>
+}
+
+export default SideBar

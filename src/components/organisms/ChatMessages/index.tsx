@@ -24,7 +24,7 @@ const ChatMessages: React.FC = () => {
     return <EmptyContentPopup>Select a chat to start messaging</EmptyContentPopup>
   }
 
-  const { name: friendName, gender, lastTimeOnline } = chat.selectedFriend as IFriends
+  const { name: friendName, gender, lastTimeOnline, messages } = chat.selectedFriend as IFriends
 
   return (
     <>
@@ -59,7 +59,7 @@ const ChatMessages: React.FC = () => {
         </div>
       </div>
       <div className="chat-messages">
-        <MessageList />
+        <MessageList messages={messages} />
       </div>
       <div className="chat-input-container">
         <ChatInput />

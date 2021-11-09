@@ -10,11 +10,10 @@ import Chat from '../../templates/Chat'
 import PopUp from '../../organisms/PopUp'
 
 import chat from '../../../store/chat'
-
-import './styles.scss'
-
 import user from '../../../store/user'
 import socket from '../../../store/socket'
+
+import './styles.scss'
 
 const MessagePage: React.FC = () => {
   const { id: selectedId } = useParams<{ [v: string]: string }>()
@@ -51,10 +50,15 @@ const MessagePage: React.FC = () => {
       </div>
       <Header onLogOutHandler={onLogOut} isHidden={typeof chat.selectedFriend !== 'undefined'} />
       <div className={cn('content', { 'content_full-height_mobile': chat.selectedFriend })}>
-        <Sidebar>
-          <FriendList handleSelectFriend={handleSelectFriend} />
+        <Sidebar isFriendSelected={typeof chat.selectedFriend !== 'undefined'}>
+          <FriendList
+            handleSelectFriend={handleSelectFriend}
+            isLoading={chat.isLoading}
+            friends={chat.friendList}
+            selectedId={chat.selectedFriend?.id}
+          />
         </Sidebar>
-        <Chat />
+        <Chat isFriendNotSelected={typeof chat.selectedFriend === 'undefined'} isLoading={chat.isLoading} />
       </div>
     </div>
   )

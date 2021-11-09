@@ -1,33 +1,34 @@
-import { observer } from 'mobx-react-lite'
-
 import EmptyFriendList from '../../molecules/EmptyFriendList'
 import Friend from '../Friend'
 
-import chat from '../../../store/chat'
+import { IFriends } from '../../../interface/friends'
 
 interface IFriendList {
   handleSelectFriend: (id: string) => void
+  friends: IFriends[] | undefined
+  isLoading: boolean
+  selectedId: string | undefined
 }
 
-const FriendList: React.FC<IFriendList> = ({ handleSelectFriend }) => {
-  if (chat.isLoading) {
+const FriendList: React.FC<IFriendList> = ({ handleSelectFriend, isLoading, friends, selectedId }) => {
+  if (isLoading) {
     return <div></div>
   }
 
-  if (!chat.friendList || chat.friendList.length === 0) {
+  if (!friends || friends.length === 0) {
     return <EmptyFriendList />
   }
 
   return (
     <>
-      {chat.friendList.map(({ name, gender, lastMessage, isLastMessageFromUser, id }) => (
+      {friends.map(({ name, gender, lastMessage, isLastMessageFromUser, id }) => (
         <div key={`${name + id}`} onClick={() => handleSelectFriend(id)}>
           <Friend
             name={name}
             lastMessage={lastMessage}
             gender={gender}
             isLastMessageFromUser={isLastMessageFromUser}
-            isSelected={id === chat.selectedFriend?.id}
+            isSelected={id === selectedId}
           />
         </div>
       ))}
@@ -35,4 +36,4 @@ const FriendList: React.FC<IFriendList> = ({ handleSelectFriend }) => {
   )
 }
 
-export default observer(FriendList)
+export default FriendList
