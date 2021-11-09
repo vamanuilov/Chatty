@@ -1,5 +1,5 @@
 .loader {
-  position: fixed;
+  position: absolute;
   left: 0;
   top: 0;
   width: 100%;
@@ -13,6 +13,10 @@
     opacity: 0;
     pointer-events: none;
     transition: visibility 0.1s, opacity 0.1s;
+  }
+
+  &_fixed {
+    position: fixed;
   }
 }
 

@@ -53,6 +53,16 @@
     width: 18px;
     height: 36px;
   }
+
+  @media (max-width: 800px) {
+    width: 36px;
+    height: 36px;
+
+    &__icon {
+      width: 13px;
+      height: 23px;
+    }
+  }
 }
 
 .user-logout {

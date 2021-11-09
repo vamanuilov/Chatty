@@ -25,7 +25,7 @@ const FormTemplate: React.FC<IFormTemplate> = ({ form, header, isLoading }) => {
         </div>
       </div>
       <div className="page__content">
-        <Loader isLoading={isLoading} />
+        <Loader isFixed isLoading={isLoading} />
         <div className="form-container">
           <div className="form-container__header">{header}</div>
           <div className="form-container__form">{form}</div>
