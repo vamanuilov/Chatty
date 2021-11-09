@@ -38,10 +38,6 @@ class SocketStore {
   }
 
   onClose() {
-    popup.setMessage({
-      type: 'error',
-      text: 'Connection closed. \n Refresh page'
-    })
     this.isLoading = false
     // eslint-disable-next-line no-console
     console.warn('WS Connection closed! Refresh page or reconnect manually')

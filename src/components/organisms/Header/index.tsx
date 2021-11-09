@@ -1,23 +1,37 @@
 import React from 'react'
 import cn from 'classnames'
-import { observer } from 'mobx-react-lite'
 
-import Avatar from '../../molecules/Avatar'
 import Logo from '../../molecules/Logo'
+import InputWithSvgIcon from '../../molecules/InputWithSvgIcon'
 
-import avatar from '../../../assets/images/avatar.png'
+import { ReactComponent as AvatarIcon } from '../../../assets/images/avatar.svg'
+import { ReactComponent as LogOutIcon } from '../../../assets/images/logout.svg'
 
 import './styles.scss'
 
-import chat from '../../../store/chat'
+interface IHeader {
+  onLogOutHandler: () => void
+  isHidden: boolean
+}
 
-const Header = () => {
+const Header: React.FC<IHeader> = ({ onLogOutHandler, isHidden }) => {
   return (
-    <div className={cn('header', { header_hidden: chat.selectedFriend })}>
+    <div className={cn('header', { header_hidden: isHidden })}>
       <Logo className="header__logo" />
-      <Avatar src={avatar} className="header__avatar" />
+      <div className="user">
+        <div className="user-logout">
+          <InputWithSvgIcon id="logout" type="button" onClickHandler={onLogOutHandler}>
+            <LogOutIcon className="user-logout__icon" />
+          </InputWithSvgIcon>
+        </div>
+        <div className="user-avatar">
+          <InputWithSvgIcon id="avatar" type="button">
+            <AvatarIcon className="user-avatar__icon" />
+          </InputWithSvgIcon>
+        </div>
+      </div>
     </div>
   )
 }
 
-export default observer(Header)
+export default React.memo(Header)

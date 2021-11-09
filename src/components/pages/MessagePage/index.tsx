@@ -32,19 +32,24 @@ const MessagePage: React.FC = () => {
     chat.setSelectedFriend(selectedId)
   }, [selectedId])
 
-  const handleSelectFriend = useCallback((id: string) => {
+  const handleSelectFriend = useCallback((id: string): void => {
     if (chat.selectedFriend?.id !== id) {
       history.push(`/messages/${id}`)
     }
   }, [])
 
+  const onLogOut = useCallback((): void => {
+    history.push('/login')
+    localStorage.removeItem('wsConnectKey')
+    user.wsConnectKey = ''
+  }, [])
+
   return (
     <div className="chat-page">
-      {/* TODO: fix popup styles. move to center of page */}
       <div className="chat-pop-up">
         <PopUp />
       </div>
-      <Header />
+      <Header onLogOutHandler={onLogOut} isHidden={typeof chat.selectedFriend !== 'undefined'} />
       <div className={cn('content', { 'content_full-height_mobile': chat.selectedFriend })}>
         <Sidebar>
           <FriendList handleSelectFriend={handleSelectFriend} />
