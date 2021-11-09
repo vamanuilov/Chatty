@@ -1,18 +1,7 @@
 @import '../../../assets/styles/variables';
+@import '../../../assets/styles/mixins';
 
 $chatHeaderHeight: 96px;
-$scrollBarWidth: 12px;
-
-@mixin scrollbarElements($backgroundColor, $borderRadius, $rightPadding) {
-  background: $backgroundColor;
-  border-radius: $borderRadius;
-  border-right: $rightPadding $ContentBgImgColorWithOpacity10 solid;
-  background-clip: padding-box;
-  @media (max-width: 800px) {
-    border-radius: $scrollBarWidth / 2;
-    border-right: $rightPadding / 2;
-  }
-}
 
 .chat-header {
   width: 100%;
@@ -82,30 +71,12 @@ $scrollBarWidth: 12px;
   display: flex;
   flex-direction: column-reverse;
 
-  &::-webkit-scrollbar {
-    width: $scrollBarWidth;
-
-    @media (max-width: 800px) {
-      width: $scrollBarWidth / 2;
-      padding-bottom: 0px;
-    }
-  }
-
-  &::-webkit-scrollbar-track {
-    @include scrollbarElements(#e1ecfe, $scrollBarWidth, 4px);
-  }
-
-  &::-webkit-scrollbar-thumb {
-    @include scrollbarElements(#c5daff, $scrollBarWidth, 4px);
-
-    &:hover {
-      background-color: $blue-100;
-    }
-  }
+  @include customScrollBar(12px, 4px);
 }
 
 .not-selected {
   display: none;
+
   @media (min-width: 800px) {
     display: flex;
     justify-content: center;

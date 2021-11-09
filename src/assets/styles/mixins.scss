@@ -1,0 +1,35 @@
+@import './variables';
+
+@mixin scrollbarElements($backgroundColor, $borderRadius, $rightPadding) {
+  background: $backgroundColor;
+  border-radius: $borderRadius;
+  border-right: $rightPadding $ContentBgImgColorWithOpacity10 solid;
+  background-clip: padding-box;
+  @media (max-width: 800px) {
+    border-radius: $borderRadius / 2;
+    border-right: $rightPadding / 2;
+  }
+}
+
+@mixin customScrollBar($scrollWidth, $rightPadding) {
+  &::-webkit-scrollbar {
+    width: $scrollWidth;
+
+    @media (max-width: 800px) {
+      width: $scrollWidth / 2;
+      padding-bottom: 0px;
+    }
+  }
+
+  &::-webkit-scrollbar-track {
+    @include scrollbarElements($scrollBarTrack, $scrollWidth, $rightPadding);
+  }
+
+  &::-webkit-scrollbar-thumb {
+    @include scrollbarElements($scrollBarThumb, $scrollWidth, $rightPadding);
+
+    &:hover {
+      background-color: $blue-100;
+    }
+  }
+}
