@@ -74,9 +74,25 @@
   pointer-events: none;
 
   &__item {
+    border-bottom: 1px solid $blue-100;
+  }
+
+  &__item:first-child {
+    border-radius: 8px 8px 0px 0px;
+  }
+
+  &__item:last-child {
+    border: 0;
+    border-radius: 0px 0px 8px 8px;
+  }
+
+  &__item:hover {
+    background-color: #f3f8ff;
+  }
+
+  &__item-label {
     display: block;
     padding: 14px;
-    border-bottom: 1px solid $blue-100;
     cursor: pointer;
     font-weight: normal;
     font-size: 15px;
@@ -85,14 +101,6 @@
     &::first-letter {
       text-transform: capitalize;
     }
-
-    &:hover {
-      background-color: #f3f8ff;
-    }
-  }
-
-  &__item:last-child {
-    border-bottom: none;
   }
 
   &_open {

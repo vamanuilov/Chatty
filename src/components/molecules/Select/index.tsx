@@ -62,8 +62,8 @@ const Select: React.FC<ISelect> = ({ onChange, name, innerRef, options, placehol
         <div className={cn('dropdown-container', { 'dropdown-container_open': isDropdownOpen })}>
           {options?.map(({ id, gender }) => {
             return (
-              <div key={`gender_${id}`}>
-                <label className="dropdown-container__item" htmlFor={`gender_${id}`}>
+              <div className="dropdown-container__item" key={`gender_${id}`}>
+                <label className="dropdown-container__item-label" htmlFor={`gender_${id}`}>
                   {gender}
                 </label>
                 <input
