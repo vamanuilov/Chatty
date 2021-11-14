@@ -1,5 +1,6 @@
 {
   "name": "chat",
+  "homepage": "https://vamanuilov.github.io/chat/#/",
   "version": "0.1.0",
   "private": true,
   "dependencies": {
@@ -28,6 +29,7 @@
   "scripts": {
     "start": "react-scripts start",
     "build": "react-scripts build",
+    "deploy": "gh-pages -d build",
     "test": "react-scripts test",
     "eject": "react-scripts eject",
     "lint": "npx eslint ./src/*.{js,ts,tsx,jsx}",
@@ -61,6 +63,7 @@
     "eslint-config-prettier": "^8.3.0",
     "eslint-plugin-jest": "^25.0.5",
     "eslint-plugin-prettier": "^4.0.0",
+    "gh-pages": "^3.2.3",
     "husky": "^7.0.2",
     "prettier": "2.4.1",
     "sass": "^1.43.2"
