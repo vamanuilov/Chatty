@@ -6,8 +6,8 @@
   border-right: $rightPadding $ContentBgImgColorWithOpacity10 solid;
   background-clip: padding-box;
   @media (max-width: 800px) {
-    border-radius: $borderRadius / 2;
-    border-right: $rightPadding / 2;
+    border-radius: calc($borderRadius / 2);
+    border-right: calc($rightPadding / 2);
   }
 }
 
@@ -16,7 +16,7 @@
     width: $scrollWidth;
 
     @media (max-width: 800px) {
-      width: $scrollWidth / 2;
+      width: calc($scrollWidth / 2);
       padding-bottom: 0px;
     }
   }
