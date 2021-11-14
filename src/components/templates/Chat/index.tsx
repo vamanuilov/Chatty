@@ -15,7 +15,7 @@ interface IChat {
 
 const Chat: React.FC<IChat> = ({ isFriendNotSelected, isLoading }) => {
   return (
-    <div className={cn('chat-container', { 'chat-container_hidden': !isFriendNotSelected })}>
+    <div className={cn('chat-container', { 'chat-container_hidden': isFriendNotSelected })}>
       <div className="chat-container__loader">
         <Loader isLoading={isLoading} />
       </div>

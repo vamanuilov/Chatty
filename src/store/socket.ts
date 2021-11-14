@@ -8,9 +8,13 @@ import popup from './popup'
 
 import { IFriends } from '../interface/friends'
 
+interface IUserData {
+  name: string
+  gender: 'male' | 'female'
+}
 interface IWSResponse {
   type: string
-  data: any
+  data: IUserData | IUserData[] | string
 }
 
 class SocketStore {
@@ -50,18 +54,16 @@ class SocketStore {
       switch (wsResponse.type) {
         case 'user_data': {
           // TODO: I don't know what to do with this data
-          const userData: {
-            name: string
-            gender: 'male' | 'female'
-          } = wsResponse.data
+          const userData: IUserData = wsResponse.data as IUserData
 
           console.log('user_data: ', userData)
           break
         }
         case 'users_list': {
-          const friendList: IFriends[] = wsResponse.data.map((friend: { name: string; gender: 'male' | 'female' }) => ({
+          const usersList: IUserData[] = wsResponse.data as IUserData[]
+          const friendList: IFriends[] = usersList.map((friend: IUserData) => ({
             name: friend.name,
-            icon: friend.gender,
+            gender: friend.gender,
             id: nanoid(ID_LENGTH),
             lastTimeOnline: 'Online'
           }))
