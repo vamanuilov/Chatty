@@ -31,6 +31,11 @@
     outline: none;
     border-color: $blue-300;
   }
+
+  &:placeholder-shown {
+    text-overflow: ellipsis;
+  }
+
   @include placeholder-color(#9f9f9f);
 
   @media (max-width: 800px) {

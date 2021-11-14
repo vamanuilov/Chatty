@@ -21,6 +21,8 @@
   }
 
   &_error > input {
+    padding-right: 32px;
+
     &:focus,
     &:active {
       border-color: $error;
