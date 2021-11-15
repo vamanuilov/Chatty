@@ -1,0 +1,10 @@
+.refresh-button {
+  width: -webkit-fit-content;
+  width: -moz-fit-content;
+  width: fit-content;
+
+  &_animated {
+    transform: rotate(360deg);
+    transition: 0.2s linear;
+  }
+}
