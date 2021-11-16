@@ -1,57 +1,27 @@
 import React, { useEffect } from 'react'
 import { observer } from 'mobx-react-lite'
 import { Controller, useForm, UseFormClearErrors } from 'react-hook-form'
-import * as yup from 'yup'
 import { yupResolver } from '@hookform/resolvers/yup'
+
+import { loginSchema } from '../../../config/schemas'
 
 import Button from '../../atoms/Button'
 import FormInput from '../../molecules/FormInput'
-import Captcha from '../Captcha'
+import Captcha from '../CaptchaBlock'
 
 import { ILoginData } from '../../../interface/user'
 
 import user from '../../../store/user'
 import popup from '../../../store/popup'
 
-import { MAX_INPUT_VALUE, MIN_INPUT_VALUE } from '../../../config'
-
 import './styles.scss'
+
+import { LogInInputFields } from './common'
 
 interface ILoginForm {
   onSubmitHandler: (data: ILoginData) => void
   onAdditionalButtonClickHandler: () => void
 }
-
-interface ILoginInputs {
-  inputName: 'login' | 'password'
-  type: 'login' | 'password' | 'text'
-  label: string
-  placeholder: string
-  id: string
-}
-
-const LogInInputFields: ILoginInputs[] = [
-  {
-    inputName: 'login',
-    type: 'login',
-    label: 'Username',
-    placeholder: 'Type your username...',
-    id: 'login'
-  },
-  {
-    inputName: 'password',
-    type: 'password',
-    label: 'Password',
-    placeholder: 'Type your password...',
-    id: 'password'
-  }
-]
-
-const schema = yup.object().shape({
-  login: yup.string().min(MIN_INPUT_VALUE).required(),
-  password: yup.string().min(MIN_INPUT_VALUE).max(MAX_INPUT_VALUE).required(),
-  captcha: yup.string().required()
-})
 
 const LoginForm: React.FC<ILoginForm> = ({ onSubmitHandler, onAdditionalButtonClickHandler }) => {
   const {
@@ -60,7 +30,7 @@ const LoginForm: React.FC<ILoginForm> = ({ onSubmitHandler, onAdditionalButtonCl
     clearErrors,
     handleSubmit,
     formState: { errors, isDirty }
-  } = useForm<ILoginData>({ resolver: yupResolver(schema) })
+  } = useForm<ILoginData>({ resolver: yupResolver(loginSchema) })
 
   useEffect(() => {
     user.resetErrors()

@@ -13,12 +13,12 @@ import './styles.scss'
 
 import user from '../../../store/user'
 
-interface ICaptcha extends IController {
+interface ICaptchaBlock extends IController {
   errorText?: string
   resetError?: UseFormClearErrors<{ captcha: string }>
 }
 
-const Captcha: React.FC<ICaptcha> = ({ onChange, onBlur, name, errorText, innerRef, resetError }) => {
+const CaptchaBlock: React.FC<ICaptchaBlock> = ({ onChange, onBlur, name, errorText, innerRef, resetError }) => {
   const [parameter, setParameter] = useState<number>(Date.now())
 
   const onRefreshHandler = (): void => {
@@ -71,4 +71,4 @@ const Captcha: React.FC<ICaptcha> = ({ onChange, onBlur, name, errorText, innerR
   )
 }
 
-export default observer(Captcha)
+export default observer(CaptchaBlock)

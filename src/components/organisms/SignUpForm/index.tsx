@@ -2,81 +2,31 @@ import { useEffect } from 'react'
 import { observer } from 'mobx-react-lite'
 import { yupResolver } from '@hookform/resolvers/yup'
 import { Controller, useForm, UseFormClearErrors } from 'react-hook-form'
-import * as yup from 'yup'
 
-import './styles.scss'
+import { signUpSchema } from '../../../config/schemas'
 
-import { MAX_INPUT_VALUE, MIN_INPUT_VALUE, POP_UP_LIFETIME } from '../../../config'
+import { POP_UP_LIFETIME } from '../../../config'
 
 import Button from '../../atoms/Button'
 import FormInput from '../../molecules/FormInput'
-import Captcha from '../Captcha'
+import CaptchaBlock from '../CaptchaBlock'
 import Select from '../../molecules/Select'
 import StubInput from '../../molecules/StubInput'
 
 import user from '../../../store/user'
 import popup from '../../../store/popup'
 
+import './styles.scss'
+
 import { ISignUpData } from '../../../interface/user'
 
-type ITextInputNames = 'login' | 'password' | 'password_confirm' | 'name'
-
-interface ITextInput {
-  inputName: ITextInputNames
-  type: 'text' | 'login' | 'password'
-  label: string
-  placeholder: string
-  id: string
-}
+import { ITextInputNames, RegisterInputFields } from './common'
 
 interface ISignUpForm {
   onSubmitHandler: (data: ISignUpData) => void
   onRegisterAfterDelay?: () => void
   onAdditionalButtonClickHandler: () => void
 }
-
-const RegisterInputFields: ITextInput[] = [
-  {
-    inputName: 'login',
-    type: 'login',
-    label: 'Create user name',
-    placeholder: 'Create user name',
-    id: 'login'
-  },
-  {
-    inputName: 'password',
-    type: 'password',
-    label: 'Create password',
-    placeholder: 'Create password',
-    id: 'password'
-  },
-  {
-    inputName: 'password_confirm',
-    type: 'password',
-    label: 'Password confirmation',
-    placeholder: 'Confirm password',
-    id: 'password_confirm'
-  },
-  {
-    inputName: 'name',
-    type: 'text',
-    label: 'Nickname',
-    placeholder: 'Nickname',
-    id: 'name'
-  }
-]
-
-const schema = yup.object().shape({
-  login: yup.string().min(MIN_INPUT_VALUE).max(MAX_INPUT_VALUE).required('Required field'),
-  password: yup.string().min(MIN_INPUT_VALUE).max(MAX_INPUT_VALUE).required('Required field'),
-  password_confirm: yup
-    .string()
-    .required('Required field')
-    .oneOf([yup.ref('password'), null], 'Passwords do not match'),
-  name: yup.string().min(MIN_INPUT_VALUE).max(MAX_INPUT_VALUE).required('Required field'),
-  gender_id: yup.number().required('Required field'),
-  captcha: yup.string().required('Required field')
-})
 
 const SignUpForm: React.FC<ISignUpForm> = ({
   onSubmitHandler,
@@ -91,7 +41,7 @@ const SignUpForm: React.FC<ISignUpForm> = ({
     handleSubmit,
     formState: { errors, isDirty }
   } = useForm<ISignUpData>({
-    resolver: yupResolver(schema),
+    resolver: yupResolver(signUpSchema),
     defaultValues: {
       login: '',
       password: '',
@@ -219,7 +169,7 @@ const SignUpForm: React.FC<ISignUpForm> = ({
             name="captcha"
             control={control}
             render={({ field: { onBlur, onChange, name, ref } }) => (
-              <Captcha
+              <CaptchaBlock
                 resetError={clearErrors as UseFormClearErrors<Pick<ISignUpData, 'captcha'>>}
                 onBlur={onBlur}
                 onChange={onChange}
