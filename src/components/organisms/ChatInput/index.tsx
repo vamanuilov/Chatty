@@ -1,4 +1,5 @@
 import React, { useMemo, useRef, useState } from 'react'
+import cn from 'classnames'
 import { nanoid } from 'nanoid'
 
 import InputWithSvgIcon from '../../molecules/InputWithSvgIcon'
@@ -12,6 +13,7 @@ import './styles.scss'
 
 const ChatInput: React.FC = () => {
   const [userMessage, setUserMessage] = useState<string>('')
+  const [hasInputError, setHasInputError] = useState<boolean>(false)
   const fileRef = useRef<HTMLInputElement>(null)
   const fileAcceptValues: string = useMemo(
     () => Object.values(FILE_LIMITS.types).reduce((acc, rec) => (acc ? `${acc},${rec.join(',')}` : rec.join(',')), ''),
@@ -19,6 +21,10 @@ const ChatInput: React.FC = () => {
   )
 
   const handleMessageInput = (e: React.ChangeEvent<HTMLTextAreaElement>) => {
+    if (hasInputError) {
+      setHasInputError(false)
+    }
+
     setUserMessage(e.target.value)
   }
 
@@ -35,8 +41,12 @@ const ChatInput: React.FC = () => {
   }
 
   const handleSendClick = () => {
-    chatStore.addMessage({ text: userMessage, author: 'user', id: nanoid(ID_LENGTH), type: 'text' })
-    setUserMessage('')
+    if (userMessage === '') {
+      setHasInputError(true)
+    } else {
+      chatStore.addMessage({ text: userMessage, author: 'user', id: nanoid(ID_LENGTH), type: 'text' })
+      setUserMessage('')
+    }
   }
 
   const handleKeyDown = (e: React.KeyboardEvent<HTMLTextAreaElement>) => {
@@ -69,7 +79,7 @@ const ChatInput: React.FC = () => {
           id="chatTextInput"
           value={userMessage}
           onChange={handleMessageInput}
-          className="text-input__textarea"
+          className={cn('text-input__textarea', { 'text-input__textarea_error': hasInputError })}
           onKeyDown={handleKeyDown}
         />
       </div>
