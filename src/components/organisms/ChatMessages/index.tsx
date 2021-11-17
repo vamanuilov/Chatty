@@ -4,7 +4,7 @@ import { observer } from 'mobx-react-lite'
 import cn from 'classnames'
 
 import ChatInput from '../ChatInput'
-import MessageList from '../../molecules/MessageList'
+import MessageList from '../MessageList'
 import InputWithSvgIcon from '../../molecules/InputWithSvgIcon'
 import FriendIcon from '../../molecules/FriendIcon'
 import EmptyContentPopup from '../../atoms/EmptyContentPopup'

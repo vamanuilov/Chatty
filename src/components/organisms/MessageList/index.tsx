@@ -1,10 +1,8 @@
 import Message from '../../atoms/Message'
-import FileMessage from '../../atoms/FileMessage'
+import FileMessage from '../../molecules/FileMessage'
 import EmptyContentPopup from '../../atoms/EmptyContentPopup'
 
 import { IFileMessage, IMessage } from '../../../interface/message'
-
-import './styles.scss'
 
 interface IMessageList {
   messages: IMessage[] | undefined
