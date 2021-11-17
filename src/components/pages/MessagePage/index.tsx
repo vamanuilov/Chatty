@@ -53,12 +53,15 @@ const MessagePage: React.FC = () => {
         <Sidebar isFriendSelected={typeof chat.selectedFriend !== 'undefined'}>
           <FriendList
             handleSelectFriend={handleSelectFriend}
-            isLoading={chat.isLoading}
+            isLoading={chat.isLoading || socket.isLoading}
             friends={chat.friendList}
             selectedId={chat.selectedFriend?.id}
           />
         </Sidebar>
-        <Chat isFriendNotSelected={typeof chat.selectedFriend === 'undefined'} isLoading={chat.isLoading} />
+        <Chat
+          isFriendNotSelected={typeof chat.selectedFriend === 'undefined'}
+          isLoading={chat.isLoading || socket.isLoading}
+        />
       </div>
     </div>
   )

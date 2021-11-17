@@ -42,7 +42,6 @@ class SocketStore {
   }
 
   onClose() {
-    this.isLoading = false
     // eslint-disable-next-line no-console
     console.warn('WS Connection closed! Refresh page or reconnect manually')
   }
@@ -91,12 +90,13 @@ class SocketStore {
       this.connect(this.socket?.url.split('ws_id=')[1])
       this.retryCount += 1
     } else {
+      this.isLoading = false
+
       popup.setMessage({
         type: 'error',
         text: `Can't connect to the server. \n Try again`
       })
     }
-    this.isLoading = false
   }
 
   getFriendList() {
