@@ -8,9 +8,21 @@ import { uploadFile } from '../utils/api'
 
 import popup from './popup'
 
+interface IFileLimits {
+  size: number
+  types: {
+    [v: string]: string[]
+  }
+}
+
+interface IPreviewContent {
+  type: string
+  fileSrc?: string
+}
+
 export const ID_LENGTH: number = 5
 
-export const FILE_LIMITS = {
+export const FILE_LIMITS: IFileLimits = {
   size: 2,
   types: {
     video: ['video/mp4', 'video/gg', 'video/webm'],
@@ -23,9 +35,24 @@ class ChatStore {
   friendList: IFriends[] = []
   selectedFriend: IFriends | undefined
   isLoading: boolean = false
+  isFilePreviewModalOpen: boolean = false
+  previewContent: IPreviewContent = {
+    type: ''
+  }
 
   constructor() {
     makeAutoObservable(this)
+  }
+
+  setIsFilePreviewModalOpen(value: boolean) {
+    this.isFilePreviewModalOpen = value
+  }
+
+  setPreviewContent(type: string, fileSrc: string) {
+    this.previewContent = {
+      type,
+      fileSrc
+    }
   }
 
   setSelectedFriend(selectedId: string) {
@@ -44,20 +71,17 @@ class ChatStore {
   }
 
   addMessage(newMessage: IMessage) {
-    if (!newMessage || newMessage.text === '' || typeof this.selectedFriend === 'undefined') {
+    if (newMessage.text === '' || typeof this.selectedFriend === 'undefined') {
       return
     }
 
     const friendMessages: IMessage[] | undefined = this.selectedFriend?.messages
     const newMessages: IMessage[] = friendMessages ? [...friendMessages, newMessage] : [newMessage]
-
-    if (JSON.stringify(newMessages) !== JSON.stringify(friendMessages)) {
-      const lastMessage: string = newMessage.type === 'text' ? (newMessage.text as string) : 'File'
-      this.selectedFriend = { ...this.selectedFriend, messages: newMessages, lastMessage, isLastMessageFromUser: true }
-      this.friendList = this.friendList.map((friend) =>
-        friend.id === this.selectedFriend?.id ? this.selectedFriend : friend
-      )
-    }
+    const lastMessage: string = newMessage.type === 'text' ? (newMessage.text as string) : 'File'
+    this.selectedFriend = { ...this.selectedFriend, messages: newMessages, lastMessage, isLastMessageFromUser: true }
+    this.friendList = this.friendList.map((friend) =>
+      friend.id === this.selectedFriend?.id ? this.selectedFriend : friend
+    )
   }
 
   sendFile = async (file: File): Promise<void> => {

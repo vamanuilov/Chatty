@@ -1,10 +1,12 @@
 import FileDescription from '../../atoms/FileDescription'
+import PreviewContentIcon from '../../atoms/PreviewContent'
 import InputWithSvgIcon from '../../molecules/InputWithSvgIcon'
-import PreviewContentIcon from '../../atoms/PreviewContentIcon'
 
 import { ReactComponent as TrashCanIcon } from '../../../assets/images/trash-can.svg'
 
 import './styles.scss'
+
+import chat from '../../../store/chat'
 
 interface IFilePreview {
   fileSrc: string
@@ -18,7 +20,7 @@ const FilePreview: React.FC<IFilePreview> = ({ fileSrc, name, size, type, onDele
   return (
     <div className="file-preview">
       <div className="preview-content">
-        <div className="preview-content__icon">
+        <div className="preview-content__icon" onClick={() => chat.setIsFilePreviewModalOpen(true)}>
           <PreviewContentIcon fileSrc={fileSrc} type={type} />
         </div>
         <FileDescription name={name} size={size} />
