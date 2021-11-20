@@ -12,7 +12,7 @@ export const WS_URI = `${WS_PREFIX}${DOMAIN}:${WS_PORT}/`
 
 export const API_VERSION: string = '/api/'
 
-export const REQUEST_TIMEOUT: number = 30000
+export const REQUEST_TIMEOUT: number = 15000
 export const RETRY_AMOUNT = 3
 
 export const POP_UP_LIFETIME = 2000

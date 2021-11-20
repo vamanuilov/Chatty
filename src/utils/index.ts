@@ -1,8 +1,15 @@
 import { REQUEST_TIMEOUT } from '../config'
 
-export const timeoutFunction = (request: Promise<Response>): Promise<Response> => {
+export const timeoutFunction = (request: Promise<Response>, controller: AbortController): Promise<Response> => {
   const timeout = new Promise<Response>((resolve) => {
-    setTimeout(resolve, REQUEST_TIMEOUT, 'Request timeout')
+    setTimeout(
+      () => {
+        controller?.abort()
+        resolve
+      },
+      REQUEST_TIMEOUT,
+      'Request timeout'
+    )
   })
 
   return Promise.race<Response>([request, timeout])
