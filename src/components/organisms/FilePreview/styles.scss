@@ -31,7 +31,8 @@
     border-radius: 8px;
     min-width: 24px;
     height: 36px;
-    width: auto;
+    width: fit-content;
+    max-width: 30%;
     cursor: pointer;
   }
 }

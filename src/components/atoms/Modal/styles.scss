@@ -13,8 +13,8 @@
 }
 
 .modal-content {
-  width: 30%;
-  max-height: 80%;
+  width: fit-content;
+  max-width: 50%;
   padding: 20px;
   border-radius: 8px;
   background-color: $userMessageBackground;
@@ -25,12 +25,22 @@
     outline: none;
   }
 
+  audio {
+    width: 30vw;
+  }
+
   @media (max-width: 1200px) {
-    width: 60%;
+    max-width: 60%;
+    audio {
+      width: 50vw;
+    }
   }
 
   @media (max-width: 500px) {
-    width: 90%;
+    max-width: 90%;
+    audio {
+      width: 80vw;
+    }
   }
 }
 
