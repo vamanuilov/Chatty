@@ -12,19 +12,25 @@ class PopUp {
     type: '',
     text: ''
   }
+  timer: NodeJS.Timeout | null = null
 
   constructor() {
     makeAutoObservable(this)
   }
 
-  setMessage = ({ type, text }: IPopUp): void => {
+  setMessage({ type, text }: IPopUp): void {
+    if (this.timer !== null) {
+      clearTimeout(this.timer)
+    }
+
     this.message = {
       type,
       text
     }
 
-    setTimeout(() => {
+    this.timer = setTimeout(() => {
       this.resetMessage()
+      this.timer = null
     }, POP_UP_LIFETIME)
   }
 

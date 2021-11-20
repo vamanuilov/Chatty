@@ -70,18 +70,14 @@ class SocketStore {
           break
         }
       }
-    } else if (incomingMessage.data.includes('2222')) {
-      /*TODO: remove this if block after backend fix.
-      some sort of spam from server on file upload. need to be fixed on server.*/
-      console.log('spam from server: ', incomingMessage)
-      return
-    } else {
-      /* TODO: based on the fact that we have no message requirements yet,
-      I think that all that is not processed is an error */
+    } else if (incomingMessage.data.includes(`Get param 'ws_id' - is wrong! Please relogin!`)) {
       popup.setMessage({
         type: 'error',
         text: incomingMessage.data
       })
+      return
+    } else {
+      chat.addMessage({ text: incomingMessage.data, id: nanoid(ID_LENGTH), type: 'text', author: 'friend' })
     }
   }
 

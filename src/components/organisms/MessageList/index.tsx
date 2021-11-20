@@ -1,8 +1,10 @@
-import Message from '../../atoms/Message'
+import Message from '../Message'
 import FileMessage from '../../molecules/FileMessage'
 import EmptyContentPopup from '../../atoms/EmptyContentPopup'
 
-import { IFileMessage, IMessage } from '../../../interface/message'
+import { IMessage } from '../../../interface/message'
+
+import chat from '../../../store/chat'
 
 interface IMessageList {
   messages: IMessage[] | undefined
@@ -18,11 +20,16 @@ const MessageList: React.FC<IMessageList> = ({ messages }) => {
   }
   return (
     <div>
-      {messages.map(({ text, type, author, id }) => {
-        if (type === 'file') {
-          const { size, name, fileLink } = text as IFileMessage
+      {messages.map(({ text, type, author, id, isFileError = false, isFileLoading = false }) => {
+        if (type === 'file' && typeof text !== 'string') {
+          const { size, name, fileLink } = text
+          const retryHandler = (): void => {
+            if (text.binaryFile) {
+              chat.sendFile(text.binaryFile, id)
+            }
+          }
           return (
-            <Message key={id} author={author}>
+            <Message key={id} author={author} isLoading={isFileLoading} isError={isFileError} onRetry={retryHandler}>
               <FileMessage fileLink={fileLink} size={size} name={name} />
             </Message>
           )

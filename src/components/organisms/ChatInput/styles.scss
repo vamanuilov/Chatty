@@ -1,6 +1,6 @@
 @import '../../../assets/styles/variables';
 
-$desktop-line-height: 43px;
+$desktop-line-height: 45px;
 $mobile-line-height: 26px;
 
 @mixin textarea-placeholder($textColor, $line-height) {
@@ -26,13 +26,17 @@ $mobile-line-height: 26px;
   }
 }
 
+.chat-input-container {
+  border-top: 1px solid $blue-50;
+  background-color: $white;
+  width: 100%;
+}
+
 .chat-input {
   display: flex;
   align-items: center;
   justify-content: space-around;
-  border-top: 1px solid $blue-50;
   height: 80px;
-  background: $white;
   padding: 25px 14px;
 
   @media (max-width: 800px) {
@@ -53,6 +57,8 @@ $mobile-line-height: 26px;
 
 .text-input {
   width: 100%;
+  z-index: 1;
+
   &__textarea {
     border: none;
     width: 100%;
@@ -141,5 +147,24 @@ $mobile-line-height: 26px;
   }
   90% {
     margin-left: 0rem;
+  }
+}
+
+.file-preview-container {
+  width: fit-content;
+  max-width: 70%;
+  padding-top: 10px;
+  margin: 0 auto;
+  transform: translateY(0);
+  max-height: 100px;
+  transition: max-height 0.1s linear, transform 0.1s linear;
+  position: relative;
+
+  &_hidden {
+    max-height: 0;
+    padding: 0;
+    visibility: hidden;
+    opacity: 0;
+    transform: translateY(0.2px);
   }
 }

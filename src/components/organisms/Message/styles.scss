@@ -1,9 +1,10 @@
 @import '../../../assets/styles/variables';
+@import '../../../assets/styles/animations';
 
 $side-margin: 36px;
 $corner-side-position: $side-margin - 10px;
 $mobile-side-margin: 20px;
-$mobile-corner-side-position: $mobile-side-margin - 8px;
+$mobile-corner-side-position: $mobile-side-margin - 10px;
 
 .message-container {
   position: relative;
@@ -18,6 +19,7 @@ $mobile-corner-side-position: $mobile-side-margin - 8px;
 .message-corner {
   position: absolute;
   top: 0;
+  z-index: 1;
   stroke: $blue-50;
 
   &_friend {
@@ -51,6 +53,7 @@ $mobile-corner-side-position: $mobile-side-margin - 8px;
 .message {
   padding: 12px;
   max-width: 40%;
+  position: relative;
   border: 1px solid $blue-50;
   border-radius: 12px;
   width: -webkit-fit-content;
@@ -67,6 +70,39 @@ $mobile-corner-side-position: $mobile-side-margin - 8px;
     font-size: 14px;
     line-height: 17px;
     max-width: 91%;
+  }
+
+  &_state-shown {
+    @media (max-width: 800px) {
+      max-width: 83%;
+    }
+  }
+
+  &__states {
+    z-index: 2;
+    position: absolute;
+    left: -30px;
+    bottom: 0;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-end;
+    align-items: center;
+    width: 30px;
+  }
+
+  &_loading {
+    margin-bottom: 3px;
+  }
+
+  &__load-icon {
+    -webkit-animation: rotating 0.7s linear infinite;
+    animation: rotating 0.7s linear infinite;
+  }
+
+  &__load-icon,
+  &__error-icon {
+    width: 15px;
+    height: 15px;
   }
 
   &.message_user {

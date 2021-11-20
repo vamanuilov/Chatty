@@ -1,6 +1,5 @@
 import React from 'react'
 import { useHistory } from 'react-router'
-import { observer } from 'mobx-react-lite'
 import cn from 'classnames'
 
 import ChatInput from '../ChatInput'
@@ -9,29 +8,34 @@ import InputWithSvgIcon from '../../molecules/InputWithSvgIcon'
 import FriendIcon from '../../molecules/FriendIcon'
 import EmptyContentPopup from '../../atoms/EmptyContentPopup'
 
-import { IFriends } from '../../../interface/friends'
-
 import { ReactComponent as BackArrow } from '../../../assets/images/arrow.svg'
+
+import { IFriends } from '../../../interface/friends'
+import { IFileMessage } from '../../../interface/message'
 
 import './styles.scss'
 
-import chat from '../../../store/chat'
+interface IChatMessages {
+  onMessageSend: (message: string | IFileMessage) => void
+  onFileUpload: (file: File) => void
+  selectedFriend: IFriends | undefined
+}
 
-const ChatMessages: React.FC = () => {
+const ChatMessages: React.FC<IChatMessages> = ({ onMessageSend, onFileUpload, selectedFriend }) => {
   const history = useHistory()
 
-  if (!chat.selectedFriend) {
+  if (!selectedFriend) {
     return <EmptyContentPopup>Select a chat to start messaging</EmptyContentPopup>
   }
 
-  const { name: friendName, gender, lastTimeOnline, messages } = chat.selectedFriend as IFriends
+  const { name: friendName, gender, lastTimeOnline, messages } = selectedFriend
 
   return (
     <>
       <div className="chat-header">
         <div
           className={cn('chat-header__backwards-arrow', {
-            'chat-header__backwards-arrow_hidden_desktop': chat.selectedFriend
+            'chat-header__backwards-arrow_hidden_desktop': selectedFriend
           })}
         >
           <InputWithSvgIcon
@@ -46,7 +50,7 @@ const ChatMessages: React.FC = () => {
         </div>
         <div
           className={cn('chat-header__user-icon', {
-            'chat-header__user-icon_hidden_desktop': chat.selectedFriend
+            'chat-header__user-icon_hidden_desktop': selectedFriend
           })}
         >
           <FriendIcon icon={gender} isHeader />
@@ -61,11 +65,11 @@ const ChatMessages: React.FC = () => {
       <div className="chat-messages">
         <MessageList messages={messages} />
       </div>
-      <div className="chat-input-container">
-        <ChatInput />
+      <div>
+        <ChatInput onMessageSend={onMessageSend} onFileUpload={onFileUpload} />
       </div>
     </>
   )
 }
 
-export default observer(ChatMessages)
+export default ChatMessages

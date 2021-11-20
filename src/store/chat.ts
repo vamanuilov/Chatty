@@ -1,23 +1,19 @@
-import { makeAutoObservable } from 'mobx'
+import { makeAutoObservable, runInAction } from 'mobx'
 import { nanoid } from 'nanoid'
 
 import { IFriends } from '../interface/friends'
-import { IMessage } from '../interface/message'
+import { IMessage, IPreviewContent } from '../interface/message'
 import { convertByteToMByte } from '../utils'
 import { uploadFile } from '../utils/api'
 
 import popup from './popup'
+import socket from './socket'
 
 interface IFileLimits {
   size: number
   types: {
     [v: string]: string[]
   }
-}
-
-interface IPreviewContent {
-  type: string
-  fileSrc?: string
 }
 
 export const ID_LENGTH: number = 5
@@ -32,12 +28,22 @@ export const FILE_LIMITS: IFileLimits = {
 }
 
 class ChatStore {
-  friendList: IFriends[] = []
+  friendList: IFriends[] = [
+    {
+      name: 'test',
+      gender: 'male',
+      id: nanoid(ID_LENGTH),
+      lastTimeOnline: 'Online'
+    }
+  ]
   selectedFriend: IFriends | undefined
   isLoading: boolean = false
   isFilePreviewModalOpen: boolean = false
   previewContent: IPreviewContent = {
-    type: ''
+    type: '',
+    fileLink: '',
+    name: '',
+    size: ''
   }
 
   constructor() {
@@ -48,10 +54,23 @@ class ChatStore {
     this.isFilePreviewModalOpen = value
   }
 
-  setPreviewContent(type: string, fileSrc: string) {
+  setPreviewContent(fileLink: string, binaryFile: File) {
+    const { type, name, size } = binaryFile
     this.previewContent = {
       type,
-      fileSrc
+      fileLink,
+      name,
+      size: `${convertByteToMByte(size).toFixed(2)} MB`,
+      binaryFile
+    }
+  }
+
+  resetPreviewContent() {
+    this.previewContent = {
+      type: '',
+      fileLink: '',
+      name: '',
+      size: ''
     }
   }
 
@@ -78,61 +97,108 @@ class ChatStore {
     const friendMessages: IMessage[] | undefined = this.selectedFriend?.messages
     const newMessages: IMessage[] = friendMessages ? [...friendMessages, newMessage] : [newMessage]
     const lastMessage: string = newMessage.type === 'text' ? (newMessage.text as string) : 'File'
-    this.selectedFriend = { ...this.selectedFriend, messages: newMessages, lastMessage, isLastMessageFromUser: true }
-    this.friendList = this.friendList.map((friend) =>
-      friend.id === this.selectedFriend?.id ? this.selectedFriend : friend
-    )
+
+    this.selectedFriend = {
+      ...this.selectedFriend,
+      messages: newMessages,
+      lastMessage,
+      isLastMessageFromUser: newMessage.author === 'user'
+    }
+    this.updateFriendList(this.selectedFriend)
+
+    if (newMessage.author === 'user') {
+      if (typeof newMessage.text === 'string') {
+        socket.sendMessage(newMessage.text)
+      } else {
+        this.sendFile(this.previewContent.binaryFile, newMessage.id)
+      }
+    }
   }
 
-  sendFile = async (file: File): Promise<void> => {
+  async sendFile(file: File | undefined, fileMessageId: string): Promise<void> {
+    if (typeof file === 'undefined') {
+      popup.setMessage({
+        type: 'error',
+        text: `Can't send file.\nThere is nothing to send`
+      })
+      return
+    }
+
     const { name, size, type } = file
-    const convertedSize: number = convertByteToMByte(size)
-
-    if (convertedSize > FILE_LIMITS.size) {
-      popup.setMessage({
-        type: 'error',
-        text: `File must be less than 2 MB \n Upload another file`
-      })
-      return
-    }
-
-    if (Object.values(FILE_LIMITS.types).every((mimeTypes) => mimeTypes.every((item) => item !== type))) {
-      popup.setMessage({
-        type: 'error',
-        text: `Wrong file format \n Upload another file`
-      })
-      return
-    }
-
+    const messageToUpdate: IMessage | undefined = this.selectedFriend?.messages?.find(
+      (message) => message.id === fileMessageId
+    )
     const fileData = new FormData()
+
+    if (typeof messageToUpdate === 'undefined') {
+      popup.setMessage({
+        type: 'error',
+        text: `Something wrong.\nCan't upload file`
+      })
+      return
+    }
 
     fileData.append('name', name)
     fileData.append('type', type)
     fileData.append('size', String(size))
     fileData.append('0', file)
 
+    const fileMessageLoading: IMessage = { ...messageToUpdate, isFileLoading: true, isFileError: false }
+    this.updateFileMessage(fileMessageLoading, fileMessageId)
+
     try {
       const response: string = await uploadFile(fileData)
 
       if (response.includes('/file')) {
-        this.addMessage({
-          text: { size: `${convertedSize.toFixed(2)} MB`, name: name, fileLink: response },
-          author: 'user',
-          id: nanoid(ID_LENGTH),
-          type: 'file'
-        })
+        if (typeof messageToUpdate.text !== 'string') {
+          const messageWithFileLink: IMessage = {
+            ...messageToUpdate,
+            isFileLoading: false,
+            text: { ...messageToUpdate.text, fileLink: response }
+          }
+
+          runInAction(() => {
+            this.updateFileMessage(messageWithFileLink, fileMessageId)
+          })
+        }
       } else {
         popup.setMessage({
           type: 'error',
           text: response
         })
       }
-    } catch (err) {
+    } catch {
       popup.setMessage({
         type: 'error',
         text: `Can't upload file. \n Try again`
       })
+
+      runInAction(() => {
+        const fileMessageError: IMessage = { ...messageToUpdate, isFileLoading: false, isFileError: true }
+        this.updateFileMessage(fileMessageError, fileMessageId)
+      })
     }
+  }
+
+  updateFriendList(updatedFriend: IFriends | undefined): void {
+    this.friendList = this.friendList.map((friend) => (friend.id === updatedFriend?.id ? updatedFriend : friend))
+  }
+
+  updateFileMessage(updatedMessage: IMessage, fileMessageId: string): void {
+    const newMessages = this.selectedFriend?.messages?.map((message) => {
+      if (message.id === fileMessageId && typeof message.text !== 'string') {
+        return { ...message, ...updatedMessage }
+      } else {
+        return message
+      }
+    })
+
+    this.selectedFriend = this.selectedFriend && { ...this.selectedFriend, messages: newMessages }
+    this.updateFriendList(this.selectedFriend)
+  }
+
+  isFileLoading(): boolean {
+    return this.friendList.some((friend) => friend.messages?.some((message) => message.isFileLoading))
   }
 }
 
