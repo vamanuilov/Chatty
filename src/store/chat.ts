@@ -28,14 +28,7 @@ export const FILE_LIMITS: IFileLimits = {
 }
 
 class ChatStore {
-  friendList: IFriends[] = [
-    {
-      name: 'test',
-      gender: 'male',
-      id: nanoid(ID_LENGTH),
-      lastTimeOnline: 'Online'
-    }
-  ]
+  friendList: IFriends[] = []
   selectedFriend: IFriends | undefined
   isLoading: boolean = false
   isFilePreviewModalOpen: boolean = false
