@@ -47,7 +47,7 @@ class UserStore {
     } catch {
       this.error = {
         type: 'captcha',
-        message: `Can't load captcha. \n Try again`
+        message: `Can't load captcha`
       }
     } finally {
       runInAction(() => {

@@ -16,3 +16,21 @@ export const REQUEST_TIMEOUT: number = 15000
 export const RETRY_AMOUNT = 3
 
 export const POP_UP_LIFETIME = 2000
+
+export const ID_LENGTH: number = 5
+
+interface IFileLimits {
+  size: number
+  types: {
+    [v: string]: string[]
+  }
+}
+
+export const FILE_LIMITS: IFileLimits = {
+  size: 2,
+  types: {
+    video: ['video/mp4', 'video/gg', 'video/webm'],
+    audio: ['audio/mpeg', 'audio/ogg'],
+    image: ['image/jpeg', 'image/jpeg', 'image/gif', 'image/png', 'image/svg+xml']
+  }
+}

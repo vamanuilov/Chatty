@@ -1,9 +1,9 @@
 import { makeAutoObservable } from 'mobx'
 import { nanoid } from 'nanoid'
 
-import { RETRY_AMOUNT, WS_URI } from '../config'
+import { ID_LENGTH, RETRY_AMOUNT, WS_URI } from '../config'
 
-import chat, { ID_LENGTH } from './chat'
+import chat from './chat'
 import popup from './popup'
 
 import { IFriends } from '../interface/friends'

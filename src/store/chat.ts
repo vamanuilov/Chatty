@@ -1,5 +1,6 @@
 import { makeAutoObservable, runInAction } from 'mobx'
 import { nanoid } from 'nanoid'
+import { ID_LENGTH } from '../config'
 
 import { IFriends } from '../interface/friends'
 import { IMessage, IPreviewContent } from '../interface/message'
@@ -8,24 +9,6 @@ import { uploadFile } from '../utils/api'
 
 import popup from './popup'
 import socket from './socket'
-
-interface IFileLimits {
-  size: number
-  types: {
-    [v: string]: string[]
-  }
-}
-
-export const ID_LENGTH: number = 5
-
-export const FILE_LIMITS: IFileLimits = {
-  size: 2,
-  types: {
-    video: ['video/mp4', 'video/gg', 'video/webm'],
-    audio: ['audio/mpeg', 'audio/ogg'],
-    image: ['image/jpeg', 'image/jpeg', 'image/gif', 'image/png', 'image/svg+xml']
-  }
-}
 
 class ChatStore {
   friendList: IFriends[] = []

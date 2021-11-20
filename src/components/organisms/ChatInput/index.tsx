@@ -8,7 +8,7 @@ import FilePreview from '../FilePreview'
 import { ReactComponent as PaperClip } from '../../../assets/images/paper-clip.svg'
 import { ReactComponent as SendButtonIcon } from '../../../assets/images/send-button.svg'
 
-import chat, { FILE_LIMITS } from '../../../store/chat'
+import chat from '../../../store/chat'
 import popup from '../../../store/popup'
 
 import { IFileMessage } from '../../../interface/message'
@@ -16,6 +16,7 @@ import { IFileMessage } from '../../../interface/message'
 import './styles.scss'
 
 import { isFileValid } from './common'
+import { FILE_LIMITS } from '../../../config'
 
 interface IChatInput {
   onMessageSend: (message: string | IFileMessage) => void

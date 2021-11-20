@@ -12,9 +12,11 @@ import FriendList from '../../organisms/FriendList'
 import Chat from '../../organisms/Chat'
 import PopUp from '../../organisms/PopUp'
 
-import chat, { ID_LENGTH } from '../../../store/chat'
+import chat from '../../../store/chat'
 import user from '../../../store/user'
 import socket from '../../../store/socket'
+
+import { ID_LENGTH } from '../../../config'
 
 import './styles.scss'
 
