@@ -1,6 +1,6 @@
 import cn from 'classnames'
 
-import { ReactComponent as BackgroundImg } from '../../../assets/images/Background.svg'
+import { ReactComponent as BackgroundImg } from '../../../assets/images/background.svg'
 
 import ChatMessages from '../ChatMessages'
 import Loader from '../../atoms/Loader'

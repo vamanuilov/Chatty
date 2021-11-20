@@ -3,7 +3,7 @@ import React from 'react'
 import Loader from '../../atoms/Loader'
 import PopUp from '../../organisms/PopUp'
 
-import { ReactComponent as BackgroundImg } from '../../../assets/images/Background.svg'
+import { ReactComponent as BackgroundImg } from '../../../assets/images/background.svg'
 
 interface IFormTemplate {
   form: JSX.Element
