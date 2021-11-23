@@ -7,6 +7,7 @@ import chat from './chat'
 import popup from './popup'
 
 import { IFriends } from '../interface/friends'
+import { IMessage } from '../interface/message'
 
 interface IUserData {
   name: string
@@ -49,6 +50,13 @@ class SocketStore {
   onMessage(incomingMessage: MessageEvent<string>) {
     if (incomingMessage.data.includes('type')) {
       const wsResponse: IWSResponse = JSON.parse(incomingMessage.data)
+      const getMessages = (friendName: string): IMessage[] => {
+        /* TODO: Because we don't have a friend id on the server, a friend name is used, but it may not be unique.
+        edit it after adding the ID to the server */
+        const localMessages: string | null = localStorage.getItem(`messages-${friendName}`)
+        const messages: IMessage[] = localMessages ? JSON.parse(localMessages) : []
+        return messages
+      }
 
       switch (wsResponse.type) {
         case 'user_data': {
@@ -60,12 +68,21 @@ class SocketStore {
         }
         case 'users_list': {
           const usersList: IUserData[] = wsResponse.data as IUserData[]
-          const friendList: IFriends[] = usersList.map((friend: IUserData) => ({
-            name: friend.name,
-            gender: friend.gender,
-            id: nanoid(ID_LENGTH),
-            lastTimeOnline: 'Online'
-          }))
+          const friendList: IFriends[] = usersList.map((friend: IUserData) => {
+            const messages: IMessage[] = getMessages(friend.name)
+            const lastMessage: IMessage | undefined = messages[messages.length - 1]
+            const lastMessageType = lastMessage?.type === 'text' ? (lastMessage.text as string) : 'File'
+
+            return {
+              name: friend.name,
+              gender: friend.gender,
+              id: nanoid(ID_LENGTH),
+              lastTimeOnline: 'Online',
+              lastMessage: lastMessage && lastMessageType,
+              isLastMessageFromUser: lastMessage && lastMessage.author === 'user',
+              messages: getMessages(friend.name)
+            }
+          })
           chat.friendList = friendList
           break
         }

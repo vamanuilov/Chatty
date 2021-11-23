@@ -89,6 +89,8 @@ class ChatStore {
         this.sendFile(this.previewContent.binaryFile, newMessage.id)
       }
     }
+
+    localStorage.setItem(`messages-${this.selectedFriend.name}`, JSON.stringify(this.selectedFriend?.messages))
   }
 
   async sendFile(file: File | undefined, fileMessageId: string): Promise<void> {
