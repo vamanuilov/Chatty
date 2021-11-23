@@ -1,17 +1,17 @@
 {
   "files": {
-    "main.css": "/chat/static/css/main.4d79c97a.chunk.css",
-    "main.js": "/chat/static/js/main.060b1173.chunk.js",
-    "main.js.map": "/chat/static/js/main.060b1173.chunk.js.map",
-    "runtime-main.js": "/chat/static/js/runtime-main.5d51ee1b.js",
-    "runtime-main.js.map": "/chat/static/js/runtime-main.5d51ee1b.js.map",
-    "static/js/2.b5c64510.chunk.js": "/chat/static/js/2.b5c64510.chunk.js",
-    "static/js/2.b5c64510.chunk.js.map": "/chat/static/js/2.b5c64510.chunk.js.map",
-    "static/js/3.312c196f.chunk.js": "/chat/static/js/3.312c196f.chunk.js",
-    "static/js/3.312c196f.chunk.js.map": "/chat/static/js/3.312c196f.chunk.js.map",
+    "main.css": "/chat/static/css/main.b2eb566d.chunk.css",
+    "main.js": "/chat/static/js/main.5bcc0549.chunk.js",
+    "main.js.map": "/chat/static/js/main.5bcc0549.chunk.js.map",
+    "runtime-main.js": "/chat/static/js/runtime-main.149f0770.js",
+    "runtime-main.js.map": "/chat/static/js/runtime-main.149f0770.js.map",
+    "static/js/2.2dae2cd2.chunk.js": "/chat/static/js/2.2dae2cd2.chunk.js",
+    "static/js/2.2dae2cd2.chunk.js.map": "/chat/static/js/2.2dae2cd2.chunk.js.map",
+    "static/js/3.a67a444b.chunk.js": "/chat/static/js/3.a67a444b.chunk.js",
+    "static/js/3.a67a444b.chunk.js.map": "/chat/static/js/3.a67a444b.chunk.js.map",
     "index.html": "/chat/index.html",
-    "static/css/main.4d79c97a.chunk.css.map": "/chat/static/css/main.4d79c97a.chunk.css.map",
-    "static/js/2.b5c64510.chunk.js.LICENSE.txt": "/chat/static/js/2.b5c64510.chunk.js.LICENSE.txt",
+    "static/css/main.b2eb566d.chunk.css.map": "/chat/static/css/main.b2eb566d.chunk.css.map",
+    "static/js/2.2dae2cd2.chunk.js.LICENSE.txt": "/chat/static/js/2.2dae2cd2.chunk.js.LICENSE.txt",
     "static/media/Loader.45d11a25.svg": "/chat/static/media/Loader.45d11a25.svg",
     "static/media/arrow.139af588.svg": "/chat/static/media/arrow.139af588.svg",
     "static/media/avatar.5804d5c5.svg": "/chat/static/media/avatar.5804d5c5.svg",
@@ -29,9 +29,9 @@
     "static/media/trash-can.8edb7a59.svg": "/chat/static/media/trash-can.8edb7a59.svg"
   },
   "entrypoints": [
-    "static/js/runtime-main.5d51ee1b.js",
-    "static/js/2.b5c64510.chunk.js",
-    "static/css/main.4d79c97a.chunk.css",
-    "static/js/main.060b1173.chunk.js"
+    "static/js/runtime-main.149f0770.js",
+    "static/js/2.2dae2cd2.chunk.js",
+    "static/css/main.b2eb566d.chunk.css",
+    "static/js/main.5bcc0549.chunk.js"
   ]
 }
