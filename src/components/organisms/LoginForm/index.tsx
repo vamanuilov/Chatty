@@ -80,7 +80,7 @@ const LoginForm: React.FC<ILoginForm> = ({ onSubmitHandler, onAdditionalButtonCl
                   id={id}
                   errorText={errors[inputName]?.message}
                   onBlur={onBlur}
-                  onChange={(e) => {
+                  onChange={(e: React.ChangeEvent<HTMLInputElement>) => {
                     onChange && onChange(e)
                     if (user.error.type === 'userData') {
                       user.resetErrors()

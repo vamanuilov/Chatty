@@ -13,9 +13,7 @@ const StubInput: React.FC<IStubInput> = ({ labelText, isLoading }) => {
   return (
     <div className="stub">
       <Label labelText={labelText} />
-      <div
-        className={classNames('stub__input', { stub__input_loading: isLoading, stub__input_error: !isLoading })}
-      ></div>
+      <div className={classNames('stub__input', { stub__input_loading: isLoading, stub__input_error: !isLoading })} />
     </div>
   )
 }

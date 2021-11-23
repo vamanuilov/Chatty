@@ -22,7 +22,12 @@ const FriendList: React.FC<IFriendList> = ({ handleSelectFriend, isLoading, frie
   return (
     <>
       {friends.map(({ name, gender, lastMessage, isLastMessageFromUser, id }) => (
-        <div key={`${name + id}`} onClick={() => handleSelectFriend(id)}>
+        <div
+          key={`${name + id}`}
+          onClick={() => {
+            handleSelectFriend(id)
+          }}
+        >
           <Friend
             name={name}
             lastMessage={lastMessage}

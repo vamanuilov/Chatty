@@ -18,7 +18,7 @@ const PreviewContent: React.FC<IPreviewContent> = ({ type, fileSrc, isInModal = 
       return <video src={fileSrc} className="preview-item" autoPlay={isInModal} controls={isInModal} />
     case 'audio':
       if (isInModal) {
-        return <audio src={fileSrc} className="preview-item preview__audio" autoPlay={isInModal} controls></audio>
+        return <audio src={fileSrc} className="preview-item preview__audio" autoPlay={isInModal} controls />
       }
       return <PlayButton className="preview-item preview-svg" />
     default:

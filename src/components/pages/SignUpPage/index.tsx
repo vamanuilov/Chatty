@@ -9,6 +9,8 @@ import user from '../../../store/user'
 
 import { ISignUpData } from '../../../interface/user'
 
+import { PathEnum } from '../../../routes/endpoints'
+
 const SignUpPage = () => {
   const history = useHistory()
 
@@ -19,12 +21,12 @@ const SignUpPage = () => {
 
   const onRegisterAfterDelay = (): void => {
     user.isRegistered = false
-    history.push('/login')
+    history.push(PathEnum.LOGIN)
   }
 
   const onAdditionalButtonClickHandler = (): void => {
     user.isRegistered = false
-    history.push('/login')
+    history.push(PathEnum.LOGIN)
   }
 
   return (

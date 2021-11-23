@@ -26,6 +26,15 @@ const Select: React.FC<ISelect> = ({ onChange, name, innerRef, options, placehol
   const [isDropdownOpen, setIsDropdownOpen] = useState<boolean>(false)
   const dropdownContainerRef = useRef<HTMLDivElement>(null)
 
+  const onToggleDropdown = (): void => {
+    setIsDropdownOpen((prev) => !prev)
+  }
+
+  const onChangeHandler = (e: React.ChangeEvent<HTMLInputElement>) => {
+    onChange && onChange(e)
+    setValue(e.target.getAttribute('data-name') as string)
+  }
+
   useEffect(() => {
     const checkOutsideClick = (e: MouseEvent) => {
       if (isDropdownOpen && dropdownContainerRef.current && !dropdownContainerRef.current.contains(e.target as Node)) {
@@ -47,9 +56,7 @@ const Select: React.FC<ISelect> = ({ onChange, name, innerRef, options, placehol
       </div>
       <div ref={dropdownContainerRef} className="select">
         <div
-          onClick={() => {
-            setIsDropdownOpen((prev) => !prev)
-          }}
+          onClick={onToggleDropdown}
           className={cn('select__main-item', {
             'select__main-item_selected': value !== placeholder,
             'select__main-item_active': isDropdownOpen,
@@ -73,13 +80,8 @@ const Select: React.FC<ISelect> = ({ onChange, name, innerRef, options, placehol
                   value={id}
                   id={`gender_${id}`}
                   data-name={gender}
-                  onClick={() => {
-                    setIsDropdownOpen((prev) => !prev)
-                  }}
-                  onChange={(e) => {
-                    onChange && onChange(e)
-                    setValue(e.target.getAttribute('data-name') as string)
-                  }}
+                  onClick={onToggleDropdown}
+                  onChange={onChangeHandler}
                   ref={innerRef}
                 />
               </div>

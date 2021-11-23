@@ -11,6 +11,10 @@ import './styles.scss'
 import { observer } from 'mobx-react-lite'
 
 const PopUp: React.FC = () => {
+  const onCloseClickHandler = (): void => {
+    popup.resetMessage()
+  }
+
   return (
     <div className={cn('pop-up-container', { 'pop-up-container_show': popup.message.text })}>
       <div
@@ -21,13 +25,7 @@ const PopUp: React.FC = () => {
       >
         <div className="pop-up__text">{popup.message.text}</div>
         <div className="close-icon-container">
-          <InputWithSvgIcon
-            type="button"
-            id="closeIcon"
-            onClickHandler={() => {
-              popup.resetMessage()
-            }}
-          >
+          <InputWithSvgIcon type="button" id="closeIcon" onClickHandler={onCloseClickHandler}>
             <CloseIcon className="close-icon-container__svg" />
           </InputWithSvgIcon>
         </div>

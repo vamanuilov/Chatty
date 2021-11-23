@@ -11,8 +11,8 @@ const Routes: React.FC = () => {
   if (wsConnectKey) {
     return (
       <Switch>
-        {privateRoutes.map((route, index) => (
-          <Route key={index} exact={route.exact} path={route.path} component={route.component} />
+        {privateRoutes.map((route) => (
+          <Route key={route.id} exact={route.exact} path={route.path} component={route.component} />
         ))}
         <Redirect to="/messages" />
       </Switch>
@@ -21,8 +21,8 @@ const Routes: React.FC = () => {
 
   return (
     <Switch>
-      {publicRoutes.map((route, index) => (
-        <Route key={index} exact={route.exact} path={route.path} component={route.component} />
+      {publicRoutes.map((route) => (
+        <Route key={route.id} exact={route.exact} path={route.path} component={route.component} />
       ))}
       <Redirect to="/login" />
     </Switch>

@@ -20,7 +20,7 @@ export const convertToUrlEncoded = <T>(data: T): string =>
     return acc === '' ? `${key}=${value}` : `${acc}&${key}=${value}`
   }, '')
 
-export const convertToFormData = (data: { [v: string]: any }): FormData => {
+export const convertToFormData = (data: { [v: string]: File | string | number }): FormData => {
   const formData = new FormData()
 
   Object.entries(data).forEach(([key, value]) => {

@@ -18,6 +18,9 @@ interface IMessageListitem {
 }
 
 const Message: React.FC<IMessageListitem> = ({ children, author, isLoading, isError, onRetry }) => {
+  const onRetryHandler = (): void => {
+    onRetry && onRetry()
+  }
   return (
     <div className="message-container">
       <Corner
@@ -42,11 +45,7 @@ const Message: React.FC<IMessageListitem> = ({ children, author, isLoading, isEr
             )}
             {isError && (
               <>
-                <RefreshButton
-                  onClickHandler={() => {
-                    onRetry && onRetry()
-                  }}
-                />
+                <RefreshButton onClickHandler={onRetryHandler} />
                 <div className="message_error">
                   <ErrorIcon className="message__error-icon" />
                 </div>

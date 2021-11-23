@@ -13,12 +13,19 @@ interface IRefreshButton {
 
 const RefreshButton: React.FC<IRefreshButton> = ({ onClickHandler }) => {
   const [isAnimated, setIsAnimated] = useState<boolean>(false)
+  const startAnimation = (): void => {
+    setIsAnimated(true)
+  }
+
+  const onAnimationEnd = (): void => {
+    setIsAnimated(false)
+  }
 
   return (
     <div
       className={cn('refresh-button', { 'refresh-button_animated': isAnimated })}
-      onClick={() => setIsAnimated(true)}
-      onTransitionEnd={() => setIsAnimated(false)}
+      onClick={startAnimation}
+      onTransitionEnd={onAnimationEnd}
     >
       <InputWithSvgIcon id="refresh-captcha" type="button" onClickHandler={onClickHandler}>
         <RefreshIcon width="15px" height="15px" />

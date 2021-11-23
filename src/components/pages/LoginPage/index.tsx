@@ -10,6 +10,8 @@ import user from '../../../store/user'
 
 import { ILoginData } from '../../../interface/user'
 
+import { PathEnum } from '../../../routes/endpoints'
+
 const LoginPage: React.FC = () => {
   const history = useHistory()
 
@@ -18,12 +20,12 @@ const LoginPage: React.FC = () => {
   }
 
   const onAdditionalButtonClickHandler = () => {
-    history.push('/signup')
+    history.push(PathEnum.SIGN_UP)
   }
 
   useEffect(() => {
     if (user.wsConnectKey) {
-      history.push('/messages')
+      history.push(PathEnum.DEFAULT_CHAT)
     }
   }, [user.wsConnectKey])
 

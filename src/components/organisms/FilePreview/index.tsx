@@ -17,10 +17,14 @@ interface IFilePreview {
 }
 
 const FilePreview: React.FC<IFilePreview> = ({ fileSrc, name, size, type, onDelete }) => {
+  const onPreviewContentClickHandler = () => {
+    chat.setIsFilePreviewModalOpen(true)
+  }
+
   return (
     <div className="file-preview">
       <div className="preview-content">
-        <div className="preview-content__icon" onClick={() => chat.setIsFilePreviewModalOpen(true)}>
+        <div className="preview-content__icon" onClick={onPreviewContentClickHandler}>
           <PreviewContentIcon fileSrc={fileSrc} type={type} />
         </div>
         <FileDescription name={name} size={size} />

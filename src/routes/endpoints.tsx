@@ -1,11 +1,11 @@
-import { PropsWithChildren } from 'react'
 import LoginPage from '../components/pages/LoginPage'
 import MessagePage from '../components/pages/MessagePage'
 import SignUpPage from '../components/pages/SignUpPage'
 
 interface IRoutes {
+  id: string
   path: string | string[]
-  component: (props: PropsWithChildren<any>) => JSX.Element
+  component: () => JSX.Element
   exact?: boolean
 }
 
@@ -19,11 +19,13 @@ export enum PathEnum {
 
 export const publicRoutes: IRoutes[] = [
   {
+    id: 'loginPage',
     path: [PathEnum.DEFAULT, PathEnum.LOGIN],
     component: () => <LoginPage />,
     exact: true
   },
   {
+    id: 'signUpPage',
     path: PathEnum.SIGN_UP,
     component: () => <SignUpPage />,
     exact: true
@@ -32,6 +34,7 @@ export const publicRoutes: IRoutes[] = [
 
 export const privateRoutes: IRoutes[] = [
   {
+    id: 'messagePage',
     path: [PathEnum.DEFAULT_CHAT, PathEnum.CHAT_WITH_ID],
     component: () => <MessagePage />,
     exact: true

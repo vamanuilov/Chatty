@@ -15,6 +15,8 @@ import { IFileMessage } from '../../../interface/message'
 
 import './styles.scss'
 
+import { PathEnum } from '../../../routes/endpoints'
+
 interface IChatMessages {
   onMessageSend: (message: string | IFileMessage) => void
   onFileUpload: (file: File) => void
@@ -29,6 +31,9 @@ const ChatMessages: React.FC<IChatMessages> = ({ onMessageSend, onFileUpload, se
   }
 
   const { name: friendName, gender, lastTimeOnline, messages } = selectedFriend
+  const onBackwardsClickHandler = (): void => {
+    history.push(PathEnum.DEFAULT_CHAT)
+  }
 
   return (
     <>
@@ -38,13 +43,7 @@ const ChatMessages: React.FC<IChatMessages> = ({ onMessageSend, onFileUpload, se
             'chat-header__backwards-arrow_hidden_desktop': selectedFriend
           })}
         >
-          <InputWithSvgIcon
-            id="backwards"
-            type="button"
-            onClickHandler={() => {
-              history.push('/messages/')
-            }}
-          >
+          <InputWithSvgIcon id="backwards" type="button" onClickHandler={onBackwardsClickHandler}>
             <BackArrow />
           </InputWithSvgIcon>
         </div>

@@ -27,6 +27,13 @@ const CaptchaBlock: React.FC<ICaptchaBlock> = ({ onChange, onBlur, name, errorTe
     setParameter(Date.now())
   }
 
+  const onChangeHandler = (e: React.ChangeEvent<HTMLInputElement>) => {
+    onChange && onChange(e)
+    if (user.error.type === 'captcha') {
+      user.resetErrors()
+    }
+  }
+
   useEffect(() => {
     user.getCaptcha(parameter)
   }, [parameter])
@@ -37,12 +44,7 @@ const CaptchaBlock: React.FC<ICaptchaBlock> = ({ onChange, onBlur, name, errorTe
         <FormInput
           name={name}
           innerRef={innerRef}
-          onChange={(e) => {
-            onChange && onChange(e)
-            if (user.error.type === 'captcha') {
-              user.resetErrors()
-            }
-          }}
+          onChange={onChangeHandler}
           onBlur={onBlur}
           type="text"
           label="Security code"
