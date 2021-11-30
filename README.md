@@ -2,7 +2,7 @@
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
-Click here to open [gh page](https://vamanuilov.github.io/chat/#/)
+Click here to open [gh page](https://vamanuilov.github.io/chatty/#/)
 
 ## Available Scripts
 
