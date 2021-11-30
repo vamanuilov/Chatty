@@ -2,7 +2,7 @@ export const MIN_INPUT_VALUE: number = 2
 export const MAX_INPUT_VALUE: number = 50
 
 export const HTTP_PREFIX: string = 'https://'
-export const WS_PREFIX: string = 'ws://'
+export const WS_PREFIX: string = 'wss://'
 export const DOMAIN: string = 'server-chatty.herokuapp.com'
 
 export const HTTP_URL = `${HTTP_PREFIX}${DOMAIN}`

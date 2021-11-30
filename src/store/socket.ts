@@ -22,7 +22,6 @@ class SocketStore {
   socket: WebSocket | undefined
   retryCount: number = 1
   isLoading: boolean = false
-  type: string = 'testtest'
 
   constructor() {
     makeAutoObservable(this)
@@ -30,11 +29,7 @@ class SocketStore {
 
   connect = (connectKey: string) => {
     this.isLoading = true
-    console.log('###:', 'connectKey, WS_URI', connectKey, WS_URI)
-
-    // this.socket = new WebSocket(`${WS_URI}?type=${this.type}&ws_id=${connectKey}`)
-    // var HOST = location.origin.replace(/^http/, 'ws')
-    this.socket = new WebSocket(`wss://server-chatty.herokuapp.com/?type=${this.type}&ws_id=${connectKey}`)
+    this.socket = new WebSocket(`${WS_URI}/ws_id=${connectKey}`)
 
     this.socket.onopen = this.onOpen.bind(this)
     this.socket.onclose = this.onClose.bind(this)
