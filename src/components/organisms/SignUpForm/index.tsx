@@ -1,7 +1,7 @@
 import { useEffect } from 'react'
 import { observer } from 'mobx-react-lite'
 import { yupResolver } from '@hookform/resolvers/yup'
-import { Controller, useForm, UseFormClearErrors } from 'react-hook-form'
+import { Controller, useForm } from 'react-hook-form'
 
 import { signUpSchema } from '../../../config/schemas'
 
@@ -9,7 +9,6 @@ import { POP_UP_LIFETIME } from '../../../config'
 
 import Button from '../../atoms/Button'
 import FormInput from '../../molecules/FormInput'
-import CaptchaBlock from '../CaptchaBlock'
 import Select from '../../molecules/Select'
 import StubInput from '../../molecules/StubInput'
 
@@ -47,8 +46,7 @@ const SignUpForm: React.FC<ISignUpForm> = ({
       password: '',
       password_confirm: '',
       gender_id: undefined,
-      name: '',
-      captcha: ''
+      name: ''
     }
   })
   const watchPassword = watch('password')
@@ -74,13 +72,6 @@ const SignUpForm: React.FC<ISignUpForm> = ({
 
   useEffect(() => {
     switch (user.error.type) {
-      case 'captcha': {
-        setError('captcha', {
-          type: 'manual',
-          message: user.error.message
-        })
-        break
-      }
       case 'gender_id': {
         setError('gender_id', {
           type: 'manual',
@@ -163,22 +154,6 @@ const SignUpForm: React.FC<ISignUpForm> = ({
               )}
             />
           )}
-        </div>
-        <div className="sign-up-form__item">
-          <Controller
-            name="captcha"
-            control={control}
-            render={({ field: { onBlur, onChange, name, ref } }) => (
-              <CaptchaBlock
-                resetError={clearErrors as UseFormClearErrors<Pick<ISignUpData, 'captcha'>>}
-                onBlur={onBlur}
-                onChange={onChange}
-                name={name}
-                innerRef={ref}
-                errorText={errors.captcha?.message}
-              />
-            )}
-          />
         </div>
         <div className="form-buttons">
           <div className="sign-up-form__button">

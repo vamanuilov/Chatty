@@ -30,7 +30,12 @@ class SocketStore {
 
   connect = (connectKey: string) => {
     this.isLoading = true
-    this.socket = new WebSocket(`${WS_URI}?type=${this.type}&ws_id=${connectKey}`)
+    console.log('###:', 'connectKey, WS_URI', connectKey, WS_URI)
+
+    // this.socket = new WebSocket(`${WS_URI}?type=${this.type}&ws_id=${connectKey}`)
+    // var HOST = location.origin.replace(/^http/, 'ws')
+    this.socket = new WebSocket(`wss://server-chatty.herokuapp.com/?type=${this.type}&ws_id=${connectKey}`)
+
     this.socket.onopen = this.onOpen.bind(this)
     this.socket.onclose = this.onClose.bind(this)
     this.socket.onmessage = this.onMessage.bind(this)
@@ -51,7 +56,7 @@ class SocketStore {
     if (incomingMessage.data.includes('type')) {
       const wsResponse: IWSResponse = JSON.parse(incomingMessage.data)
       const getMessages = (friendName: string): IMessage[] => {
-        /* TODO: Because we don't have a friend id on the server, a friend name is used, but it may not be unique.
+        /* TODO: Because I don't have a friend id on the server, a friend name is used, but it may not be unique.
         edit it after adding the ID to the server */
         const localMessages: string | null = localStorage.getItem(`messages-${friendName}`)
         const messages: IMessage[] = localMessages ? JSON.parse(localMessages) : []
@@ -59,13 +64,6 @@ class SocketStore {
       }
 
       switch (wsResponse.type) {
-        case 'user_data': {
-          // TODO: I don't know what to do with this data
-          const userData: IUserData = wsResponse.data as IUserData
-
-          console.log('user_data: ', userData)
-          break
-        }
         case 'users_list': {
           const usersList: IUserData[] = wsResponse.data as IUserData[]
           const friendList: IFriends[] = usersList.map((friend: IUserData) => {
@@ -86,15 +84,20 @@ class SocketStore {
           chat.friendList = friendList
           break
         }
+        case 'message': {
+          const message: any = wsResponse.data
+          if (message.author === 'friend') {
+            chat.addMessage({ text: message.text, id: nanoid(ID_LENGTH), type: 'text', author: 'friend' })
+          }
+          break
+        }
       }
-    } else if (incomingMessage.data.includes(`Get param 'ws_id' - is wrong! Please relogin!`)) {
+    } else if (incomingMessage.data.includes(`Your session is too old! Please re-login!`)) {
       popup.setMessage({
         type: 'error',
         text: incomingMessage.data
       })
       return
-    } else {
-      chat.addMessage({ text: incomingMessage.data, id: nanoid(ID_LENGTH), type: 'text', author: 'friend' })
     }
   }
 
@@ -129,7 +132,7 @@ class SocketStore {
   }
 
   sendMessage(message: string) {
-    this.socket?.send(message)
+    this.socket?.send(JSON.stringify({ type: 'message', text: message }))
   }
 
   closeConnection() {

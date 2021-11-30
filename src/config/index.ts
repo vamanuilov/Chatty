@@ -1,14 +1,12 @@
 export const MIN_INPUT_VALUE: number = 2
 export const MAX_INPUT_VALUE: number = 50
 
-export const HTTP_PREFIX: string = 'http://'
+export const HTTP_PREFIX: string = 'https://'
 export const WS_PREFIX: string = 'ws://'
-export const DOMAIN: string = '109.194.37.212'
-export const HTTP_PORT: string = '93'
-export const WS_PORT: string = '2346'
+export const DOMAIN: string = 'server-chatty.herokuapp.com'
 
-export const HTTP_URL = `${HTTP_PREFIX}${DOMAIN}:${HTTP_PORT}`
-export const WS_URI = `${WS_PREFIX}${DOMAIN}:${WS_PORT}/`
+export const HTTP_URL = `${HTTP_PREFIX}${DOMAIN}`
+export const WS_URI = `${WS_PREFIX}${DOMAIN}/`
 
 export const API_VERSION: string = '/api/'
 

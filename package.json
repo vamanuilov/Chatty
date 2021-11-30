@@ -1,6 +1,6 @@
 {
-  "name": "chat",
-  "homepage": "https://vamanuilov.github.io/chat/#/",
+  "name": "chatty",
+  "homepage": "https://vamanuilov.github.io/chatty/#/",
   "version": "0.1.0",
   "private": true,
   "dependencies": {

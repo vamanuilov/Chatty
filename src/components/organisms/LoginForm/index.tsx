@@ -1,13 +1,12 @@
 import React, { useEffect } from 'react'
 import { observer } from 'mobx-react-lite'
-import { Controller, useForm, UseFormClearErrors } from 'react-hook-form'
+import { Controller, useForm } from 'react-hook-form'
 import { yupResolver } from '@hookform/resolvers/yup'
 
 import { loginSchema } from '../../../config/schemas'
 
 import Button from '../../atoms/Button'
 import FormInput from '../../molecules/FormInput'
-import Captcha from '../CaptchaBlock'
 
 import { ILoginData } from '../../../interface/user'
 
@@ -38,13 +37,6 @@ const LoginForm: React.FC<ILoginForm> = ({ onSubmitHandler, onAdditionalButtonCl
 
   useEffect(() => {
     switch (user.error.type) {
-      case 'captcha': {
-        setError('captcha', {
-          type: 'manual',
-          message: user.error.message
-        })
-        break
-      }
       case 'userData': {
         ;['login', 'password'].forEach((inputName) => {
           setError(inputName as 'login' | 'password', {
@@ -94,22 +86,6 @@ const LoginForm: React.FC<ILoginForm> = ({ onSubmitHandler, onAdditionalButtonCl
             />
           </div>
         ))}
-        <div className="login-form__captcha">
-          <Controller
-            name="captcha"
-            control={control}
-            render={({ field: { onBlur, onChange, name, ref } }) => (
-              <Captcha
-                resetError={clearErrors as UseFormClearErrors<Pick<ILoginData, 'captcha'>>}
-                onBlur={onBlur}
-                onChange={onChange}
-                name={name}
-                innerRef={ref}
-                errorText={errors.captcha?.message}
-              />
-            )}
-          />
-        </div>
         <div className="form-buttons">
           <div className="login-form__button">
             <Button type="submit" buttonText="Log In" isMainButton isDisabled={user.isLoading || !isDirty} />

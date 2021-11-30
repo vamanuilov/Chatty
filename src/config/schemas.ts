@@ -10,12 +10,10 @@ export const signUpSchema = yup.object().shape({
     .required('Required field')
     .oneOf([yup.ref('password'), null], 'Passwords do not match'),
   name: yup.string().min(MIN_INPUT_VALUE).max(MAX_INPUT_VALUE).required('Required field'),
-  gender_id: yup.number().required('Required field'),
-  captcha: yup.string().required('Required field')
+  gender_id: yup.number().required('Required field')
 })
 
 export const loginSchema = yup.object().shape({
   login: yup.string().min(MIN_INPUT_VALUE).required(),
-  password: yup.string().min(MIN_INPUT_VALUE).max(MAX_INPUT_VALUE).required(),
-  captcha: yup.string().required()
+  password: yup.string().min(MIN_INPUT_VALUE).max(MAX_INPUT_VALUE).required()
 })
